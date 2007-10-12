@@ -74,6 +74,10 @@ my @blocks = (
   }
 );
 
+my $title =  "MythTV status for $host";
+print "$title\n";
+print '=' x length($title) . "\n";
+
 for my $block (@blocks) {
   my $items = $xml->documentElement->find($block->{'xpath'});
 
