@@ -77,8 +77,11 @@ my @blocks = (
 for my $block (@blocks) {
   my $items = $xml->documentElement->find($block->{'xpath'});
 
-  print "$block->{'name'}:\n"
-    if (scalar(@$items) > 0);
+  # Don't do any work on this block if there is nothing for it.
+  next
+    if (scalar(@$items) == 0);
+
+  print "$block->{'name'}:\n";
 
   for my $item (@{ $items }) {
     my $template = $block->{'template'};
