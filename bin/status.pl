@@ -1,10 +1,13 @@
 #!/usr/bin/perl -w
 
+# Display the current status of a MythTV system.
+
 use LWP::Simple;
 use XML::LibXML;
 use Date::Manip;
 use Getopt::Long;
 
+# Some sane defaults.
 my $host = "localhost";
 my $port = "6544";
 
@@ -28,7 +31,9 @@ my $xml = eval { $parser->parse_string( $status ) };
 our $today    = substr(ParseDate('today'), 0, 8);
 our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
+# The blocks of output which we might generate.
 my @blocks = (
+  # Info about the encoders.
   {
     'name'  => 'Encoders',
     'xpath' => "//Status/Encoders/Encoder",
@@ -38,6 +43,8 @@ my @blocks = (
       'state' =>{ '0' => 'Idle', '4' => 'Recording' },
     }
   },
+
+  # What programs (if any) are being recorded right now?
   {
     'name'  => 'Recording Now',
     'xpath' => "//Status/Encoders/Encoder/Program",
@@ -47,6 +54,8 @@ my @blocks = (
        'endTime' => { 'T' => ' ' },
      }
   },
+
+  # The upcoming recordings.
   {
     'name'  => 'Scheduled Recordings',
     'xpath' => '//Status/Scheduled/Program',
