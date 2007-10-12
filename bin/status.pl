@@ -3,11 +3,24 @@
 use LWP::Simple;
 use XML::LibXML;
 use Date::Manip;
+use Getopt::Long;
 
 my $host = "localhost";
 my $port = "6544";
 
-my $status = get("http://$host:$port/xml");
+GetOptions(
+  'h|host=s' => \$host,
+  'p|port=s' => \$port
+);
+
+die "Sorry, port isn't a number.\n"
+  if $port !~ /^\d+$/;
+
+my $url = "http://$host:$port/xml";
+my $status = get($url);
+
+die "Sorry, failed to fetch $url.\n"
+  unless defined $status;
 
 my $parser = XML::LibXML->new();
 my $xml = eval { $parser->parse_string( $status ) };
@@ -40,6 +53,7 @@ my @blocks = (
     'attrs' => [ qw/title startTime/ ],
     'template' => "__startTime__ - __title__",
     'filter' =>  {
+       # Only show recordings for today and tomorrow.
        'startTime' => sub {
 	   my $date = substr(ParseDate($_[0]), 0, 8);
            return ! (($date cmp $today) == 0
