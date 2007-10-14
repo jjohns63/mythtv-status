@@ -84,7 +84,7 @@ my @blocks = (
 );
 
 my $title =  "MythTV status for $host";
-print "$title\n";
+print "\n$title\n";
 print '=' x length($title) . "\n";
 
 for my $block (@blocks) {
