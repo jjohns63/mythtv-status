@@ -33,6 +33,15 @@ our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
 # The blocks of output which we might generate.
 my @blocks = (
+  # Date/Time from server
+  {
+    'name'  => 'Status',
+    'xpath' => "//Status",
+    'attrs' => [ qw/time date/ ],
+    'template' => "__date__, __time__",
+    'format' => 'one line'
+  },
+
   # Info about the encoders.
   {
     'name'  => 'Encoders',
@@ -85,7 +94,8 @@ for my $block (@blocks) {
   next
     if (scalar(@$items) == 0);
 
-  print "$block->{'name'}:\n";
+  $block->{'format'} ||= 'multi line';
+  print "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
 
   for my $item (@{ $items }) {
     my $template = $block->{'template'};
