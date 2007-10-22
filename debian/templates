@@ -1,0 +1,15 @@
+Template: mythtv-status/host
+Type: string
+Default: localhost
+Description: MythTV backend to check
+ The MythTV backend to check, you only need to change this if you want to check
+ a different host.
+
+Template: mythtv-status/enable
+Type: boolean
+Default: true
+Description: Update the system MOTD?
+ Should the Message of the Day be updated on system boot and on a regular
+ basis?
+ .
+ To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status.

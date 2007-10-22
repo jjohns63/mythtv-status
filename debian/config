@@ -1,0 +1,25 @@
+#!/bin/sh
+
+PACKAGE=mythtv-status
+
+CONFIGFILE=/etc/default/$PACKAGE
+set -e
+. /usr/share/debconf/confmodule
+
+# Load config file, if it exists.
+if [ -e $CONFIGFILE ]; then
+  . $CONFIGFILE || true
+
+
+  # Store values from config file into
+  # debconf db.
+
+  db_set $PACKAGE/enable $RUN
+  db_set $PACKAGE/host $HOST
+
+fi
+
+# Ask questions.
+db_input medium $PACKAGE/host || true
+db_input medium $PACKAGE/enable || true
+db_go
