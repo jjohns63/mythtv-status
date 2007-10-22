@@ -1,9 +1,16 @@
 #!/bin/bash
 
+. /etc/default/mythtv-status
+
+if [ x$RUN != xyes ]
+then
+  exit
+fi
+
 [ ! -f /var/run/motd.orig ] && cp /var/run/motd /var/run/motd.orig
 
 cp /var/run/motd.orig /var/run/motd.new
-if mythtv-status >> /var/run/motd.new
+if mythtv-status -h $HOST >> /var/run/motd.new
 then
   mv /var/run/motd.new /var/run/motd
 fi
