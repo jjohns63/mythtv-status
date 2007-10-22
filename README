@@ -1,0 +1,39 @@
+mythtv-status
+=============
+
+This script will display the current status of your MythTV system at the
+command line.  It can optionally append it the system MOTD on a regular
+basis.
+
+Sample output looks like:
+
+-- Begin --
+MythTV status for localhost
+===========================
+Status: Mon Oct 15 2007, 8:41 AM
+
+Encoders:
+cerberus (9) - Idle
+cerberus (12) - Idle
+
+Scheduled Recordings:
+2007-10-15 13:30:00 - Grey's Anatomy
+2007-10-15 18:00:00 - 3 News
+2007-10-15 20:30:00 - Mythbusters
+2007-10-15 22:00:00 - Flight Of The Conchords
+2007-10-16 13:30:00 - Grey's Anatomy
+2007-10-16 18:00:00 - 3 News
+-- End --
+
+Why this tool?
+--------------
+Well, as you can see above Grey's Anatomy is currently being recorded
+at 1:30 PM.  My wife and I sat down to watch one of these episodes (yes
+they're repeats, we've only just discovered Grey's Anatomy so repeats
+are good) and one of them was very jumpy.  It was pretty obvious the
+server was under load.  My wife was a little annoyed when I admitted
+that I was probably compiling a new kernel at the time.
+
+I wrote this script to notify me when I login about any work that MythTV
+might be wanting to do in the next little while (or currently) so we
+won't have any repeats of the Grey's Anatomy incident.
