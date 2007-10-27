@@ -15,7 +15,11 @@ clean:
 	rm -f build-stamp configure-stamp
 	dh_clean 
 
-install:
+build:
+	pod2man bin/mythtv-status > debian/mythtv-status.1
+	@touch build-stamp
+
+install: build-stamp
 	dh_testdir
 	dh_testroot
 	dh_clean -k 
@@ -37,7 +41,7 @@ binary-arch: install
 # Make sure we start after mythtv-backend
 	dh_installinit -- defaults 21
 	dh_installcron
-	dh_installman
+	dh_installman debian/mythtv-status.1
 	dh_compress
 	dh_fixperms
 	dh_perl
