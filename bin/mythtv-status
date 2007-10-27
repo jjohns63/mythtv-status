@@ -129,3 +129,49 @@ for my $block (@blocks) {
 
   print "\n";
 }
+
+=head1 NAME
+
+mythtv-status - Display the status of a MythTV backend
+
+=head1 SYNOPSIS
+
+ mythtv-status [options]
+
+=head1 DESCRIPTION
+
+This script queries a MythTV backend and reports on the status of it,
+any upcoming recordings and any which are happening right now.
+
+The intention is to warn you if there is a program being recorded or
+about to be recorded.
+
+=head1 COMMAND LINE OPTIONS
+
+=over
+
+=item B<-h HOST, --host=HOST>
+
+The host to check, defaults to localhost.
+
+=item B<-p PORT, --port=PORT>
+
+The port to use when connecting to MythTV, defaults to 6544.
+
+=back
+
+=head1 AUTHOR
+
+Andrew Ruthven, andrew@etc.gen.nz
+
+=head1 LICENSE
+
+Copyright (c) 2007 Andrew Ruthven <andrew@etc.gen.nz>
+This code is hereby licensed for public consumption under the GNU GPL v2.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+=cut
+
