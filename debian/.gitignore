@@ -1,0 +1,7 @@
+files
+mythtv-status.1
+mythtv-status.postinst.debhelper
+mythtv-status.postrm.debhelper
+mythtv-status.prerm.debhelper
+mythtv-status.substvars
+mythtv-status
