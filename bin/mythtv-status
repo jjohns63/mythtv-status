@@ -160,6 +160,32 @@ The port to use when connecting to MythTV, defaults to 6544.
 
 =back
 
+=head1 OUTPUT
+
+The output of this script is broken up into several chunks they are:
+
+=over
+
+=item Status
+
+Some general info about the backend, currently just the timestamp of then
+this program was run.
+
+=item Encoders
+
+Each encoder that the backend knows about are listed, with the hostname
+they are on, the encoder ID (in brackets) and the current status.
+
+=item Recording Now
+
+Any programs which are being recorded right now.
+
+=item Scheduled Recordings
+
+Up to 10 programs which are scheduled to be recorded today and tomorrow.
+
+=back
+
 =head1 AUTHOR
 
 Andrew Ruthven, andrew@etc.gen.nz
