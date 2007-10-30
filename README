@@ -2,8 +2,8 @@ mythtv-status
 =============
 
 This script will display the current status of your MythTV system at the
-command line.  It can optionally append it the system MOTD on a regular
-basis.
+command line.  It can optionally append it to the system message of the
+day (MOTD) on a regular basis.
 
 Sample output looks like:
 
