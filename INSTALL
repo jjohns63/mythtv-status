@@ -1,0 +1,20 @@
+Installing MythTV Status
+========================
+
+Depedencies
+-----------
+You will need to have the following Perl modules installed:
+
+LWP::Simple
+XML::LibXML
+Date::Manip
+
+If you have installed this package using Debian then they should already be
+present.
+
+MOTD
+----
+To update the message of the day you will probably want to modify
+bin/mythtv-update-motd to work with the location of your /etc/motd
+file (on Debian it is symlinked into /var/run), and then run that
+script on a regular basis from cron.
