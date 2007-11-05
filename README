@@ -25,6 +25,28 @@ Scheduled Recordings:
 2007-10-16 18:00:00 - 3 News
 -- End --
 
+And when recording:
+
+-- Begin --
+MythTV status for localhost
+===========================
+Status: Mon Nov 5 2007, 6:30 PM
+
+Encoders:
+cerberus (9) - Recording
+cerberus (12) - Idle
+
+Recording Now:
+3 News (Ends: 2007-11-05 19:00:00)
+
+Scheduled Recordings:
+2007-11-05 20:30:00 - Heroes
+2007-11-05 22:00:00 - Flight Of The Conchords
+2007-11-06 00:00:00 - Alias
+2007-11-06 13:30:00 - Grey's Anatomy
+2007-11-06 18:00:00 - 3 News
+-- End --
+
 Why this tool?
 --------------
 Well, as you can see above Grey's Anatomy is currently being recorded
