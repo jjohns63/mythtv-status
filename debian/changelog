@@ -1,3 +1,9 @@
+mythtv-status (0.2) unstable; urgency=low
+
+  * Minor changes to documentation. 
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Wed, 14 Nov 2007 21:50:24 +1300
+
 mythtv-status (0.1) unstable; urgency=low
 
   * Initial Release.
