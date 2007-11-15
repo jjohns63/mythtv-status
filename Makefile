@@ -35,7 +35,8 @@ build/sid/$(deb):
 publish: $(RELEASE_FILES)
 	for release in $(releases); do ars-add -r $$release -g main build/$$release/$(deb); done
 	@cp $(tarball) $(tarball_dir)
-	@ln -sf $(tarball_dir)/$(tarball) $(tarball_dir)/$(package)-latest.tar.gz
+	@chmod o+r $(tarball_dir)/*-$(version).*
+	@ln -sf `basename $(tarball)` $(tarball_dir)/$(package)-latest.tar.gz
 
 clean:
 	@rm -rf build
