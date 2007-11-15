@@ -58,7 +58,7 @@ my @blocks = (
       'connected' => { '1' => '', '0' => ' (Disconnected)' },
       'state' =>{ '0' => 'Idle',
                   '1' => 'Watching LiveTV',
-                  '2' => 'Watching Prer-recorded',
+                  '2' => 'Watching Pre-recorded',
 		  '3' => 'Watching Recording',
 		  '4' => 'Recording' },
     }
