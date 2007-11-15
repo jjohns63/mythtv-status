@@ -66,7 +66,7 @@ fi
 set -e
 
 case "$1" in
-  start|reload|refresh|restart)
+  start|reload|refresh|restart|force-reload)
     log_daemon_msg "Updating $DESC " "$NAME"
     [ ! -f /var/run/motd.orig ] && cp /var/run/motd /var/run/motd.orig
 
