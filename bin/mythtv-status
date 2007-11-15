@@ -52,10 +52,15 @@ my @blocks = (
   {
     'name'  => 'Encoders',
     'xpath' => "//Status/Encoders/Encoder",
-    'attrs' => [ qw/hostname id state/ ],
-    'template' => "__hostname__ (__id__) - __state__",
+    'attrs' => [ qw/hostname id state connected/ ],
+    'template' => "__hostname__ (__id__) - __state____connected__",
     'rewrite' => {
-      'state' =>{ '0' => 'Idle', '4' => 'Recording' },
+      'connected' => { '1' => '', '0' => ' (Disconnected)' },
+      'state' =>{ '0' => 'Idle',
+                  '1' => 'Watching LiveTV',
+                  '2' => 'Watching Prer-recorded',
+		  '3' => 'Watching Recording',
+		  '4' => 'Recording' },
     }
   },
 
