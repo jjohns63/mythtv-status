@@ -22,7 +22,7 @@ case "$1" in
     db_get $PACKAGE/enable
     RUN="${RET:-true}"
 
-    if [ $RUN == 'true' ]
+    if [ $RUN = 'true' ]
     then
       RUN='yes'
     fi
