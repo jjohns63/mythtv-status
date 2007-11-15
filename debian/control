@@ -1,9 +1,12 @@
 Source: mythtv-status
-Section: unknown
+Section: misc
 Priority: extra
 Maintainer: Andrew Ruthven <andrew@etc.gen.nz>
 Build-Depends: debhelper (>= 5)
 Standards-Version: 3.7.2
+Homepage: http://www.etc.gen.nz/projects/mythtv/mythtv-status.html
+XS-Vcs-Git: http://git.etc.gen.nz/mythtv-status.git
+XS-Vcs-Browser: http://git.etc.gen.nz/cgi-bin/gitweb.cgi?p=mythtv-status.git;a=summary
 
 Package: mythtv-status
 Architecture: all
