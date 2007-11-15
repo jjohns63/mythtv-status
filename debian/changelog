@@ -1,3 +1,9 @@
+mythtv-status (0.3) unstable; urgency=low
+
+  * Add additional recorder states and display if an encoder is not connected. 
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Fri, 16 Nov 2007 07:35:47 +1300
+
 mythtv-status (0.2) unstable; urgency=low
 
   * Minor changes to documentation. 
