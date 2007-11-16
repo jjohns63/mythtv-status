@@ -28,7 +28,7 @@ sponsor: $(orig_tarball)
 
 $(tarball):
 	@mkdir -p $(@D)
-	@git-archive --format=tar $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile)"` | gzip > $(tarball)
+	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile)"` | gzip > $(tarball)
 
 build/etch/$(deb): 
 	@ssh build-etch-i386 "cd `pwd`; $(build)"
