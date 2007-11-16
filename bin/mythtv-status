@@ -12,14 +12,17 @@ use LWP::Simple;
 use XML::LibXML;
 use Date::Manip;
 use Getopt::Long;
+use Text::Wrap;
 
 # Some sane defaults.
 my $host = "localhost";
 my $port = "6544";
+my $description = undef;
 
 GetOptions(
   'h|host=s' => \$host,
-  'p|port=s' => \$port
+  'p|port=s' => \$port,
+  'd|descripton' => \$description
 );
 
 die "Sorry, port isn't a number.\n"
@@ -79,8 +82,8 @@ my @blocks = (
   {
     'name'  => 'Scheduled Recordings',
     'xpath' => '//Status/Scheduled/Program',
-    'attrs' => [ qw/title startTime/ ],
-    'template' => "__startTime__ - __title__",
+    'attrs' => [ qw/title startTime NODE_TEXT/ ],
+    'template' => "__startTime__ - __title__" . (defined $description ? "\n__NODE_TEXT__" : ''),
     'filter' =>  {
        # Only show recordings for today and tomorrow.
        'startTime' => sub {
@@ -112,7 +115,8 @@ for my $block (@blocks) {
     my $template = $block->{'template'};
     my $skip = undef;
     for my $key (@{ $block->{'attrs'} }) {
-      my $value = $item->getAttribute($key);
+      my $value = $key eq 'NODE_TEXT' ? wrap('  ', '  ', $item->string_value()) : $item->getAttribute($key);
+      $value =~ s/\s+$//;
 
       $skip = 1
         if defined $block->{'filter'}{$key} &&
@@ -162,6 +166,10 @@ The host to check, defaults to localhost.
 =item B<-p PORT, --port=PORT>
 
 The port to use when connecting to MythTV, defaults to 6544.
+
+=item B<-d, --description>
+
+Display the description for the scheduled recordings.
 
 =back
 
