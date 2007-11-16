@@ -11,9 +11,9 @@ XS-Vcs-Browser: http://git.etc.gen.nz/cgi-bin/gitweb.cgi?p=mythtv-status.git;a=s
 Package: mythtv-status
 Architecture: all
 Depends: ${misc:Depends}, ${perl:Depends}, libwww-perl, libxml-libxml-perl, libdate-manip-perl
-Description: Show the MythTV status
- Shows the current MythTV status and the next 10 recordings
- for today and tomorrow.
+Description: Show the status of a MythTV backend
+ Shows the current status of a local or remote MythTV backend and the next
+ 10 recordings for today and tomorrow.
  .
  Also provides funtionality for updating the MOTD with
  this information, this can provide a good heads on when 
