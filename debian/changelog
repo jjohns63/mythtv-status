@@ -1,3 +1,18 @@
+mythtv-status (0.4) unstable; urgency=low
+
+  [ Andrew Ruthven ]
+  * No longer ship mythtv-update-motd.
+  * Allow displaying the description and episode title for programs.
+  * Cleanup the wording of the package descriptions.
+
+  [ Francois Marier ]
+  * Many fixes to the Debian packaging to make lintian happy.
+  * Check that script is executable before using it in cron.
+  * Use po-debconf and add a French translation.
+  * Upload to unstable (closes: #451442)
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Fri, 16 Nov 2007 14:16:15 +1300
+
 mythtv-status (0.3) unstable; urgency=low
 
   * Add additional recorder states and display if an encoder is not connected. 
