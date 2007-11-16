@@ -1,0 +1,43 @@
+
+2007-11-16	Francois Marier
+	Many fixes to the Debian packaging to make lintian happy.
+	Fixes to the Makefile for supporting Debian sponsoring.
+	Check if the initscript exists before running it
+
+2007-11-16	Andrew Ruthven
+        Add additional encoder states and logic for displaying the
+	  connected state of encoders.
+	Release version 0.3.
+	Changes to the Makefile required by new packaging.
+	Tweaks to the Debian packaging.
+	Optionally display programs description and/or subtitle.
+	Release version 0.4.
+
+2007-11-15	Andrew Ruthven
+	Fix up publishing the tarball.
+	Release version 0.2.
+
+2007-11-05	Andrew Ruthven
+	Add an example when recording.
+	Work the Debian packaging
+
+2007-10-31	Andrew Ruthven
+	Expand out MOTD in the documentation.
+	Add a section to the perldoc which describes what is in the output.
+
+2007-10-27	Andrew Ruthven
+	Debian packaging:
+	 - Convert the perldoc to a man page, and install it.
+	 - Ignore the build files/directories.
+	Remove the bit about how to get the GPLv2 from the perldoc.
+	Add perldoc.
+	Release version 0.1.
+
+2007-10-22	Andrew Ruthven
+	Add Debian directory
+	Add a README file.
+	Check for the Debian settings and use them.
+	Add license.
+	Update the MOTD.
+	Rename to what we'll use when installing it.
+	Pull out the XML generated timestamp and allow one line output.
