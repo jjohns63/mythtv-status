@@ -4,10 +4,10 @@ package=mythtv-status
 releases=etch sid
 sponsor_keyid=19D03486
 
-build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'($.git|$build)'
+build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build)'
 version=$(shell git-tag -l | tail -1)
 
-deb=$(package)_$(version)_all.deb
+deb=$(package)_$(version)-1_all.deb
 orig_tarball=../$(package)_$(version).orig.tar.gz
 tarball=build/tarball/$(package)-$(version).tar.gz
 tarball_dir=../$(package)_tarballs
