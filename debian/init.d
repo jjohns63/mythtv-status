@@ -72,7 +72,7 @@ case "$1" in
 
     cp /var/run/motd.orig /var/run/motd.new
 
-    if $DAEMON -h $HOST >> /var/run/motd.new
+    if $DAEMON $ARGS -h $HOST >> /var/run/motd.new
     then
       mv /var/run/motd.new /var/run/motd
     fi

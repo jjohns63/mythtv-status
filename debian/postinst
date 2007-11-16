@@ -45,6 +45,10 @@ RUN=$RUN
 # HOST:
 #  What host should be check the status on?
 HOST=$HOST
+
+# ARGS:
+#  Any extra arguments to pass to mythtv-status (i.e., -e and/or -d).
+ARGS=$ARGS
 _eof
 
     db_stop
