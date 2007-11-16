@@ -1,0 +1,58 @@
+# Mythtv-status debconf questions
+# Copyright (C) 2007
+# This file is distributed under the same license as the mythtv-status package.
+# Francois Marier <francois@debian.org>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: Source: mythtv-status@packages.debian.org\n"
+"POT-Creation-Date: 2007-11-16 12:53+1300\n"
+"PO-Revision-Date: 2007-11-16 12:53+1300\n"
+"Last-Translator: Francois Marier <francois@debian.org>\n"
+"Language-Team: French <debian-l10n-french@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid "MythTV backend to check:"
+msgstr "Système MythTV à examiner:"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid ""
+"The MythTV backend to check, you only need to change this if you want to "
+"check a different host."
+msgstr ""
+"Le système MythTV à examiner. Vous n'avez à changer la valeur par défaut "
+"que si vous désirer examiner un autre hôte."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "Update the system MOTD?"
+msgstr "Mettre à jour le MOTD du système ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"Whether the Message of the Day should be updated on system boot and on a "
+"regular basis."
+msgstr ""
+"Mise à jour du message du jour du système lors du démarrage et sur une "
+"base régulière."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgstr ""
+"Pour changer la fréquence de mise à jour du message du jour, modifier le "
+"fichier /etc/cron.d/mythtv-status."

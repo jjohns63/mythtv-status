@@ -14,6 +14,7 @@ clean:
 	dh_testroot
 	rm -f build-stamp configure-stamp
 	dh_clean 
+	debconf-updatepo
 
 build:
 	pod2man bin/mythtv-status > debian/mythtv-status.1
