@@ -21,10 +21,10 @@ my $description = undef;
 my $episode = undef;
 
 GetOptions(
-  'h|host=s' => \$host,
-  'p|port=s' => \$port,
-  'e|episode' => \$episode,
-  'd|descripton' => \$description
+  'd|descripton' => \$description,
+  'e|episode'    => \$episode,
+  'h|host=s'     => \$host,
+  'p|port=s'     => \$port,
 );
 
 die "Sorry, port isn't a number.\n"
@@ -165,6 +165,14 @@ about to be recorded.
 
 =over
 
+=item B<-d, --description>
+
+Display the description for the scheduled recordings.
+
+=item B<-e, --episode>
+
+Display the episode (subtitle) for the scheduled recordings.
+
 =item B<-h HOST, --host=HOST>
 
 The host to check, defaults to localhost.
@@ -172,14 +180,6 @@ The host to check, defaults to localhost.
 =item B<-p PORT, --port=PORT>
 
 The port to use when connecting to MythTV, defaults to 6544.
-
-=item B<-e, --episode>
-
-Display the episode (subtitle) for the scheduled recordings.
-
-=item B<-d, --description>
-
-Display the description for the scheduled recordings.
 
 =back
 
