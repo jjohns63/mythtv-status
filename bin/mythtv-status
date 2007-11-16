@@ -18,10 +18,12 @@ use Text::Wrap;
 my $host = "localhost";
 my $port = "6544";
 my $description = undef;
+my $episode = undef;
 
 GetOptions(
   'h|host=s' => \$host,
   'p|port=s' => \$port,
+  'e|episode' => \$episode,
   'd|descripton' => \$description
 );
 
@@ -82,8 +84,10 @@ my @blocks = (
   {
     'name'  => 'Scheduled Recordings',
     'xpath' => '//Status/Scheduled/Program',
-    'attrs' => [ qw/title startTime NODE_TEXT/ ],
-    'template' => "__startTime__ - __title__" . (defined $description ? "\n__NODE_TEXT__" : ''),
+    'attrs' => [ qw/title startTime NODE_TEXT subTitle/ ],
+    'template' => "__startTime__ - __title__" 
+      . (defined $episode ? " - __subTitle__" : '')
+      . (defined $description ? "\n__NODE_TEXT__" : ''),
     'filter' =>  {
        # Only show recordings for today and tomorrow.
        'startTime' => sub {
@@ -117,6 +121,8 @@ for my $block (@blocks) {
     for my $key (@{ $block->{'attrs'} }) {
       my $value = $key eq 'NODE_TEXT' ? wrap('  ', '  ', $item->string_value()) : $item->getAttribute($key);
       $value =~ s/\s+$//;
+
+      $value ||= 'Unknown';
 
       $skip = 1
         if defined $block->{'filter'}{$key} &&
@@ -166,6 +172,10 @@ The host to check, defaults to localhost.
 =item B<-p PORT, --port=PORT>
 
 The port to use when connecting to MythTV, defaults to 6544.
+
+=item B<-e, --episode>
+
+Display the episode (subtitle) for the scheduled recordings.
 
 =item B<-d, --description>
 
