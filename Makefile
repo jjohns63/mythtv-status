@@ -20,7 +20,7 @@ release: $(RELEASE_FILES)
 
 $(tarball):
 	@mkdir -p $(@D)
-	@git-archive --format=tar $(version) `git-ls-tree --name-only $(version) | grep -v .gitignore | grep -v debian` | gzip > $(tarball)
+	@git-archive --format=tar $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile)"` | gzip > $(tarball)
 
 build/etch/$(deb): 
 	@ssh build-etch-i386 "cd `pwd`; $(build)"
