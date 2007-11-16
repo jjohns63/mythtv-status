@@ -122,7 +122,8 @@ for my $block (@blocks) {
       my $value = $key eq 'NODE_TEXT' ? wrap('  ', '  ', $item->string_value()) : $item->getAttribute($key);
       $value =~ s/\s+$//;
 
-      $value ||= 'Unknown';
+      $value = 'Unknown'
+	if $value eq '';
 
       $skip = 1
         if defined $block->{'filter'}{$key} &&
