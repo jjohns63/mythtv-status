@@ -36,10 +36,10 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-DAEMON=/usr/sbin/mythtv-update-motd # Introduce the server's location here
-NAME=mythtv-status         # Introduce the short server's name here
-DESC="MythTV Status"         # Introduce a short description here
-LOGDIR=/var/log/mythtv-status  # Log directory to use
+DAEMON=/usr/bin/mythtv-status # Introduce the server's location here
+NAME=mythtv-status            # Introduce the short server's name here
+DESC="MythTV Status"          # Introduce a short description here
+LOGDIR=/var/log/mythtv-status # Log directory to use
 
 test -x $DAEMON || exit 0
 test -x $DAEMON_WRAPPER || exit 0
@@ -72,11 +72,10 @@ case "$1" in
 
     cp /var/run/motd.orig /var/run/motd.new
 
-    if mythtv-status -h $HOST >> /var/run/motd.new
+    if $DAEMON -h $HOST >> /var/run/motd.new
     then
       mv /var/run/motd.new /var/run/motd
     fi
-    #$DAEMON
     log_end_msg 0
     ;;
   stop)
