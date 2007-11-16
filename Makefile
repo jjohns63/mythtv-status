@@ -2,11 +2,13 @@
 
 package=mythtv-status
 releases=etch sid
+sponsor_keyid=19D03486
 
 build=dpkg-buildpackage -uc -us -rfakeroot
 version=$(shell git-tag -l | tail -1)
 
 deb=$(package)_$(version)_all.deb
+orig_tarball=../$(package)_$(version).orig.tar.gz
 tarball=build/tarball/$(package)-$(version).tar.gz
 tarball_dir=../$(package)_tarballs
 
@@ -17,6 +19,12 @@ RELEASE_FILES=build/tarball/mythtv-status-${version}.tar.gz $(DEBS)
 all: release
 
 release: $(RELEASE_FILES)
+
+$(orig_tarball): $(tarball)
+	@ln -s `basename \`pwd\``/$< $@
+
+sponsor: $(orig_tarball)
+	dpkg-buildpackage -rfakeroot -k$(sponsor_keyid) -i'($.git|$build)' -tc
 
 $(tarball):
 	@mkdir -p $(@D)
@@ -41,4 +49,4 @@ publish: $(RELEASE_FILES)
 clean:
 	@rm -rf build
 
-.PHONY: release clean
+.PHONY: release clean sponsor
