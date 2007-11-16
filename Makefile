@@ -21,10 +21,11 @@ all: release
 release: $(RELEASE_FILES)
 
 $(orig_tarball): $(tarball)
+	@rm -f $@
 	@ln -s `basename \`pwd\``/$< $@
 
 sponsor: $(orig_tarball)
-	dpkg-buildpackage -rfakeroot -k$(sponsor_keyid) -i'($.git|$build)' -tc
+	dpkg-buildpackage -rfakeroot -k$(sponsor_keyid) -i'(.git|build|Makefile)' -tc
 
 $(tarball):
 	@mkdir -p $(@D)
