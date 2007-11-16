@@ -1,2 +1,2 @@
 bin/mythtv-status usr/bin
-bin/mythtv-update-motd usr/sbin
+bin/mythtv-update-motd usr/share/mythtv-status
