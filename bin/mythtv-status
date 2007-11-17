@@ -19,8 +19,10 @@ my $host = "localhost";
 my $port = "6544";
 my $description = undef;
 my $episode = undef;
+my $colour = undef;
 
 GetOptions(
+  'c|colour|color' => \$colour,
   'd|descripton' => \$description,
   'e|episode'    => \$episode,
   'h|host=s'     => \$host,
@@ -29,6 +31,15 @@ GetOptions(
 
 die "Sorry, port isn't a number.\n"
   if $port !~ /^\d+$/;
+
+my $safe = '';
+my $warning = '';
+my $normal = '';
+if (defined $colour) {
+  $safe    = "\033[0;32;40m";
+  $warning = "\033[1;31;40m";
+  $normal  = "\033[0m";
+}
 
 my $url = "http://$host:$port/xml";
 my $status = get($url);
@@ -61,11 +72,11 @@ my @blocks = (
     'template' => "__hostname__ (__id__) - __state____connected__",
     'rewrite' => {
       'connected' => { '1' => '', '0' => ' (Disconnected)' },
-      'state' =>{ '0' => 'Idle',
-                  '1' => 'Watching LiveTV',
-                  '2' => 'Watching Pre-recorded',
-		  '3' => 'Watching Recording',
-		  '4' => 'Recording' },
+      'state' =>{ '^0$' => "${safe}Idle${normal}",
+                  '^1$' => "${warning}Watching LiveTV${normal}",
+                  '^2$' => "${warning}Watching Pre-recorded${normal}",
+		  '^3$' => "${warning}Watching Recording${normal}",
+		  '^4$' => "${warning}Recording${normal}" },
     }
   },
 
@@ -165,6 +176,10 @@ about to be recorded.
 =head1 COMMAND LINE OPTIONS
 
 =over
+
+=item B<-c, --colour>
+
+Use colour when showing the status of the encoder(s).
 
 =item B<-d, --description>
 
