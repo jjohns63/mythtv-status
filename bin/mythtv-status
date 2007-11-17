@@ -21,12 +21,15 @@ my $description = undef;
 my $episode = undef;
 my $colour = undef;
 
+my $VERSION = '0.5';
+
 GetOptions(
   'c|colour|color' => \$colour,
   'd|descripton' => \$description,
   'e|episode'    => \$episode,
   'h|host=s'     => \$host,
   'p|port=s'     => \$port,
+  'v|version'    => &print_version(),
 );
 
 die "Sorry, port isn't a number.\n"
@@ -157,6 +160,13 @@ for my $block (@blocks) {
   print "\n";
 }
 
+sub print_version {
+  print "mythtv-status, version $VERSION.\n";
+  print "Written by Andrew Ruthven <andrew\@etc.gen.nz>\n";
+  print "\n";
+  exit;
+}
+
 =head1 NAME
 
 mythtv-status - Display the status of a MythTV backend
@@ -196,6 +206,10 @@ The host to check, defaults to localhost.
 =item B<-p PORT, --port=PORT>
 
 The port to use when connecting to MythTV, defaults to 6544.
+
+=item -B<-v, --version>
+
+Show the version of mythtv-status and then exit.
 
 =back
 
