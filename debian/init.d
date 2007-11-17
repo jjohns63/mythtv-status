@@ -1,10 +1,5 @@
 #!/bin/sh 
 #
-# Example init.d script with LSB support.
-#
-# Please read this init.d carefully and modify the sections to
-# adjust it to the program you want to run.
-#
 # Copyright (c) 2007 Javier Fernandez-Sanguino <jfs@debian.org>
 #
 # This is free software; you may redistribute it and/or modify
@@ -39,16 +34,11 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/bin/mythtv-status # Introduce the server's location here
 NAME=mythtv-status            # Introduce the short server's name here
 DESC="MythTV Status"          # Introduce a short description here
-LOGDIR=/var/log/mythtv-status # Log directory to use
 
 test -x $DAEMON || exit 0
 test -x $DAEMON_WRAPPER || exit 0
 
 . /lib/lsb/init-functions
-
-# Default options, these can be overriden by the information
-# at /etc/default/$NAME
-LOGFILE=$LOGDIR/$NAME.log  # Server logfile
 
 # Include defaults if available
 if [ -f /etc/default/$NAME ] ; then
