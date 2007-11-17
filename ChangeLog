@@ -1,3 +1,5 @@
+2007-11-17	Andrew Ruthven
+	Add support for printing colour in the encoder status display.
 
 2007-11-16	Francois Marier
 	Many fixes to the Debian packaging to make lintian happy.
