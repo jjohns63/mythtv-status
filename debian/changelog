@@ -1,3 +1,12 @@
+mythtv-status (0.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * Allow defining arguments in /etc/default/mythtv-status for use in the
+    init.d script.
+  * Minor cleanups to the init.d script.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Sun, 18 Nov 2007 10:17:09 +1300
+
 mythtv-status (0.4-1) unstable; urgency=low
 
   [ Andrew Ruthven ]
