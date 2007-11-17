@@ -29,7 +29,7 @@ GetOptions(
   'e|episode'    => \$episode,
   'h|host=s'     => \$host,
   'p|port=s'     => \$port,
-  'v|version'    => &print_version(),
+  'v|version'    => \&print_version,
 );
 
 die "Sorry, port isn't a number.\n"
