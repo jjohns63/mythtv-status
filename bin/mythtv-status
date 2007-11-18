@@ -13,6 +13,7 @@ use XML::LibXML;
 use Date::Manip;
 use Getopt::Long;
 use Text::Wrap;
+use POSIX qw/strftime/;
 
 # Some sane defaults.
 my $host = "localhost";
@@ -44,17 +45,25 @@ if (defined $colour) {
   $normal  = "\033[0m";
 }
 
-my $url = "http://$host:$port/xml";
-my $status = get($url);
-
-die "Sorry, failed to fetch $url.\n"
-  unless defined $status;
-
-my $parser = XML::LibXML->new();
-my $xml = eval { $parser->parse_string( $status ) };
-
-our $today    = substr(ParseDate('today'), 0, 8);
-our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
+# Allow setting some defaults for the output blocks.
+my %defaults = (
+  'schedule' => {
+    'attrs' => [ qw/title startTime NODE_TEXT subTitle/ ],
+    'template' => "__startTime__ - __title__" 
+      . (defined $episode ? " - __subTitle__" : '')
+      . (defined $description ? "\n__NODE_TEXT__" : ''),
+    'filter' =>  {
+       # Only show recordings for today and tomorrow.
+       'startTime' => sub {
+         my $date = substr(ParseDate($_[0]), 0, 8);
+         return ! (($date cmp $today) == 0
+          || ($date cmp $tomorrow) == 0) }
+     },
+     'rewrite' => {
+       'startTime' => { 'T' => ' ' },
+     }
+   }
+);
 
 # The blocks of output which we might generate.
 my @blocks = (
@@ -98,66 +107,170 @@ my @blocks = (
   {
     'name'  => 'Scheduled Recordings',
     'xpath' => '//Status/Scheduled/Program',
-    'attrs' => [ qw/title startTime NODE_TEXT subTitle/ ],
-    'template' => "__startTime__ - __title__" 
-      . (defined $episode ? " - __subTitle__" : '')
-      . (defined $description ? "\n__NODE_TEXT__" : ''),
-    'filter' =>  {
-       # Only show recordings for today and tomorrow.
-       'startTime' => sub {
-	   my $date = substr(ParseDate($_[0]), 0, 8);
-           return ! (($date cmp $today) == 0
-	      || ($date cmp $tomorrow) == 0) }
-     },
-     'rewrite' => {
-       'startTime' => { 'T' => ' ' },
-     }
-  }
+    'defaults' => 'schedule',
+  },
+
+  # Conflicts
+  {
+    'name' => 'Schedule Conflicts',
+    'Perl MythTV' => 1,
+    'defaults' => 'schedule',
+  },
 );
+
+###
+### Fetch the XML status from the backend.
+###
+my $url = "http://$host:$port/xml";
+my $status = get($url);
+
+die "Sorry, failed to fetch $url.\n"
+  unless defined $status;
+
+###
+### Parse the XML
+###
+my $parser = XML::LibXML->new();
+my $xml = eval { $parser->parse_string( $status ) };
+
+###
+### Prep the Perl MythTV API if available.
+###
+my $myth = undef;
+eval { use MythTV };
+if (! $@) {
+  eval { $myth = new MythTV() };
+}
+
+###
+### Set some useful variables, and print the header
+###
+our $today    = substr(ParseDate('today'), 0, 8);
+our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
 my $title =  "MythTV status for $host";
 print "\n$title\n";
 print '=' x length($title) . "\n";
 
 for my $block (@blocks) {
+  $block->{'format'} ||= 'multi line';
+
+  # We might need to set some defaults.
+  if (defined $block->{'defaults'}) {
+    for my $field (keys %{ $defaults{ $block->{'defaults'} } }) {
+      $block->{$field} ||= $defaults{ $block->{'defaults'} }{$field};
+    }
+  }
+
+  my $output = undef;
+  if (defined $block->{'xpath'}) {
+    $output = process_xml($block, $xml);
+
+  } elsif (defined $block->{'Perl MythTV'}) {
+    $output = process_perl($block, $myth);
+  }
+
+  if (defined $output) {
+    print "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
+    print $output . "\n\n";
+  }
+}
+
+exit 0;
+
+sub process_xml {
+  my ($block, $xml) = @_;
+
   my $items = $xml->documentElement->find($block->{'xpath'});
 
   # Don't do any work on this block if there is nothing for it.
-  next
+  return undef
     if (scalar(@$items) == 0);
 
-  $block->{'format'} ||= 'multi line';
-  print "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
-
+  my @lines;
   for my $item (@{ $items }) {
-    my $template = $block->{'template'};
-    my $skip = undef;
+    my %vars;
     for my $key (@{ $block->{'attrs'} }) {
-      my $value = $key eq 'NODE_TEXT' ? wrap('  ', '  ', $item->string_value()) : $item->getAttribute($key);
-      $value =~ s/\s+$//;
-
-      $value = 'Unknown'
-	if $value eq '';
-
-      $skip = 1
-        if defined $block->{'filter'}{$key} &&
-	  &{ $block->{'filter'}{$key} }($value);
-
-      if (defined $block->{'rewrite'}{$key}) {
-	my ($search, $replace);
-	while (($search, $replace) = each %{ $block->{'rewrite'}{$key} } ) {
-	  $value =~ s/$search/$replace/g;
-	}
-      }
-
-      $template =~ s/__${key}__/$value/g;
+      $vars{$key} = $key eq 'NODE_TEXT' ? $item->string_value : $item->getAttribute($key);
     }
-   
-    print "$template\n"
-      unless defined $skip;
+
+    my $str = substitute_vars($block, \%vars);
+    push @lines, $str
+      if defined $str;
   }
 
-  print "\n";
+  return join("\n", @lines);
+}
+
+sub process_perl {
+  my ($block, $myth) = @_;
+
+  return "Unable to access MythTV Perl API."
+    unless defined $myth;
+
+  my @lines;
+
+  # This isn't defined in the 0.20 version of the API.  It is in 0.21svn.
+  my $recstatus_conflict = 7;
+
+  my %rows = $myth->backend_rows('QUERY_GETALLPENDING', 2);
+
+  foreach my $row (@{$rows{'rows'}}) {
+    my $show;
+    {
+      # MythTV::Program currently has a slightly broken line with a numeric
+      # comparision.
+      local($^W) = undef;
+      $show = new MythTV::Program(@$row);
+    }
+
+    if ($show->{'recstatus'} == $recstatus_conflict) {
+      my %vars = (
+        'title'     => $show->{'title'},  
+        'startTime' => strftime("%FT%T", localtime($show->{'starttime'})),
+        'NODE_TEXT' => $show->{'description'},
+        'subTitle'  => $show->{'subtitle'}
+       );
+
+      my $str = substitute_vars($block, \%vars);
+      push @lines, $str
+        if defined $str;
+    }
+  }
+
+  return join("\n", @lines);
+}
+
+sub substitute_vars {
+  my $block = shift;
+  my $vars  = shift;
+
+  my $template = $block->{'template'};
+  my $skip = undef;
+  my ($key, $value);
+  while (($key, $value) = (each %{ $vars })) {
+    $value = wrap('  ', '  ', $value)
+      if $key eq 'NODE_TEXT';
+
+    $value =~ s/\s+$//;
+    $value = 'Unknown'
+      if $value eq '';
+
+    $skip = 1
+      if defined $block->{'filter'}{$key} &&
+        &{ $block->{'filter'}{$key} }($value);
+
+    if (defined $block->{'rewrite'}{$key}) {
+      my ($search, $replace);
+      while (($search, $replace) = each %{ $block->{'rewrite'}{$key} } ) {
+        $value =~ s/$search/$replace/g;
+      }
+    }
+
+    $template =~ s/__${key}__/$value/g;
+  }
+   
+  return defined $skip ? undef : $template;
 }
 
 sub print_version {
@@ -236,6 +349,10 @@ Any programs which are being recorded right now.
 =item Scheduled Recordings
 
 Up to 10 programs which are scheduled to be recorded today and tomorrow.
+
+=item Schedule Conflicts
+
+Any upcoming schedule conflicts (not just limited to today or tomorrow).
 
 =back
 
