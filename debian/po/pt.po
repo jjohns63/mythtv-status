@@ -1,0 +1,58 @@
+# translation of mythtv-status debconf to Portuguese
+# Copyright (C) 2007 Américo Monteiro
+# This file is distributed under the same license as the mythtv-status package.
+#
+# Américo Monteiro <a_monteiro@netcabo.pt>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: mythtv-status 0.4-1\n"
+"Report-Msgid-Bugs-To: Source: mythtv-status@packages.debian.org\n"
+"POT-Creation-Date: 2007-11-16 12:53+1300\n"
+"PO-Revision-Date: 2007-11-18 18:40+0000\n"
+"Last-Translator: Américo Monteiro <a_monteiro@netcabo.pt>\n"
+"Language-Team: Portuguese <traduz@debianpt.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid "MythTV backend to check:"
+msgstr "Backend do MythTV para verificar:"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid ""
+"The MythTV backend to check, you only need to change this if you want to "
+"check a different host."
+msgstr ""
+"O backend do MythTV para verificar, você apenas precisa alterar isto se "
+"desejar verificar uma máquina diferente."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "Update the system MOTD?"
+msgstr "Actualizar o sistema MOTD?"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"Whether the Message of the Day should be updated on system boot and on a "
+"regular basis."
+msgstr ""
+"Se a Mensagem do Dia deverá ser actualizada no arranque da máquina e numa "
+"base regular."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgstr ""
+"Para ajustar a frequência de actualização do MOTD, "
+"edite /etc/cron.d/mythtv-status."
+
