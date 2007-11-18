@@ -32,22 +32,14 @@ $(tarball):
 	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile)"` | gzip > $(tarball)
 
 build/etch/$(deb): 
-	@rm -rf build/working &> /dev/null
-	@mkdir -p build/working
-	@git-archive --format=tar $(version) | (cd build/working; tar xf -)
-	@ssh build-etch-i386 "cd `pwd`/build/working; $(build)"
+	@ssh build-etch-i386 "cd `pwd`; $(build)"
 	@mkdir -p build/etch
-	@mv build/$(deb) build/etch
-	@rm -rf build/working &> /dev/null
+	@mv ../$(deb) build/etch
 
 build/sid/$(deb): 
-	@rm -rf build/working &> /dev/null
-	@mkdir -p build/working
-	@git-archive --format=tar $(version) | (cd build/working; tar xf -)
-	@ssh build-sid-i386 "cd `pwd`/build/working; $(build)"
+	@ssh build-sid-i386 "cd `pwd`; $(build)"
 	@mkdir -p build/sid
-	@mv build/$(deb) build/sid
-	@rm -rf build/working &> /dev/null
+	@mv ../$(deb) build/sid
 
 publish: $(RELEASE_FILES)
 	for release in $(releases); do ars-add -r $$release -g main build/$$release/$(deb); done
