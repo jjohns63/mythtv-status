@@ -104,7 +104,7 @@ my @blocks = (
     'attrs' => [ qw/title endTime/ ],
     'template' => "__title__ (Ends: __endTime__)",
     'rewrite' => {
-      '/endTime/' => { 'T' => ' ' },
+      '/endTime/' => { '.*T' => '' },
      },
      'subs' => {
        'find_next' => sub { $next_time = 'now' }
