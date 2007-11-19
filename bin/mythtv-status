@@ -219,7 +219,7 @@ for my $block (@blocks) {
     $output = substitute_vars($block, { 'next_time' => $next_time });
   }
 
-  if (defined $output) {
+  if (defined $output && $output ne '') {
     print "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
     print $output . "\n\n";
   }
