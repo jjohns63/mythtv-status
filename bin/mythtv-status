@@ -376,7 +376,7 @@ The host to check, defaults to localhost.
 
 The port to use when connecting to MythTV, defaults to 6544.
 
-=item -B<-v, --version>
+=item B<-v, --version>
 
 Show the version of mythtv-status and then exit.
 
@@ -390,7 +390,7 @@ The output of this script is broken up into several chunks they are:
 
 =item Status
 
-Some general info about the backend, currently just the timestamp of then
+Some general info about the backend, currently just the timestamp of when
 this program was run.
 
 =item Encoders
