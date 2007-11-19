@@ -60,16 +60,19 @@ my %defaults = (
           || ($date cmp $tomorrow) == 0) }
      },
      'rewrite' => {
-       'startTime' => { 'T' => ' ' },
+       '/startTime/' => { 'T' => ' ' },
      }
    }
 );
+
+my $next_time = undef;
 
 # The blocks of output which we might generate.
 my @blocks = (
   # Date/Time from server
   {
     'name'  => 'Status',
+    'type'  => 'xpath',
     'xpath' => "//Status",
     'attrs' => [ qw/time date/ ],
     'template' => "__date__, __time__",
@@ -79,12 +82,13 @@ my @blocks = (
   # Info about the encoders.
   {
     'name'  => 'Encoders',
+    'type'  => 'xpath',
     'xpath' => "//Status/Encoders/Encoder",
     'attrs' => [ qw/hostname id state connected/ ],
     'template' => "__hostname__ (__id__) - __state____connected__",
     'rewrite' => {
-      'connected' => { '1' => '', '0' => ' (Disconnected)' },
-      'state' =>{ '^0$' => "${safe}Idle${normal}",
+      '/connected/' => { '1' => '', '0' => ' (Disconnected)' },
+      '/state/' =>{ '^0$' => "${safe}Idle${normal}",
                   '^1$' => "${warning}Watching LiveTV${normal}",
                   '^2$' => "${warning}Watching Pre-recorded${normal}",
 		  '^3$' => "${warning}Watching Recording${normal}",
@@ -95,27 +99,69 @@ my @blocks = (
   # What programs (if any) are being recorded right now?
   {
     'name'  => 'Recording Now',
+    'type'  => 'xpath',
     'xpath' => "//Status/Encoders/Encoder/Program",
     'attrs' => [ qw/title endTime/ ],
     'template' => "__title__ (Ends: __endTime__)",
-     'rewrite' => {
-       'endTime' => { 'T' => ' ' },
+    'rewrite' => {
+      '/endTime/' => { 'T' => ' ' },
+     },
+     'subs' => {
+       'find_next' => sub { $next_time = 'now' }
      }
   },
 
   # The upcoming recordings.
   {
     'name'  => 'Scheduled Recordings',
+    'type'  => 'xpath',
     'xpath' => '//Status/Scheduled/Program',
     'defaults' => 'schedule',
+    'subs' => {
+      'find_next' => sub {
+	 my $vars = shift;
+         return
+	   if $next_time eq 'now';
+
+         my $date = ParseDate($vars->{'startTime'});
+	 if (! defined $next_time || Date_Cmp($date, $next_time) < 0) {
+	   $next_time = $date
+	 };
+       }
+     }
   },
 
   # Conflicts
   {
     'name' => 'Schedule Conflicts',
-    'Perl MythTV' => 1,
+    'type' => 'Perl MythTV API',
     'defaults' => 'schedule',
   },
+
+  # How many hours till the next recording.
+  {
+    'name' => 'Time till next recording',
+    'type' => 'sub',
+    'format' => 'one line',
+    'template' => '__next_time__',
+    'rewrite' => {
+      '&next_time' => sub {
+        return "Never"
+	  unless defined $next_time;
+
+        my $str = Delta_Format(DateCalc('now', $next_time, undef, 1), 0, '%hh Hours, %mv Minutes');
+        $str =~ s/\b1 (Hour|Minute)s/1 $1/;
+        $str =~ s/^0 Hours, //;
+        $str =~ s/ 0 Minutes//;
+
+	return $str;
+      }
+    },
+    'filter' =>  {
+      'next_time' => sub { return $_[0] eq 'now' }
+    }
+  },
+
 );
 
 ###
@@ -163,11 +209,14 @@ for my $block (@blocks) {
   }
 
   my $output = undef;
-  if (defined $block->{'xpath'}) {
+  if ($block->{'type'} eq 'xpath') {
     $output = process_xml($block, $xml);
 
-  } elsif (defined $block->{'Perl MythTV'}) {
+  } elsif ($block->{'type'} eq 'Perl MythTV API') {
     $output = process_perl($block, $myth);
+
+  } elsif ($block->{'type'} eq 'sub') {
+    $output = substitute_vars($block, { 'next_time' => $next_time });
   }
 
   if (defined $output) {
@@ -260,14 +309,21 @@ sub substitute_vars {
       if defined $block->{'filter'}{$key} &&
         &{ $block->{'filter'}{$key} }($value);
 
-    if (defined $block->{'rewrite'}{$key}) {
+    if (defined $block->{'rewrite'}{"/$key/"}) {
       my ($search, $replace);
-      while (($search, $replace) = each %{ $block->{'rewrite'}{$key} } ) {
+      while (($search, $replace) = each %{ $block->{'rewrite'}{"/$key/"} } ) {
         $value =~ s/$search/$replace/g;
       }
+    } elsif (defined $block->{'rewrite'}{"&$key"}) {
+      $value = &{ $block->{'rewrite'}{"&$key"} }($value);
     }
 
     $template =~ s/__${key}__/$value/g;
+  }
+
+  my ($name, $sub);
+  while (($name, $sub) =  each %{ $block->{'subs'} }) {
+    &$sub($vars);
   }
    
   return defined $skip ? undef : $template;
@@ -353,6 +409,11 @@ Up to 10 programs which are scheduled to be recorded today and tomorrow.
 =item Schedule Conflicts
 
 Any upcoming schedule conflicts (not just limited to today or tomorrow).
+
+=item Time till next recording
+
+If there are no recordings currently happening, then the amount of time until
+the next recording is displayed.
 
 =back
 
