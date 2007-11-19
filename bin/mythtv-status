@@ -21,6 +21,7 @@ my $port = "6544";
 my $description = undef;
 my $episode = undef;
 my $colour = undef;
+my %display;
 
 my $VERSION = '0.5';
 
@@ -31,6 +32,13 @@ GetOptions(
   'h|host=s'     => \$host,
   'p|port=s'     => \$port,
   'v|version'    => \&print_version,
+  'status!'               => \$display{'Status'},
+  'encoders!'             => \$display{'Encoders'},
+  'recording_now!'        => \$display{'Recording Now'},
+  'scheduled_recordings!' => \$display{'Scheduled Recordings'},
+  'schedule_conflicts!'   => \$display{'Schedule Conflicts'},
+  'next_recording!'       => \$display{'Time till next recording'},
+
 );
 
 die "Sorry, port isn't a number.\n"
@@ -101,6 +109,7 @@ my @blocks = (
     'name'  => 'Recording Now',
     'type'  => 'xpath',
     'xpath' => "//Status/Encoders/Encoder/Program",
+    'hide'  => 'after',
     'attrs' => [ qw/title endTime/ ],
     'template' => "__title__ (Ends: __endTime__)",
     'rewrite' => {
@@ -117,6 +126,7 @@ my @blocks = (
     'type'  => 'xpath',
     'xpath' => '//Status/Scheduled/Program',
     'defaults' => 'schedule',
+    'hide'  => 'after',
     'subs' => {
       'find_next' => sub {
 	 my $vars = shift;
@@ -201,6 +211,16 @@ print '=' x length($title) . "\n";
 for my $block (@blocks) {
   $block->{'format'} ||= 'multi line';
 
+  my $hide = undef;
+  if (defined $display{ $block->{'name'} }
+    && $display{ $block->{'name'} } == 0) {
+    if (defined $block->{'hide'} && lc($block->{'hide'}) eq 'after') {
+      $hide = 1;
+    } else {
+      next;
+    }
+  }
+
   # We might need to set some defaults.
   if (defined $block->{'defaults'}) {
     for my $field (keys %{ $defaults{ $block->{'defaults'} } }) {
@@ -219,7 +239,7 @@ for my $block (@blocks) {
     $output = substitute_vars($block, { 'next_time' => $next_time });
   }
 
-  if (defined $output && $output ne '') {
+  if (defined $output && $output ne '' && ! defined $hide) {
     print "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
     print $output . "\n\n";
   }
@@ -371,6 +391,10 @@ Display the episode (subtitle) for the scheduled recordings.
 =item B<-h HOST, --host=HOST>
 
 The host to check, defaults to localhost.
+
+=item B<--nostatus>, B<--noencoders>, B<--norecording_now>, B<--noscheduled_recordings>, B<--noschedule_conflicts>, B<--nonext_recording>
+
+Suppress displaying blocks of the output if they would normally be displayed.
 
 =item B<-p PORT, --port=PORT>
 
