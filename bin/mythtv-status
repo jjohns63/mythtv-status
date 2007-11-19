@@ -151,7 +151,7 @@ my @blocks = (
 
         my $str = Delta_Format(DateCalc('now', $next_time, undef, 1), 0, '%hh Hours, %mv Minutes');
         $str =~ s/\b1 (Hour|Minute)s/1 $1/;
-        $str =~ s/^0 Hours, //;
+        $str =~ s/^0 Hours, (.*)$/$warning$1$normal/;
         $str =~ s/ 0 Minutes//;
 
 	return $str;
