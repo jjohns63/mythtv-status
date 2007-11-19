@@ -183,7 +183,7 @@ my $xml = eval { $parser->parse_string( $status ) };
 ### Prep the Perl MythTV API if available.
 ###
 my $myth = undef;
-eval { use MythTV };
+eval { require MythTV };
 if (! $@) {
   eval { $myth = new MythTV() };
 }
