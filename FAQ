@@ -1,0 +1,10 @@
+Some sometimes asked questions...
+
+Q) Why not just run mythtv-status from your .profile (or similar)?
+A) Simple reason, speed.  When I first wrote mythtv-status I was running it
+out of my .profile, bit it slowed down logging in by about 2-3 seconds.
+Which was just enough to be annoying.
+
+That is why I decided to update the MOTD instead.  This way how long the
+script takes to run doesn't matter, you never have to run it
+interactively.
