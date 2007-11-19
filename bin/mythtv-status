@@ -121,7 +121,7 @@ my @blocks = (
       'find_next' => sub {
 	 my $vars = shift;
          return
-	   if $next_time eq 'now';
+	   if defined $next_time && $next_time eq 'now';
 
          my $date = ParseDate($vars->{'startTime'});
 	 if (! defined $next_time || Date_Cmp($date, $next_time) < 0) {
