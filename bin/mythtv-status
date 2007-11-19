@@ -175,34 +175,13 @@ my @blocks = (
 );
 
 ###
-### Fetch the XML status from the backend.
-###
-my $url = "http://$host:$port/xml";
-my $status = get($url);
-
-die "Sorry, failed to fetch $url.\n"
-  unless defined $status;
-
-###
-### Parse the XML
-###
-my $parser = XML::LibXML->new();
-my $xml = eval { $parser->parse_string( $status ) };
-
-###
-### Prep the Perl MythTV API if available.
-###
-my $myth = undef;
-eval { require MythTV };
-if (! $@) {
-  eval { $myth = new MythTV() };
-}
-
-###
 ### Set some useful variables, and print the header
 ###
 our $today    = substr(ParseDate('today'), 0, 8);
 our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
+
+# A couple of global variables
+my ($xml, $myth);
 
 my $title =  "MythTV status for $host";
 print "\n$title\n";
@@ -230,9 +209,13 @@ for my $block (@blocks) {
 
   my $output = undef;
   if ($block->{'type'} eq 'xpath') {
+    $xml ||= load_xml();
+
     $output = process_xml($block, $xml);
 
   } elsif ($block->{'type'} eq 'Perl MythTV API') {
+    $myth ||= load_perl_api();
+
     $output = process_perl($block, $myth);
 
   } elsif ($block->{'type'} eq 'sub') {
@@ -246,6 +229,32 @@ for my $block (@blocks) {
 }
 
 exit 0;
+
+# Fetch the XML status from the backend.
+sub load_xml {
+  my $url = "http://$host:$port/xml";
+  my $status = get($url);
+
+  die "Sorry, failed to fetch $url.\n"
+    unless defined $status;
+
+  # Parse the XML
+  my $parser = XML::LibXML->new();
+  return eval { $parser->parse_string( $status ) };
+}
+
+
+# Prep the Perl MythTV API if available.
+sub load_perl_api {
+  my $myth = undef;
+
+  eval { require MythTV };
+  if (! $@) {
+    eval { $myth = new MythTV() };
+  }
+
+  return $myth;
+}
 
 sub process_xml {
   my ($block, $xml) = @_;
