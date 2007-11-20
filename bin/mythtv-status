@@ -144,8 +144,9 @@ my @blocks = (
   # Conflicts
   {
     'name' => 'Schedule Conflicts',
-    'type' => 'Perl MythTV API',
+    'type' => 'sub',
     'defaults' => 'schedule',
+    'sub' => \&process_conflicts
   },
 
   # How many hours till the next recording.
@@ -213,10 +214,10 @@ for my $block (@blocks) {
 
     $output = process_xml($block, $xml);
 
-  } elsif ($block->{'type'} eq 'Perl MythTV API') {
-    $myth ||= load_perl_api();
+  } elsif ($block->{'type'} eq 'sub') {
 
-    $output = process_perl($block, $myth);
+    $output = &{ $block->{'sub'} }($block)
+      if defined $block->{'sub'};
 
   } elsif ($block->{'type'} eq 'sub') {
     $output = substitute_vars($block, { 'next_time' => $next_time });
@@ -280,8 +281,9 @@ sub process_xml {
   return join("\n", @lines);
 }
 
-sub process_perl {
-  my ($block, $myth) = @_;
+sub process_conflicts {
+  my ($block) = @_;
+  $myth ||= load_perl_api();
 
   return "Unable to access MythTV Perl API."
     unless defined $myth;
