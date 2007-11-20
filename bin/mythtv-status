@@ -170,6 +170,9 @@ my @blocks = (
     },
     'filter' =>  {
       'next_time' => sub { return $_[0] eq 'now' }
+    },
+    'sub' => sub {
+      return substitute_vars($_[0], { 'next_time' => $next_time });
     }
   },
 
@@ -218,9 +221,6 @@ for my $block (@blocks) {
 
     $output = &{ $block->{'sub'} }($block)
       if defined $block->{'sub'};
-
-  } elsif ($block->{'type'} eq 'sub') {
-    $output = substitute_vars($block, { 'next_time' => $next_time });
   }
 
   if (defined $output && $output ne '' && ! defined $hide) {
