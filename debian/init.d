@@ -36,7 +36,6 @@ NAME=mythtv-status            # Introduce the short server's name here
 DESC="MythTV Status"          # Introduce a short description here
 
 test -x $DAEMON || exit 0
-test -x $DAEMON_WRAPPER || exit 0
 
 . /lib/lsb/init-functions
 
