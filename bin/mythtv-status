@@ -39,10 +39,10 @@ GetOptions(
   'email-only-on-conflict' => \$email_only_on_conflict,
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
-  'recording_now!'        => \$display{'Recording Now'},
-  'scheduled_recordings!' => \$display{'Scheduled Recordings'},
-  'schedule_conflicts!'   => \$display{'Schedule Conflicts'},
-  'next_recording!'       => \$display{'Time till next recording'},
+  'recording-now!'        => \$display{'Recording Now'},
+  'scheduled-recordings!' => \$display{'Scheduled Recordings'},
+  'schedule-conflicts!'   => \$display{'Schedule Conflicts'},
+  'next-recording!'       => \$display{'Time till next recording'},
 
 );
 
@@ -442,8 +442,8 @@ Send the output to the listed email addresses.  By default the encoder status,
 currently recording shows and time till next recording is surpressed from
 the email.
 
-To turn the additional blocks on you can use B<--encoders>, B<--recording_now>
-and/or B<--next_recording>.
+To turn the additional blocks on you can use B<--encoders>, B<--recording-now>
+and/or B<--next-recording>.
 
 =item B<--email-only-on-conflict>
 
@@ -453,7 +453,7 @@ Only send an email out (if --email is present) if there is a schedule conflict.
 
 The host to check, defaults to localhost.
 
-=item B<--nostatus>, B<--noencoders>, B<--norecording_now>, B<--noscheduled_recordings>, B<--noschedule_conflicts>, B<--nonext_recording>
+=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>
 
 Suppress displaying blocks of the output if they would normally be displayed.
 
