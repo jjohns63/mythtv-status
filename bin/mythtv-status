@@ -15,6 +15,7 @@ use Getopt::Long;
 use Text::Wrap;
 use POSIX qw/strftime/;
 use MIME::Entity;
+use Pod::Usage;
 
 # Some sane defaults.
 my $host = "localhost";
@@ -25,6 +26,7 @@ my $colour = undef;
 my %display;
 my @email;
 my $email_only_on_conflict = 0;
+my $help = undef;
 
 my $VERSION = '0.5';
 
@@ -44,7 +46,11 @@ GetOptions(
   'schedule-conflicts!'   => \$display{'Schedule Conflicts'},
   'next-recording!'       => \$display{'Time till next recording'},
 
-);
+  'help|?' => \$help,
+) || pod2usage("\nUse --help for help.\n");
+
+pod2usage(verbose => 1)
+  if defined $help;
 
 die "Sorry, port isn't a number.\n"
   if $port !~ /^\d+$/;
@@ -420,7 +426,7 @@ any upcoming recordings and any which are happening right now.
 The intention is to warn you if there is a program being recorded or
 about to be recorded.
 
-=head1 COMMAND LINE OPTIONS
+=head1 OPTIONS
 
 =over
 
@@ -448,6 +454,10 @@ and/or B<--next-recording>.
 =item B<--email-only-on-conflict>
 
 Only send an email out (if --email is present) if there is a schedule conflict.
+
+=item B<-?, --help>
+
+Display help.
 
 =item B<-h HOST, --host=HOST>
 
