@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. /etc/default/mythtv-status
+
+if [ "x$EMAIL" = "x" -o "x$EMAIL" = "xnone" ]
+then
+  exit
+fi
+
+/usr/bin/mythtv-status --email $EMAIL $EMAIL_ARGS

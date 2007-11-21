@@ -27,6 +27,11 @@ case "$1" in
       RUN='yes'
     fi
 
+    db_get $PACKAGE/email
+    EMAIL="${RET:-none}"
+
+    EMAIL_ARGS="${EMAIL_ARGS:--email-only-on-conflict}"
+
     cat <<_eof > $DEBIANCONFIG
 # $PACKAGE Debian configuration
 #
@@ -49,6 +54,16 @@ HOST=$HOST
 # ARGS:
 #  Any extra arguments to pass to mythtv-status (i.e., -e and/or -d).
 ARGS=$ARGS
+
+# EMAIL:
+#  A comma separated list of email address to send status emails to.
+#
+#  Set to none (or leave empty) to disable daily emails.
+EMAIL=$EMAIL
+
+# EMAIL_ARGS:
+#  Command line arguments that are used when sending the daily email.
+EMAIL_ARGS=$EMAIL_ARGS
 _eof
 
     db_stop

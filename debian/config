@@ -16,10 +16,12 @@ if [ -e $CONFIGFILE ]; then
 
   db_set $PACKAGE/enable $RUN
   db_set $PACKAGE/host $HOST
+  db_set $PACKAGE/email $EMAIL
 
 fi
 
 # Ask questions.
 db_input medium $PACKAGE/host || true
 db_input medium $PACKAGE/enable || true
+db_input medium $PACKAGE/email || true
 db_go
