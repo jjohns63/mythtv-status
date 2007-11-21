@@ -14,6 +14,7 @@ use Date::Manip;
 use Getopt::Long;
 use Text::Wrap;
 use POSIX qw/strftime/;
+use MIME::Entity;
 
 # Some sane defaults.
 my $host = "localhost";
@@ -22,6 +23,8 @@ my $description = undef;
 my $episode = undef;
 my $colour = undef;
 my %display;
+my @email;
+my $email_only_on_conflict = 0;
 
 my $VERSION = '0.5';
 
@@ -32,6 +35,8 @@ GetOptions(
   'h|host=s'     => \$host,
   'p|port=s'     => \$port,
   'v|version'    => \&print_version,
+  'email=s@'     => \@email,
+  'email-only-on-conflict' => \$email_only_on_conflict,
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
   'recording_now!'        => \$display{'Recording Now'},
@@ -44,10 +49,24 @@ GetOptions(
 die "Sorry, port isn't a number.\n"
   if $port !~ /^\d+$/;
 
+# Get the email address into a format we can use.
+@email = split(',', join(',', @email));
+
+# Default to not showing some blocks if we're sending email, but let the
+# user override us.
+if (scalar(@email) > 0) {
+  for my $block ('Encoders', 'Recording Now', 'Time till next recording') {
+    if (! defined $display{$block}) {
+      $display{$block} = 0;
+    }
+  }
+}
+
+# Possibly use some colour, but not in emails.
 my $safe = '';
 my $warning = '';
 my $normal = '';
-if (defined $colour) {
+if (defined $colour && scalar(@email) == 0) {
   $safe    = "\033[0;32;40m";
   $warning = "\033[1;31;40m";
   $normal  = "\033[0m";
@@ -179,17 +198,18 @@ my @blocks = (
 );
 
 ###
-### Set some useful variables, and print the header
+### Set some useful variables
 ###
 our $today    = substr(ParseDate('today'), 0, 8);
 our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
 # A couple of global variables
 my ($xml, $myth);
+my $schedule_conflicts_present = 0;
 
 my $title =  "MythTV status for $host";
-print "\n$title\n";
-print '=' x length($title) . "\n";
+my $output = "$title\n";
+$output .= '=' x length($title) . "\n";
 
 for my $block (@blocks) {
   $block->{'format'} ||= 'multi line';
@@ -211,21 +231,36 @@ for my $block (@blocks) {
     }
   }
 
-  my $output = undef;
+  my $result = undef;
   if ($block->{'type'} eq 'xpath') {
     $xml ||= load_xml();
 
-    $output = process_xml($block, $xml);
+    $result = process_xml($block, $xml);
 
   } elsif ($block->{'type'} eq 'sub') {
 
-    $output = &{ $block->{'sub'} }($block)
+    $result = &{ $block->{'sub'} }($block)
       if defined $block->{'sub'};
   }
 
-  if (defined $output && $output ne '' && ! defined $hide) {
-    print "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
-    print $output . "\n\n";
+  if (defined $result && $result ne '' && ! defined $hide) {
+    $output .= "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
+    $output .= $result . "\n\n";
+  }
+}
+
+# Either print the status out, or email it.
+if (scalar(@email) == 0) {
+  print "\n$output";
+} else {
+  if (! ($email_only_on_conflict && ! $schedule_conflicts_present)) {
+    my $mail = MIME::Entity->build(
+      To      => \@email,
+      Subject => $title . ($schedule_conflicts_present ? ' - CONFLICTS' : ''),
+      Data    => $output
+    ); 
+
+    $mail->send('sendmail');
   }
 }
 
@@ -318,6 +353,8 @@ sub process_conflicts {
     }
   }
 
+  $schedule_conflicts_present = scalar(@lines);
+
   return join("\n", @lines);
 }
 
@@ -398,6 +435,19 @@ Display the description for the scheduled recordings.
 =item B<-e, --episode>
 
 Display the episode (subtitle) for the scheduled recordings.
+
+=item B<< --email <address>[ --email <address> ...] >>
+
+Send the output to the listed email addresses.  By default the encoder status,
+currently recording shows and time till next recording is surpressed from
+the email.
+
+To turn the additional blocks on you can use B<--encoders>, B<--recording_now>
+and/or B<--next_recording>.
+
+=item B<--email-only-on-conflict>
+
+Only send an email out (if --email is present) if there is a schedule conflict.
 
 =item B<-h HOST, --host=HOST>
 

@@ -1,3 +1,8 @@
+2007-11-21	Andrew Ruthven
+	Now the results can be sent via email with the subject set correctly.
+	  With an option to only send out email if schedule conflicts are
+	  detected.
+
 2007-11-20	Andrew Ruthven
 	Allow suppressing blocks of output.
 	Add a semi-FAQ.
