@@ -61,22 +61,22 @@ msgstr ""
 #. Description
 #: ../templates:3001
 msgid "Email status to?"
-msgstr ""
+msgstr "Envoyer le status à quelqu'un ?"
 
 #. Type: string
 #. Description
 #: ../templates:3001
 msgid "Who should we send emails to on a daily basis?"
-msgstr ""
+msgstr "Qui devrait recevoir les courriels quotidiens ?"
 
 #. Type: string
 #. Description
 #: ../templates:3001
 msgid "By default an email is only sent if there is a conflict."
-msgstr ""
+msgstr "Un message n'est envoyé que s'il y a un conflit dans l'horaire."
 
 #. Type: string
 #. Description
 #: ../templates:3001
 msgid "To disable set the email address to \"none\"."
-msgstr ""
+msgstr "Pour désactiver cette fonction, entrez l'adresse \"none\"."
