@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
-"POT-Creation-Date: 2007-11-23 11:32+1300\n"
+"Report-Msgid-Bugs-To: Source: mythtv-status@packages.debian.org\n"
+"POT-Creation-Date: 2007-11-23 11:54+1300\n"
 "PO-Revision-Date: 2007-11-23 11:39+1300\n"
 "Last-Translator: Francois Marier <francois@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. Description
 #: ../templates:1001
 msgid "MythTV backend to check:"
-msgstr "Système MythTV à examiner:"
+msgstr "Système MythTV à examiner :"
 
 #. Type: string
 #. Description
@@ -66,8 +66,8 @@ msgstr "Envoyer le status à :"
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "Who should emails be sent to on a daily basis?"
-msgstr "Qui devrait recevoir les courriels quotidiens ?"
+msgid "Status emails can be sent on a daily basis."
+msgstr "Un courriel de status peut être envoyé quotidiennement."
 
 #. Type: string
 #. Description
