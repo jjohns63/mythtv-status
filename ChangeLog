@@ -2,6 +2,7 @@
 	Don't set the background when changing the colour.
 	Make the new debconf prompt lintian clean and say how to specify
 	  multiple email addresses.
+	Release version 0.5.1.
 
 2007-11-21	Andrew Ruthven
 	Now the results can be sent via email with the subject set correctly.
