@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mythtv-status\n"
-"Report-Msgid-Bugs-To: Source: mythtv-status@packages.debian.org\n"
-"POT-Creation-Date: 2007-11-22 17:07+1300\n"
+"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
+"POT-Creation-Date: 2007-11-23 11:32+1300\n"
 "PO-Revision-Date: 2007-11-22 07:41+0000\n"
 "Last-Translator: Américo Monteiro <a_monteiro@netcabo.pt>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
@@ -51,7 +51,8 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../templates:2001
-msgid "To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgid ""
+"To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
 msgstr ""
 "Para ajustar a frequência de actualização do MOTD, edite /etc/cron.d/mythtv-"
 "status."
@@ -59,13 +60,15 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "Email status to?"
+#, fuzzy
+msgid "Send email status to:"
 msgstr "Email de estado para?"
 
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "Who should we send emails to on a daily basis?"
+#, fuzzy
+msgid "Who should emails be sent to on a daily basis?"
 msgstr "Para quem deveremos enviar emails diáriamente?"
 
 #. Type: string
@@ -81,6 +84,10 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "To disable set the email address to \"none\"."
-msgstr "Para desactivar regule o endereço de email para \"none\"."
+msgid ""
+"To disable set the email address to \"none\".  To specify multiple email "
+"addresses, seperate them with a comma."
+msgstr ""
 
+#~ msgid "To disable set the email address to \"none\"."
+#~ msgstr "Para desactivar regule o endereço de email para \"none\"."
