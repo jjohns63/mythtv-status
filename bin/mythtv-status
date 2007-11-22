@@ -73,8 +73,8 @@ my $safe = '';
 my $warning = '';
 my $normal = '';
 if (defined $colour && scalar(@email) == 0) {
-  $safe    = "\033[0;32;40m";
-  $warning = "\033[1;31;40m";
+  $safe    = "\033[0;32m";
+  $warning = "\033[1;31m";
   $normal  = "\033[0m";
 }
 
