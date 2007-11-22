@@ -20,6 +20,7 @@ Default: none
 _Description: Email status to?
  Who should we send emails to on a daily basis?
  .
- By default an email is only sent if there is a conflict.
+ By default an email is only sent if there is a conflict.  You must have
+ the MythTV Perl API installed for this to work.
  .
  To disable set the email address to "none".
