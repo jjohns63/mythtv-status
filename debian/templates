@@ -18,7 +18,7 @@ Template: mythtv-status/email
 Type: string
 Default: none
 _Description: Send email status to:
- Who should emails be sent to on a daily basis?
+ Status emails can be sent on a daily basis.
  .
  By default an email is only sent if there is a conflict.  You must have
  the MythTV Perl API installed for this to work.
