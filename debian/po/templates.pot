@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: Source: mythtv-status@packages.debian.org\n"
-"POT-Creation-Date: 2007-11-22 17:07+1300\n"
+"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
+"POT-Creation-Date: 2007-11-23 11:32+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,13 +54,13 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "Email status to?"
+msgid "Send email status to:"
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "Who should we send emails to on a daily basis?"
+msgid "Who should emails be sent to on a daily basis?"
 msgstr ""
 
 #. Type: string
@@ -74,5 +74,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "To disable set the email address to \"none\"."
+msgid ""
+"To disable set the email address to \"none\".  To specify multiple email "
+"addresses, seperate them with a comma."
 msgstr ""

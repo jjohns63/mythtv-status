@@ -17,10 +17,11 @@ _Description: Update the system MOTD?
 Template: mythtv-status/email
 Type: string
 Default: none
-_Description: Email status to?
- Who should we send emails to on a daily basis?
+_Description: Send email status to:
+ Who should emails be sent to on a daily basis?
  .
  By default an email is only sent if there is a conflict.  You must have
  the MythTV Perl API installed for this to work.
  .
- To disable set the email address to "none".
+ To disable set the email address to "none".  To specify multiple email
+ addresses, seperate them with a comma.
