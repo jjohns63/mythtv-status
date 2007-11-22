@@ -14,6 +14,13 @@ You will need to have the following Perl modules installed:
 If you have installed this package using Debian then they should already be
 present.
 
+For Fedeora 7, the required package names are (they are all available via yum):
+  perl-libwww-perl
+  perl-XML-LibXML
+  perl-DateManip
+  perl-MIME-tools
+  perl-MythTV
+
 MOTD
 ----
 To update the message of the day you will probably want to modify
