@@ -10,7 +10,7 @@
 
 2007-11-18	Andrew Ruthven
 	Add support for showing the version of the script.
-	Now we should any schedule conflicts, or if the MythTV Perl API isn't
+	Now we show any schedule conflicts, or if the MythTV Perl API isn't
 	  usable, a warning.  (This is because we need to be able to read
 	  the mysql.txt file and connect to the database to use the API, ick.)
 	Display the amount of time until the next recording.
