@@ -1,3 +1,6 @@
+2007-11-23	Andrew Ruthven
+	Don't set the background when changing the colour.
+
 2007-11-21	Andrew Ruthven
 	Now the results can be sent via email with the subject set correctly.
 	  With an option to only send out email if schedule conflicts are
