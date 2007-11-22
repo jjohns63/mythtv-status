@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mythtv-status 0.4-1\n"
-"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
-"POT-Creation-Date: 2007-11-21 14:45+1300\n"
+"Report-Msgid-Bugs-To: Source: mythtv-status@packages.debian.org\n"
+"POT-Creation-Date: 2007-11-22 17:07+1300\n"
 "PO-Revision-Date: 2007-11-18 18:40+0000\n"
 "Last-Translator: Américo Monteiro <a_monteiro@netcabo.pt>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
@@ -72,7 +72,9 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "By default an email is only sent if there is a conflict."
+msgid ""
+"By default an email is only sent if there is a conflict.  You must have the "
+"MythTV Perl API installed for this to work."
 msgstr ""
 
 #. Type: string
