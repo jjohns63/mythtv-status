@@ -1,3 +1,11 @@
+mythtv-status (0.5.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Make the new debconf questions lintian clean.
+  * Updated French translation from Francois Marier.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Fri, 23 Nov 2007 11:37:15 +1300
+
 mythtv-status (0.5-1) unstable; urgency=low
 
   * New upstream release.

@@ -28,7 +28,7 @@ my @email;
 my $email_only_on_conflict = 0;
 my $help = undef;
 
-my $VERSION = '0.5';
+my $VERSION = '0.5.1';
 
 GetOptions(
   'c|colour|color' => \$colour,
