@@ -4,7 +4,7 @@ package=mythtv-status
 releases=etch sid
 sponsor_keyid=19D03486
 
-build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build)'
+build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore)*' -I.git -Ibuild -I.gitignore
 version=$(shell git-tag -l | tail -1)
 
 deb=$(package)_$(version)-1_all.deb
@@ -33,11 +33,15 @@ $(tarball):
 
 build/etch/$(deb): 
 	@ssh build-etch-i386 "cd `pwd`; $(build)"
+	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i $(package)_$(version)*.changes"
+	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes"
 	@mkdir -p build/etch
 	@mv ../$(deb) build/etch
 
 build/sid/$(deb): 
 	@ssh build-sid-i386 "cd `pwd`; $(build)"
+	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/lintian -i $(package)_$(version)*.changes"
+	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes"
 	@mkdir -p build/sid
 	@mv ../$(deb) build/sid
 
