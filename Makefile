@@ -25,7 +25,7 @@ $(orig_tarball): $(tarball)
 	@ln -s `basename \`pwd\``/$< $@
 
 sponsor: $(orig_tarball)
-	dpkg-buildpackage -rfakeroot -k$(sponsor_keyid) -i'(.git|build|Makefile)' -tc
+	dpkg-buildpackage -rfakeroot -k$(sponsor_keyid) -i'(.git|build|Makefile)' -I.git -IMakefile -I.gitignore -Ibuild -tc
 
 $(tarball):
 	@mkdir -p $(@D)
