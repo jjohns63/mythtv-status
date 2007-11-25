@@ -14,7 +14,7 @@ You will need to have the following Perl modules installed:
 If you have installed this package using Debian then they should already be
 present.
 
-For Fedeora 7, the required package names are (they are all available via yum):
+For Fedora 7, the required package names are (they are all available via yum):
   perl-libwww-perl
   perl-XML-LibXML
   perl-DateManip
