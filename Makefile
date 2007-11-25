@@ -7,7 +7,7 @@ sponsor_keyid=19D03486
 build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore)*' -I.git -Ibuild -I.gitignore
 version=$(shell git-tag -l | grep -v ^debian | tail -1)
 
-deb=$(package)_$(version)-1_all.deb
+deb=$(package)_$(version)-*_all.deb
 orig_tarball=../$(package)_$(version).orig.tar.gz
 tarball=build/tarball/$(package)-$(version).tar.gz
 tarball_dir=../$(package)_tarballs
