@@ -296,6 +296,7 @@ sub load_xml {
 
   # Parse the XML
   my $parser = XML::LibXML->new();
+  $parser->recover(1);
   my $xml = eval { $parser->parse_string( $status ) };
 
   if ($@) {
