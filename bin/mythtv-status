@@ -27,6 +27,7 @@ my %display;
 my @email;
 my $email_only_on_conflict = 0;
 my $help = undef;
+my $xml_file = undef;
 
 my $VERSION = '0.5.1';
 
@@ -45,6 +46,8 @@ GetOptions(
   'scheduled-recordings!' => \$display{'Scheduled Recordings'},
   'schedule-conflicts!'   => \$display{'Schedule Conflicts'},
   'next-recording!'       => \$display{'Time till next recording'},
+
+  'file=s'                => \$xml_file,
 
   'help|?' => \$help,
 ) || pod2usage("\nUse --help for help.\n");
@@ -274,18 +277,29 @@ exit 0;
 
 # Fetch the XML status from the backend.
 sub load_xml {
-  my $url = "http://$host:$port/xml";
-  my $status = get($url);
+  my $status = "";
 
-  die "Sorry, failed to fetch $url.\n"
-    unless defined $status;
+  if (defined $xml_file) {
+    open (IN, "< $xml_file")
+      || die "Failed to open $xml_file for reading: $!\n";
+
+    $status = join("", <IN>);
+
+    close IN;
+  } else {
+    my $url = "http://$host:$port/xml";
+    $status = get($url);
+
+    die "Sorry, failed to fetch $url.\n"
+      unless defined $status;
+  }
 
   # Parse the XML
   my $parser = XML::LibXML->new();
   my $xml = eval { $parser->parse_string( $status ) };
 
   if ($@) {
-    die "Failed to parse XML from $url: $@\n";
+    die "Failed to parse XML: $@\n";
   }
 
   return $xml;
@@ -464,6 +478,11 @@ Only send an email out (if --email is present) if there is a schedule conflict.
 =item B<-?, --help>
 
 Display help.
+
+=item B<< --file <file> >>
+
+Load XML from the file specified instead of querying a MythTV backend.
+Handy for debugging things.
 
 =item B<-h HOST, --host=HOST>
 
