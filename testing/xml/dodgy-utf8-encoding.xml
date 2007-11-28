@@ -1,0 +1,67 @@
+<!DOCTYPE Status>
+<Status version="0.20.20070821-1" protoVer="31" time="22:21" date="mar nov 27 2007" >
+ <Encoders count="2" >
+  <Encoder local="1" connected="1" id="1" state="0" hostname="keflavik" />
+  <Encoder local="1" connected="1" id="2" state="0" hostname="keflavik" />
+ </Encoders>
+ <Scheduled count="10" >
+  <Program programFlags="256" title="L'Épicerie" programId="SH005398960000" catType="series" category="Cooking" seriesId="EP00539896" endTime="2007-11-28T20:00:00" airdate="2002-11-25" lastModified="2007-11-27T22:00:00" subTitle="" stars="0" repeat="1" fileSize="0" startTime="2007-11-28T19:30:00" hostname="" >Tout ce qui concerne l'alimentation: valeur nutritive, économie et consommation, marketing, culture et société.<Channel chanFilters="" channelName="Radio-Canada" chanNum="6" sourceId="1" commFree="0" inputId="1" chanId="1004" callSign="SRC" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Francois" encoderId="1" recEndTs="2007-11-28T20:00:00" recStatus="-1" recordId="1314" recProfile="Default" recType="10" playGroup="Default" recPriority="-3" recStartTs="2007-11-28T19:30:00" />
+  </Program>
+  <Program programFlags="0" title="Francs-tireurs (Enregistrement manuel)" programId="" catType="" category="" seriesId="" endTime="2007-11-28T21:00:00" lastModified="2007-11-27T22:00:00" subTitle="mer nov 28 20:00:00 2007" stars="0" repeat="0" fileSize="0" startTime="2007-11-28T20:00:00" hostname="" ><Channel chanFilters="" channelName="Tele-Quebec" chanNum="8" sourceId="1" commFree="0" inputId="2" chanId="1006" callSign="TQC" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="2" recEndTs="2007-11-28T21:00:00" recStatus="-1" recordId="1352" recProfile="Défaut" recType="5" playGroup="Default" recPriority="0" recStartTs="2007-11-28T20:00:00" />
+  </Program>
+  <Program programFlags="256" title="Les Francs-tireurs" programId="SH002804230000" catType="series" category="" seriesId="EP00280423" endTime="2007-11-28T21:00:00" airdate="1998-09-08" lastModified="2007-11-27T22:00:01" subTitle="" stars="0" repeat="1" fileSize="0" startTime="2007-11-28T20:00:00" hostname="" ><Channel chanFilters="" channelName="Tele-Quebec" chanNum="8" sourceId="1" commFree="0" inputId="1" chanId="1006" callSign="TQC" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="1" recEndTs="2007-11-28T21:00:00" recStatus="-1" recordId="1252" recProfile="Défaut" recType="5" playGroup="Default" recPriority="0" recStartTs="2007-11-28T20:00:00" />
+  </Program>
+  <Program programFlags="0" title="Passion auto-rétro (Enregistrement manuel)" programId="" catType="" category="" seriesId="" endTime="2007-11-29T11:30:00" lastModified="2007-11-27T22:00:00" subTitle="jeu nov 29 11:00:00 2007" stars="0" repeat="0" fileSize="0" startTime="2007-11-29T11:00:00" hostname="" ><Channel chanFilters="" channelName="Tele-Mag" chanNum="10" sourceId="1" commFree="0" inputId="1" chanId="1008" callSign="MAG" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="1" recEndTs="2007-11-29T11:30:00" recStatus="-1" recordId="1371" recProfile="Défaut" recType="5" playGroup="Default" recPriority="0" recStartTs="2007-11-29T11:00:00" />
+  </Program>
+  <Program programFlags="256" title="Enquête" programId="SH009622210000" catType="series" category="Public affairs" seriesId="EP00962221" endTime="2007-11-29T22:00:00" airdate="2007-09-12" lastModified="2007-11-27T22:00:01" subTitle="" stars="0" repeat="1" fileSize="0" startTime="2007-11-29T21:00:00" hostname="" >Magazine d'affaires publiques.<Channel chanFilters="" channelName="Radio-Canada" chanNum="6" sourceId="1" commFree="0" inputId="1" chanId="1004" callSign="SRC" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="1" recEndTs="2007-11-29T22:00:00" recStatus="-1" recordId="1273" recProfile="Défaut" recType="5" playGroup="Default" recPriority="0" recStartTs="2007-11-29T21:00:00" />
+  </Program>
+  <Program programFlags="0" title="Bazzo.tv" programId="SH008700780000" catType="series" category="Entertainment" seriesId="EP00870078" endTime="2007-11-30T13:30:00" airdate="2006-10-16" lastModified="2007-11-27T22:00:00" subTitle="" stars="0" repeat="1" fileSize="0" startTime="2007-11-30T12:30:00" hostname="" ><Channel chanFilters="" channelName="Tele-Quebec" chanNum="8" sourceId="1" commFree="0" inputId="1" chanId="1006" callSign="TQC" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="1" recEndTs="2007-11-30T13:30:00" recStatus="-1" recordId="1471" recProfile="Défaut" recType="5" playGroup="Default" recPriority="0" recStartTs="2007-11-30T12:30:00" />
+  </Program>
+  <Program programFlags="256" title="Du coeur au ventre" programId="SH009636010000" catType="series" category="Interview" seriesId="EP00963601" endTime="2007-11-30T20:00:00" airdate="2007-09-21" lastModified="2007-11-27T22:00:00" subTitle="" stars="0" repeat="1" fileSize="0" startTime="2007-11-30T19:00:00" hostname="" >Rencontres avec les producteurs les plus innovateurs et marquants du Québec.<Channel chanFilters="" channelName="Radio-Canada" chanNum="6" sourceId="1" commFree="0" inputId="2" chanId="1004" callSign="SRC" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Francois" encoderId="2" recEndTs="2007-11-30T20:00:00" recStatus="-1" recordId="1378" recProfile="Default" recType="10" playGroup="Default" recPriority="-3" recStartTs="2007-11-30T19:00:00" />
+  </Program>
+  <Program programFlags="256" title="J.E." programId="SH000820670000" catType="series" category="Public affairs" seriesId="EP00082067" endTime="2007-11-30T20:00:00" airdate="1993-09-05" lastModified="2007-11-27T22:00:00" subTitle="" stars="0" repeat="1" fileSize="0" startTime="2007-11-30T19:00:00" hostname="" >Chaque semaine, l'équipe de J.E. s'attaque aux manoeuvres frauduleuses, aux tromperies et aux manigances dont le public est victime.<Channel chanFilters="" channelName="TVA" chanNum="7" sourceId="1" commFree="0" inputId="1" chanId="1005" callSign="TVA" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="1" recEndTs="2007-11-30T20:00:00" recStatus="-1" recordId="1338" recProfile="Défaut" recType="5" playGroup="Default" recPriority="2" recStartTs="2007-11-30T19:00:00" />
+  </Program>
+  <Program programFlags="0" title="L'année en clips (2) (Enregistrement manuel)" programId="" catType="" category="" seriesId="" endTime="2007-11-30T21:00:00" lastModified="2007-11-27T22:00:00" subTitle="ven nov 30 20:00:00 2007" stars="0" repeat="0" fileSize="0" startTime="2007-11-30T20:00:00" hostname="" ><Channel chanFilters="" channelName="Musimax" chanNum="32" sourceId="1" commFree="0" inputId="1" chanId="1030" callSign="MUMAX" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="1" recEndTs="2007-11-30T21:00:00" recStatus="-1" recordId="1366" recProfile="Défaut" recType="5" playGroup="Default" recPriority="0" recStartTs="2007-11-30T20:00:00" />
+  </Program>
+  <Program programFlags="0" title="L'année en clips (Enregistrement manuel)" programId="" catType="" category="" seriesId="" endTime="2007-12-01T14:00:00" lastModified="2007-11-27T22:00:00" subTitle="sam d&#xdbff;&#xdee9;c 1 13:00:00 2007" stars="0" repeat="0" fileSize="0" startTime="2007-12-01T13:00:00" hostname="" ><Channel chanFilters="" channelName="Musimax" chanNum="32" sourceId="1" commFree="0" inputId="1" chanId="1030" callSign="MUMAX" />
+   <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="1" recEndTs="2007-12-01T14:00:00" recStatus="-1" recordId="1359" recProfile="Défaut" recType="5" playGroup="Default" recPriority="0" recStartTs="2007-12-01T13:00:00" />
+  </Program>
+ </Scheduled>
+ <JobQueue count="5" >
+  <Job status="272" flags="1" cmds="0" type="1" chanId="1008" args="" id="3537" insertTime="2007-11-27T19:29:49" statusTime="2007-11-27T19:30:40" startTime="2007-11-27T15:00:00" hostname="keflavik" startTs="20071127150000" >High Quality: 1.1 GB => 628.5 MB<Program programFlags="0" title="Oldsmobile 4-4-2 1969" programId="" catType="" category="" seriesId="" endTime="2007-11-27T15:30:00" airdate="2007-11-27" lastModified="2007-11-27T19:30:40" subTitle="Passion auto-rétro" stars="0" repeat="0" fileSize="659040260" startTime="2007-11-27T15:00:00" hostname="keflavik" ><Channel chanFilters="" channelName="Tele-Mag" chanNum="10" sourceId="0" commFree="0" inputId="0" chanId="1008" callSign="MAG" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Autos" encoderId="0" recEndTs="2007-11-27T15:30:00" recStatus="-3" recordId="1369" recProfile="Défaut" recType="0" playGroup="Default" recPriority="0" recStartTs="2007-11-27T15:00:00" />
+   </Program>
+  </Job>
+  <Job status="272" flags="2" cmds="0" type="2" chanId="1005" args="" id="3540" insertTime="2007-11-27T20:30:02" statusTime="2007-11-27T21:18:47" startTime="2007-11-27T20:30:00" hostname="keflavik" startTs="20071127203000" >Finished, 2 break(s) found.<Program programFlags="261" title="Caméra Café" programId="EP005328870035" catType="" category="" seriesId="EP00532887" endTime="2007-11-27T21:00:00" airdate="2006-09-19" lastModified="2007-11-27T21:18:47" subTitle="" stars="0" repeat="1" fileSize="1165768704" startTime="2007-11-27T20:30:00" hostname="keflavik" >Jean-Claude annonce qu'il quitte la compagnie pour refaire sa vie à Las Vegas; Bruno tente de l'en dissuader.<Channel chanFilters="" channelName="TVA" chanNum="7" sourceId="0" commFree="0" inputId="0" chanId="1005" callSign="TVA" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="0" recEndTs="2007-11-27T21:00:00" recStatus="-3" recordId="1261" recProfile="Défaut" recType="0" playGroup="Default" recPriority="0" recStartTs="2007-11-27T20:30:00" />
+   </Program>
+  </Job>
+  <Job status="272" flags="2" cmds="0" type="2" chanId="1004" args="" id="3541" insertTime="2007-11-27T21:00:02" statusTime="2007-11-27T22:00:14" startTime="2007-11-27T21:00:00" hostname="keflavik" startTs="20071127210000" >Finished, 4 break(s) found.<Program programFlags="261" title="Les Hauts et les Bas de Sophie Paquin" programId="EP008634410020" catType="" category="" seriesId="EP00863441" endTime="2007-11-27T22:00:00" airdate="2007-11-27" lastModified="2007-11-27T22:10:03" subTitle="" stars="0" repeat="0" fileSize="2330021888" startTime="2007-11-27T21:00:00" hostname="keflavik" >Sophie offre les clefs de son appartement à Mathieu; un nouveau client illuminé.<Channel chanFilters="" channelName="Radio-Canada" chanNum="6" sourceId="0" commFree="0" inputId="0" chanId="1004" callSign="SRC" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default" encoderId="0" recEndTs="2007-11-27T22:00:00" recStatus="-3" recordId="1477" recProfile="Défaut" recType="0" playGroup="Default" recPriority="0" recStartTs="2007-11-27T21:00:00" />
+   </Program>
+  </Job>
+  <Job status="4" flags="2" cmds="0" type="2" chanId="1006" args="" id="3542" insertTime="2007-11-27T21:00:03" statusTime="2007-11-27T22:20:57" startTime="2007-11-27T21:00:00" hostname="keflavik" startTs="20071127210000" >61% Completed @ 51.4984 fps.<Program programFlags="26" title="24-5" programId="" catType="" category="" seriesId="" endTime="2007-11-27T22:00:00" airdate="2007-11-27" lastModified="2007-11-27T22:05:53" subTitle="18h00 - 19h00" stars="0" repeat="0" fileSize="2195978240" startTime="2007-11-27T21:00:00" hostname="keflavik" ><Channel chanFilters="" channelName="Tele-Quebec" chanNum="8" sourceId="0" commFree="0" inputId="0" chanId="1006" callSign="TQC" />
+    <Recording dupInType="15" dupMethod="6" recGroup="24" encoderId="0" recEndTs="2007-11-27T21:57:00" recStatus="-3" recordId="1351" recProfile="Défaut" recType="0" playGroup="Default" recPriority="8" recStartTs="2007-11-27T21:00:00" />
+   </Program>
+  </Job>
+  <Job status="1" flags="1" cmds="0" type="1" chanId="1006" args="" id="3543" insertTime="2007-11-27T22:05:53" statusTime="2007-11-27T22:05:53" startTime="2007-11-27T21:00:00" hostname="master" startTs="20071127210000" ><Program programFlags="26" title="24-5" programId="" catType="" category="" seriesId="" endTime="2007-11-27T22:00:00" airdate="2007-11-27" lastModified="2007-11-27T22:05:53" subTitle="18h00 - 19h00" stars="0" repeat="0" fileSize="2195978240" startTime="2007-11-27T21:00:00" hostname="keflavik" ><Channel chanFilters="" channelName="Tele-Quebec" chanNum="8" sourceId="0" commFree="0" inputId="0" chanId="1006" callSign="TQC" />
+    <Recording dupInType="15" dupMethod="6" recGroup="24" encoderId="0" recEndTs="2007-11-27T21:57:00" recStatus="-3" recordId="1351" recProfile="Défaut" recType="0" playGroup="Default" recPriority="8" recStartTs="2007-11-27T21:00:00" />
+   </Program>
+  </Job>
+ </JobQueue>
+ <MachineInfo>
+  <Storage _local_free="53905" _total_total="208809" slaves="_local,_total" _total_used="154904" _total_free="53905" _local_total="208809" _local_used="154904" />
+  <Load avg1="0.68" avg2="0.56" avg3="0.48" />
+  <Guide guideDays="14" status="Successful." next="2007-11-28T14:15:56" end="2007-11-27 07:36" guideThru="2007-12-11T02:00:00" start="2007-11-27 07:36" >Your subscription expires on 2008-06-19 22:55:23</Guide>
+  <Thermal temperature="40 &amp;#8451;" />
+ </MachineInfo>
+</Status>
