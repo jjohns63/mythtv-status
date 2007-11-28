@@ -2,15 +2,11 @@
 <Status version="0.21.20071119-1" protoVer="36" time="4:36 PM"  
 date="Tue Nov 27 2007" >
   <Encoders count="5" >
-   <Encoder local="0" connected="1" id="1" state="0" hostname="Myth- 
-Livingroom" />
-   <Encoder local="0" connected="1" id="2" state="0" hostname="Myth- 
-Livingroom" />
+   <Encoder local="0" connected="1" id="1" state="0" hostname="Myth-Livingroom" />
+   <Encoder local="0" connected="1" id="2" state="0" hostname="Myth-Livingroom" />
    <Encoder local="1" connected="1" id="3" state="0" hostname="slave" />
-   <Encoder local="0" connected="1" id="4" state="0" hostname="Myth- 
-Livingroom" />
-   <Encoder local="0" connected="1" id="5" state="0" hostname="Myth- 
-Livingroom" />
+   <Encoder local="0" connected="1" id="4" state="0" hostname="Myth-Livingroom" />
+   <Encoder local="0" connected="1" id="5" state="0" hostname="Myth-Livingroom" />
   </Encoders>
   <Scheduled count="10" >
    <Program programFlags="0" title="Modern Marvels"  
