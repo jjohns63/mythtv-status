@@ -282,7 +282,13 @@ sub load_xml {
 
   # Parse the XML
   my $parser = XML::LibXML->new();
-  return eval { $parser->parse_string( $status ) };
+  my $xml = eval { $parser->parse_string( $status ) };
+
+  if ($@) {
+    die "Failed to parse XML from $url: $@\n";
+  }
+
+  return $xml;
 }
 
 

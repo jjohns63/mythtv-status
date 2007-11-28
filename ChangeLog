@@ -1,3 +1,6 @@
+2007-11-28	Andrew Ruthven
+	Be more wary about processing what the backend has sent us.
+
 2007-11-23	Andrew Ruthven
 	Don't set the background when changing the colour.
 	Make the new debconf prompt lintian clean and say how to specify
