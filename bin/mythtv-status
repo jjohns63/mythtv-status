@@ -28,6 +28,7 @@ my @email;
 my $email_only_on_conflict = 0;
 my $help = undef;
 my $xml_file = undef;
+my $verbose = 0;
 
 my $VERSION = '0.5.1';
 
@@ -49,6 +50,7 @@ GetOptions(
 
   'file=s'                => \$xml_file,
 
+  'verbose' => \$verbose,
   'help|?' => \$help,
 ) || pod2usage("\nUse --help for help.\n");
 
@@ -296,7 +298,13 @@ sub load_xml {
 
   # Parse the XML
   my $parser = XML::LibXML->new();
+
+  # Some XML data seems to have badness in it, including non-existant
+  # UTF-8 characters.  We'll try and recover.
   $parser->recover(1);
+  $parser->recover_silently(1)
+    unless $verbose;
+
   my $xml = eval { $parser->parse_string( $status ) };
 
   if ($@) {
@@ -496,6 +504,11 @@ Suppress displaying blocks of the output if they would normally be displayed.
 =item B<-p PORT, --port=PORT>
 
 The port to use when connecting to MythTV, defaults to 6544.
+
+=item B<--verbose>
+
+Have slightly more verbose output.  This includes any warnings that might
+be generated while parsing the XML.
 
 =item B<-v, --version>
 
