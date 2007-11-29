@@ -3,6 +3,7 @@
 		This includes cleaning up some invalid UTF-8 characters.
 	Add support for reading XML from a file.
 	Be a bit more forgiving on the XML we're receiving.
+	Release version 0.5.2.
 	Show how much disk space is used - currently only total.
 	Rename "Time till next recording" to "Next Recording In".
 	Put all the one liners together in the output and make them line

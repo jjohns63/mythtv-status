@@ -88,7 +88,7 @@ if (defined $colour && scalar(@email) == 0) {
 my %defaults = (
   'schedule' => {
     'attrs' => [ qw/title startTime NODE_TEXT subTitle/ ],
-    'template' => "__startTime__ - __title__" 
+    'template' => "__startTime__ - __title__"
       . (defined $episode ? " - __subTitle__" : '')
       . (defined $description ? "\n__NODE_TEXT__" : ''),
     'filter' =>  {
@@ -138,8 +138,8 @@ my @blocks = (
       '/state/' =>{ '^0$' => "${safe}Idle${normal}",
                   '^1$' => "${warning}Watching LiveTV${normal}",
                   '^2$' => "${warning}Watching Pre-recorded${normal}",
-		  '^3$' => "${warning}Watching Recording${normal}",
-		  '^4$' => "${warning}Recording${normal}" },
+      '^3$' => "${warning}Watching Recording${normal}",
+      '^4$' => "${warning}Recording${normal}" },
     }
   },
 
@@ -168,14 +168,14 @@ my @blocks = (
     'hide'  => 'after',
     'subs' => {
       'find_next' => sub {
-	 my $vars = shift;
+   my $vars = shift;
          return
-	   if defined $next_time && $next_time eq 'now';
+     if defined $next_time && $next_time eq 'now';
 
          my $date = ParseDate($vars->{'startTime'});
-	 if (! defined $next_time || Date_Cmp($date, $next_time) < 0) {
-	   $next_time = $date
-	 };
+   if (! defined $next_time || Date_Cmp($date, $next_time) < 0) {
+     $next_time = $date
+   };
        }
      }
   },
@@ -202,12 +202,12 @@ my @blocks = (
       'percent' => sub {
         my $vars = shift;
         my $percent = sprintf("%.1f",
-	  $vars->{'_total_used'} / $vars->{'_total_total'} * 100);
-	if ($percent >= $disk_space_warn) {
-	  return "$warning$percent\%$normal";
-	} else {
-	  return "$safe$percent\%$normal";
-	}
+    $vars->{'_total_used'} / $vars->{'_total_total'} * 100);
+  if ($percent >= $disk_space_warn) {
+    return "$warning$percent\%$normal";
+  } else {
+    return "$safe$percent\%$normal";
+  }
       }
     }
   },
@@ -226,12 +226,12 @@ my @blocks = (
       'percent' => sub {
         my $vars = shift;
         my $percent = sprintf("%.1f",
-	  $vars->{'drive_total_used'} / $vars->{'drive_total_total'} * 100);
-	if ($percent >= $disk_space_warn) {
-	  return "$warning$percent\%$normal";
-	} else {
-	  return "$safe$percent\%$normal";
-	}
+    $vars->{'drive_total_used'} / $vars->{'drive_total_total'} * 100);
+  if ($percent >= $disk_space_warn) {
+    return "$warning$percent\%$normal";
+  } else {
+    return "$safe$percent\%$normal";
+  }
       }
     }
   },
@@ -245,14 +245,14 @@ my @blocks = (
     'rewrite' => {
       '&next_time' => sub {
         return "Never"
-	  unless defined $next_time;
+    unless defined $next_time;
 
         my $str = Delta_Format(DateCalc('now', $next_time, undef, 1), 0, '%hh Hours, %mv Minutes');
         $str =~ s/\b1 (Hour|Minute)s/1 $1/;
         $str =~ s/^0 Hours, (.*)$/$warning$1$normal/;
         $str =~ s/ 0 Minutes//;
 
-	return $str;
+  return $str;
       }
     },
     'filter' =>  {
@@ -351,7 +351,7 @@ if (scalar(@email) == 0) {
       To      => \@email,
       Subject => $title . ($schedule_conflicts_present ? ' - CONFLICTS' : ''),
       Data    => $output
-    ); 
+    );
 
     $mail->send('sendmail');
   }
@@ -495,7 +495,7 @@ sub process_conflicts {
 
     if ($show->{'recstatus'} == $recstatus_conflict) {
       my %vars = (
-        'title'     => $show->{'title'},  
+        'title'     => $show->{'title'},
         'startTime' => strftime("%FT%T", localtime($show->{'starttime'})),
         'NODE_TEXT' => $show->{'description'},
         'subTitle'  => $show->{'subtitle'}
@@ -556,7 +556,7 @@ sub substitute_vars {
     $template =~ s/__${name}__/$value/g
       if defined $value;
   }
-   
+
   return defined $skip ? undef : $template;
 }
 

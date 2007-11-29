@@ -4,7 +4,7 @@ package=mythtv-status
 releases=etch sid
 sponsor_keyid=19D03486
 
-build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore)*' -I.git -Ibuild -I.gitignore
+build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting
 version=$(shell git-tag -l | grep -v ^debian | tail -1)
 
 deb=$(package)_$(version)-*_all.deb
@@ -25,11 +25,11 @@ $(orig_tarball): $(tarball)
 	@ln -s `basename \`pwd\``/$< $@
 
 sponsor: $(orig_tarball)
-	dpkg-buildpackage -rfakeroot -k$(sponsor_keyid) -i'(.git|build|Makefile)' -I.git -IMakefile -I.gitignore -Ibuild -tc
+	dpkg-buildpackage -rfakeroot -k$(sponsor_keyid) -i'(.git|build|Makefile|testing)' -I.git -IMakefile -I.gitignore -Ibuild -Itesting -tc
 
 $(tarball):
 	@mkdir -p $(@D)
-	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile)"` | gzip > $(tarball)
+	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile|testing)"` | gzip > $(tarball)
 
 build/etch/$(deb): 
 	@ssh build-etch-i386 "cd `pwd`; $(build)"
