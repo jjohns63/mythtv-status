@@ -16,7 +16,6 @@ Description: Show the status of a MythTV backend
  Shows the current status of a local or remote MythTV backend and up to
  the next 10 recordings for today and tomorrow.
  .
- Also provides funtionality for updating the MOTD with
- this information, this can provide a good heads on when 
- you should avoid heavy CPU or I/O work on your MythTV
- backend.
+ Also provides funtionality for updating the MOTD with this information,
+ this can provide a good heads up on when you should avoid heavy CPU or
+ I/O work on your MythTV backend.
