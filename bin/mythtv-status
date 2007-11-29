@@ -29,6 +29,7 @@ my $email_only_on_conflict = 0;
 my $help = undef;
 my $xml_file = undef;
 my $verbose = 0;
+my $disk_space_warn = 95;  # Percent to warn at.
 
 my $VERSION = '0.5.1';
 
@@ -47,6 +48,7 @@ GetOptions(
   'scheduled-recordings!' => \$display{'Scheduled Recordings'},
   'schedule-conflicts!'   => \$display{'Schedule Conflicts'},
   'next-recording!'       => \$display{'Time till next recording'},
+  'disk-space!'           => \$display{'Disk Space'},
 
   'file=s'                => \$xml_file,
 
@@ -179,6 +181,54 @@ my @blocks = (
     'sub' => \&process_conflicts
   },
 
+  # Diskspace, before storage groups
+  {
+    'name' => 'Disk Space',
+    'type' => 'xpath',
+    'xpath' => '//Status/MachineInfo/Storage',
+    'xml_version' => [ "<= 31" ],
+    'attrs' => [ qw/_total_total _total_used/ ],
+    'commify' => [ qw/_total_total _total_used/ ],
+    'template' => "Total space is ___total_total__ GB, with ___total_used__ GB used (__percent__)",
+    'format' => 'one line',
+    'subs' => {
+      'percent' => sub {
+        my $vars = shift;
+        my $percent = sprintf("%.1f",
+	  $vars->{'_total_used'} / $vars->{'_total_total'} * 100);
+	if ($percent >= $disk_space_warn) {
+	  return "$warning$percent\%$normal";
+	} else {
+	  return "$safe$percent\%$normal";
+	}
+      }
+    }
+  },
+
+  # Diskspace, with storage groups
+  {
+    'name' => 'Disk Space',
+    'type' => 'xpath',
+    'xpath' => '//Status/MachineInfo/Storage',
+    'xml_version' => [ ">= 32" ],
+    'attrs' => [ qw/drive_total_total drive_total_used/ ],
+    'commify' => [ qw/drive_total_total drive_total_used/ ],
+    'template' => "Total space is __drive_total_total__ GB, with __drive_total_used__ GB used (__percent__)",
+    'format' => 'one line',
+    'subs' => {
+      'percent' => sub {
+        my $vars = shift;
+        my $percent = sprintf("%.1f",
+	  $vars->{'drive_total_used'} / $vars->{'drive_total_total'} * 100);
+	if ($percent >= $disk_space_warn) {
+	  return "$warning$percent\%$normal";
+	} else {
+	  return "$safe$percent\%$normal";
+	}
+      }
+    }
+  },
+
   # How many hours till the next recording.
   {
     'name' => 'Time till next recording',
@@ -215,7 +265,7 @@ our $today    = substr(ParseDate('today'), 0, 8);
 our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
 # A couple of global variables
-my ($xml, $myth);
+my ($xml, $xml_version, $myth);
 my $schedule_conflicts_present = 0;
 
 my $title =  "MythTV status for $host";
@@ -311,6 +361,10 @@ sub load_xml {
     die "Failed to parse XML: $@\n";
   }
 
+  # Pick out the XML version.
+  my $items = $xml->documentElement->find('//Status');
+  $xml_version = @{ $items }[0]->getAttribute('protoVer');
+
   return $xml;
 }
 
@@ -329,6 +383,23 @@ sub load_perl_api {
 
 sub process_xml {
   my ($block, $xml) = @_;
+
+  # Only work on this block if we have received the appropriate version of
+  # the XML.
+  if (defined $block->{'xml_version'}) {
+    my $result = undef;
+
+    # At least one of the version checks must pass.
+    for my $check (@{ $block->{'xml_version'} }) {
+      $result ||= eval ( "$xml_version $check" );
+    }
+
+    return
+      unless defined $result && $result ne '';
+
+    warn "We have the correct version of the XML protocol\n"
+      if defined $verbose;
+  }
 
   my $items = $xml->documentElement->find($block->{'xpath'});
 
@@ -397,6 +468,9 @@ sub substitute_vars {
   my $block = shift;
   my $vars  = shift;
 
+  my %commify = map { $_ => 1 } @{ $block->{'commify'} }
+    if defined $block->{'commify'};
+
   my $template = $block->{'template'};
   my $skip = undef;
   my ($key, $value);
@@ -421,15 +495,30 @@ sub substitute_vars {
       $value = &{ $block->{'rewrite'}{"&$key"} }($value);
     }
 
+    $value = commify($value)
+      if defined $commify{$key};
+
     $template =~ s/__${key}__/$value/g;
   }
 
   my ($name, $sub);
   while (($name, $sub) =  each %{ $block->{'subs'} }) {
-    &$sub($vars);
+    $value = &$sub($vars);
+
+    $template =~ s/__${name}__/$value/g
+      if defined $value;
   }
    
   return defined $skip ? undef : $template;
+}
+
+# Beautify numbers by sticking commas in.
+sub commify {
+  my ($num) = shift;
+
+  $num = reverse $num;
+  $num =~ s<(\d\d\d)(?=\d)(?!\d*\.)><$1,>g;
+  return reverse $num;
 }
 
 sub print_version {
@@ -497,7 +586,7 @@ Handy for debugging things.
 
 The host to check, defaults to localhost.
 
-=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>
+=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nodisk-space>
 
 Suppress displaying blocks of the output if they would normally be displayed.
 
@@ -543,6 +632,10 @@ Up to 10 programs which are scheduled to be recorded today and tomorrow.
 =item Schedule Conflicts
 
 Any upcoming schedule conflicts (not just limited to today or tomorrow).
+
+=item Disk Space
+
+The amount of disk space in total, and used by MythTV.
 
 =item Time till next recording
 

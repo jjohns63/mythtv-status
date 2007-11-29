@@ -2,6 +2,7 @@
 	Be more wary about processing what the backend has sent us.
 	Add support for reading XML from a file.
 	Be a bit more forgiving on the XML we're receiving.
+	Show how much disk space is used - currently only total.
 
 2007-11-23	Andrew Ruthven
 	Don't set the background when changing the colour.
