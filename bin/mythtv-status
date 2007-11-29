@@ -42,6 +42,7 @@ GetOptions(
   'v|version'    => \&print_version,
   'email=s@'     => \@email,
   'email-only-on-conflict' => \$email_only_on_conflict,
+  'disk-space-warn=i'      => \$disk_space_warn,
 
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
@@ -605,6 +606,12 @@ Use colour when showing the status of the encoder(s).
 =item B<-d, --description>
 
 Display the description for the scheduled recordings.
+
+=item B<--disk-space-warn>
+
+The threshold (in percent) of used disk space that we should show
+the disk space in red (if using colour) or send an email if we're
+in email mode with email only on warnings.
 
 =item B<-e, --episode>
 
