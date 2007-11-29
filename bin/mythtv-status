@@ -42,6 +42,7 @@ GetOptions(
   'v|version'    => \&print_version,
   'email=s@'     => \@email,
   'email-only-on-conflict' => \$email_only_on_conflict,
+
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
   'recording-now!'        => \$display{'Recording Now'},
@@ -109,6 +110,14 @@ my $next_time = undef;
 
 # The blocks of output which we might generate.
 my @blocks = (
+  # All the one liners together
+  {
+    'name' => 'One Liners',
+    'type' => 'sub',
+    'template' => '',
+    'sub' => sub { return 'Place holder' },
+  },
+
   # Date/Time from server
   {
     'name'  => 'Status',
@@ -305,9 +314,34 @@ for my $block (@blocks) {
   }
 
   if (defined $result && $result ne '' && ! defined $hide) {
-    $output .= "$block->{'name'}:" . ($block->{'format'} eq 'one line' ? ' ' : "\n");
-    $output .= $result . "\n\n";
+    if ($block->{'format'} eq 'one line') {
+      push @oneliners, [ $block->{'name'}, $result ];
+    } else {
+      $output .= "$block->{'name'}:\n";
+      $output .= $result . "\n\n";
+    }
   }
+}
+
+# Deal with the one liners.
+if (scalar(@oneliners) > 0) {
+  # Find the longest header
+  my $length = 0;
+  for $line (@oneliners) {
+     if (length($line->[0]) > $length) {
+       $length = length($line->[0]);
+     }
+  }
+
+  # Put the one liners together, with leading dots to the colon.
+  my $oneliners = "";
+  for $line (@oneliners) {
+     $oneliners .= "$line->[0]"
+       . ('.' x ($length - length($line->[0]))) . ": $line->[1]\n";
+  }
+
+  # What a hacky way of putting the one liners where I want them...
+  $output =~ s/^One Liners:\nPlace holder\n/$oneliners/m;
 }
 
 # Either print the status out, or email it.
