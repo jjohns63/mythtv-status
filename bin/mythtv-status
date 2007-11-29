@@ -47,7 +47,7 @@ GetOptions(
   'recording-now!'        => \$display{'Recording Now'},
   'scheduled-recordings!' => \$display{'Scheduled Recordings'},
   'schedule-conflicts!'   => \$display{'Schedule Conflicts'},
-  'next-recording!'       => \$display{'Time till next recording'},
+  'next-recording!'       => \$display{'Next Recording In'},
   'disk-space!'           => \$display{'Disk Space'},
 
   'file=s'                => \$xml_file,
@@ -68,7 +68,7 @@ die "Sorry, port isn't a number.\n"
 # Default to not showing some blocks if we're sending email, but let the
 # user override us.
 if (scalar(@email) > 0) {
-  for my $block ('Encoders', 'Recording Now', 'Time till next recording') {
+  for my $block ('Encoders', 'Recording Now', 'Next Recording In') {
     if (! defined $display{$block}) {
       $display{$block} = 0;
     }
@@ -231,7 +231,7 @@ my @blocks = (
 
   # How many hours till the next recording.
   {
-    'name' => 'Time till next recording',
+    'name' => 'Next Recording In',
     'type' => 'sub',
     'format' => 'one line',
     'template' => '__next_time__',
@@ -637,7 +637,7 @@ Any upcoming schedule conflicts (not just limited to today or tomorrow).
 
 The amount of disk space in total, and used by MythTV.
 
-=item Time till next recording
+=item Next Recording In
 
 If there are no recordings currently happening, then the amount of time until
 the next recording is displayed.
