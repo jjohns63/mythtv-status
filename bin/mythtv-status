@@ -398,7 +398,7 @@ sub process_xml {
       unless defined $result && $result ne '';
 
     warn "We have the correct version of the XML protocol\n"
-      if defined $verbose;
+      if $verbose;
   }
 
   my $items = $xml->documentElement->find($block->{'xpath'});
