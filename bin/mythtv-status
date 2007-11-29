@@ -305,6 +305,8 @@ sub load_xml {
   $parser->recover_silently(1)
     unless $verbose;
 
+  clean_xml(\$status);
+
   my $xml = eval { $parser->parse_string( $status ) };
 
   if ($@) {
@@ -325,6 +327,20 @@ sub load_perl_api {
   }
 
   return $myth;
+}
+
+# We are sometimes passed dodgy XML from MythTV, make some attempts to clean
+# it.
+sub clean_xml {
+  my ($xml) = shift;
+
+  # Deal to invalid Unicode.
+  for my $bad ("&#xdbff;", "&#xdee9;") {
+    if ($$xml =~ s/$bad/?/g) {
+      warn "Found and replaced: $bad\n"
+        if $verbose;
+    }
+  }
 }
 
 sub process_xml {
