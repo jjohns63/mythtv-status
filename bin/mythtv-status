@@ -49,7 +49,7 @@ GetOptions(
   'scheduled-recordings!' => \$display{'Scheduled Recordings'},
   'schedule-conflicts!'   => \$display{'Schedule Conflicts'},
   'next-recording!'       => \$display{'Next Recording In'},
-  'disk-space!'           => \$display{'Disk Space'},
+  'total-disk-space!'     => \$display{'Total Disk Space'},
 
   'file=s'                => \$xml_file,
 
@@ -192,7 +192,7 @@ my @blocks = (
 
   # Diskspace, before storage groups
   {
-    'name' => 'Disk Space',
+    'name' => 'Total Disk Space',
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage',
     'xml_version' => [ "<= 31" ],
@@ -216,7 +216,7 @@ my @blocks = (
 
   # Diskspace, with storage groups
   {
-    'name' => 'Disk Space',
+    'name' => 'Total Disk Space',
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage',
     'xml_version' => [ ">= 32" ],
@@ -636,7 +636,7 @@ Handy for debugging things.
 
 The host to check, defaults to localhost.
 
-=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nodisk-space>
+=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>
 
 Suppress displaying blocks of the output if they would normally be displayed.
 
@@ -683,7 +683,7 @@ Up to 10 programs which are scheduled to be recorded today and tomorrow.
 
 Any upcoming schedule conflicts (not just limited to today or tomorrow).
 
-=item Disk Space
+=item Total Disk Space
 
 The amount of disk space in total, and used by MythTV.
 
