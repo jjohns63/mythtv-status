@@ -3,6 +3,7 @@
 		This includes cleaning up some invalid UTF-8 characters.
 	Add support for reading XML from a file.
 	Be a bit more forgiving on the XML we're receiving.
+	Release version 0.5.2.
 
 2007-11-23	Andrew Ruthven
 	Don't set the background when changing the colour.

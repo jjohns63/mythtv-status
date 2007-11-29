@@ -1,3 +1,9 @@
+mythtv-status (0.5.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Fri, 30 Nov 2007 09:54:03 +1300
+
 mythtv-status (0.5.1-2) unstable; urgency=low
 
   * Updated Portuguese translation from Miguel Figueiredo (Closes: #451821)
