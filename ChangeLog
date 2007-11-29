@@ -3,6 +3,7 @@
 	Add support for reading XML from a file.
 	Be a bit more forgiving on the XML we're receiving.
 	Show how much disk space is used - currently only total.
+	Rename "Time till next recording" to "Next Recording In".
 
 2007-11-23	Andrew Ruthven
 	Don't set the background when changing the colour.
