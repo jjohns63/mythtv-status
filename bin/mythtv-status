@@ -105,6 +105,7 @@ my %defaults = (
 );
 
 my $next_time = undef;
+my @alerts = ();
 
 # The blocks of output which we might generate.
 my @blocks = (
@@ -204,6 +205,7 @@ my @blocks = (
         my $percent = sprintf("%.1f",
     $vars->{'_total_used'} / $vars->{'_total_total'} * 100);
   if ($percent >= $disk_space_warn) {
+    push @alerts, "DISK SPACE";
     return "$warning$percent\%$normal";
   } else {
     return "$safe$percent\%$normal";
@@ -228,6 +230,7 @@ my @blocks = (
         my $percent = sprintf("%.1f",
     $vars->{'drive_total_used'} / $vars->{'drive_total_total'} * 100);
   if ($percent >= $disk_space_warn) {
+    push @alerts, "DISK SPACE";
     return "$warning$percent\%$normal";
   } else {
     return "$safe$percent\%$normal";
@@ -273,7 +276,6 @@ our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
 # A couple of global variables
 my ($xml, $xml_version, $myth);
-my $schedule_conflicts_present = 0;
 
 my $title =  "MythTV status for $host";
 my $output = "$title\n";
@@ -346,10 +348,17 @@ if (scalar(@oneliners) > 0) {
 if (scalar(@email) == 0) {
   print "\n$output";
 } else {
-  if (! ($email_only_on_conflict && ! $schedule_conflicts_present)) {
+  if (! ($email_only_on_conflict && scalar(@alerts) > 0)) {
+    my $suffix = undef;
+    if (@alerts == 1) {
+      $suffix = $alerts[0];
+    } elsif (@alerts > 1) {
+      $suffix = "MULTIPLE WARNINGS";
+    }
+
     my $mail = MIME::Entity->build(
       To      => \@email,
-      Subject => $title . ($schedule_conflicts_present ? ' - CONFLICTS' : ''),
+      Subject => $title . (defined $suffix ? " - $suffix" : ''),
       Data    => $output
     );
 
@@ -507,7 +516,11 @@ sub process_conflicts {
     }
   }
 
-  $schedule_conflicts_present = scalar(@lines);
+  if (scalar(@lines) == 1) {
+    push @alerts, "CONFLICT";
+  } elsif (scalar(@lines) > 1) {
+    push @alerts, "CONFLICTS";
+  }
 
   return join("\n", @lines);
 }
