@@ -40,7 +40,7 @@ binary-arch: install
 	dh_install
 	dh_installdebconf	
 # Make sure we start after mythtv-backend
-	dh_installinit -- defaults 21
+	dh_installinit -- defaults 51
 	dh_installcron
 	dh_installman debian/mythtv-status.1
 	dh_compress
