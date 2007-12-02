@@ -25,7 +25,7 @@ my $episode = undef;
 my $colour = undef;
 my %display;
 my @email;
-my $email_only_on_conflict = 0;
+my $email_only_on_alert = 0;
 my $help = undef;
 my $xml_file = undef;
 my $verbose = 0;
@@ -41,7 +41,7 @@ GetOptions(
   'p|port=i'     => \$port,
   'v|version'    => \&print_version,
   'email=s@'     => \@email,
-  'email-only-on-conflict' => \$email_only_on_conflict,
+  'email-only-on-conflict|email-only-on-alert' => \$email_only_on_alert,
   'disk-space-warn=i'      => \$disk_space_warn,
 
   'status!'               => \$display{'Status'},
@@ -348,7 +348,8 @@ if (scalar(@oneliners) > 0) {
 if (scalar(@email) == 0) {
   print "\n$output";
 } else {
-  if (! ($email_only_on_conflict && scalar(@alerts) > 0)) {
+  if ((! $email_only_on_alert) ||
+      ($email_only_on_alert && scalar(@alerts) > 0)) {
     my $suffix = undef;
     if (@alerts == 1) {
       $suffix = $alerts[0];
@@ -636,9 +637,10 @@ the email.
 To turn the additional blocks on you can use B<--encoders>, B<--recording-now>
 and/or B<--next-recording>.
 
-=item B<--email-only-on-conflict>
+=item B<--email-only-on-alert>
 
-Only send an email out (if --email is present) if there is a schedule conflict.
+Only send an email out (if --email is present) if there is an alert
+(i.e., schedule conflict or low disk space).
 
 =item B<-?, --help>
 

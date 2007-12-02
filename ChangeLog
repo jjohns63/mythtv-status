@@ -1,3 +1,7 @@
+2007-12-02	Andrew Ruthven
+	Allow sending emails only if there is low disk space or recording
+	  conflicts.
+
 2007-11-28	Andrew Ruthven
 	Be more wary about processing what the backend has sent us.
 		This includes cleaning up some invalid UTF-8 characters.
