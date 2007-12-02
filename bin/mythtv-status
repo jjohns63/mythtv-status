@@ -103,7 +103,7 @@ my %defaults = (
    }
 );
 
-my $next_time = undef;
+my $next_time = 'Never';
 
 # The blocks of output which we might generate.
 my @blocks = (
@@ -164,7 +164,7 @@ my @blocks = (
 	   if defined $next_time && $next_time eq 'now';
 
          my $date = ParseDate($vars->{'startTime'});
-	 if (! defined $next_time || Date_Cmp($date, $next_time) < 0) {
+	 if ($next_time eq 'Never' || Date_Cmp($date, $next_time) < 0) {
 	   $next_time = $date
 	 };
        }
@@ -187,8 +187,8 @@ my @blocks = (
     'template' => '__next_time__',
     'rewrite' => {
       '&next_time' => sub {
-        return "Never"
-	  unless defined $next_time;
+	return $next_time
+	  if $next_time eq 'Never' || $next_time eq 'now';
 
         my $str = Delta_Format(DateCalc('now', $next_time, undef, 1), 0, '%hh Hours, %mv Minutes');
         $str =~ s/\b1 (Hour|Minute)s/1 $1/;
