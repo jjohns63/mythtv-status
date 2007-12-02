@@ -1,3 +1,11 @@
+mythtv-status (0.5.2-2) unstable; urgency=low
+
+  * The 3rd party mythtv-backend for Debian uses an init ordering of 24 now
+    (not 20 as on my system) and in KnoppMyth it uses 50.  So change
+    mythtv-status to use 51.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Mon,  3 Dec 2007 06:41:22 +1300
+
 mythtv-status (0.5.2-1) unstable; urgency=low
 
   * New upstream release.
