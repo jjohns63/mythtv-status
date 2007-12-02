@@ -417,6 +417,11 @@ sub substitute_vars {
   my $skip = undef;
   my ($key, $value);
   while (($key, $value) = (each %{ $vars })) {
+    if (! defined $value) {
+      warn "Unable to find any value for $key while looking at $block->{'name'}\n";
+      next;
+    }
+
     $value = wrap('  ', '  ', $value)
       if $key eq 'NODE_TEXT';
 
