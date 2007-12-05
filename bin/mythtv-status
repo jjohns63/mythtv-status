@@ -104,7 +104,9 @@ my %defaults = (
    }
 );
 
+# The time of the next scheduled recording.
 my $next_time = undef;
+# Are there any alerts that should be notified via email?
 my @alerts = ();
 
 # The blocks of output which we might generate.
