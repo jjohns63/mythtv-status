@@ -1,6 +1,13 @@
+2007-12-06	Andrew Ruthven
+	Be more paranoid about handling error conditions in the
+	  substitution code.
+	Handle the case where there is no next recording scheduled
+	  in a nicer fashion.
+	Release version 0.5.3.
+
 2007-11-28	Andrew Ruthven
 	Be more wary about processing what the backend has sent us.
-		This includes cleaning up some invalid UTF-8 characters.
+	This includes cleaning up some invalid UTF-8 characters.
 	Add support for reading XML from a file.
 	Be a bit more forgiving on the XML we're receiving.
 	Release version 0.5.2.

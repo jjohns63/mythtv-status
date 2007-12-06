@@ -30,7 +30,7 @@ my $help = undef;
 my $xml_file = undef;
 my $verbose = 0;
 
-my $VERSION = '0.5.1';
+my $VERSION = '0.5.3';
 
 GetOptions(
   'c|colour|color' => \$colour,
