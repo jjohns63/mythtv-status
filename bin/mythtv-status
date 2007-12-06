@@ -322,7 +322,12 @@ sub load_perl_api {
   my $myth = undef;
 
   eval { require MythTV };
-  if (! $@) {
+  if ($@) {
+    print $@
+      if $verbose;
+  } else {
+    # Surpress warnings from DBI.  I tried unsetting $^W but that is ignored.
+    local($SIG{__WARN__}) = sub { if ($verbose) { print shift } };
     eval { $myth = new MythTV() };
   }
 
@@ -371,7 +376,7 @@ sub process_conflicts {
   my ($block) = @_;
   $myth ||= load_perl_api();
 
-  return "Unable to access MythTV Perl API."
+  return "Unable to access MythTV Perl API.  Try with --verbose to find out why."
     unless defined $myth;
 
   my @lines;

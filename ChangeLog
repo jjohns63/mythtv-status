@@ -1,3 +1,7 @@
+2007-12-07	Andrew Ruthven
+	Better suppress warnings from the MythTV Perl API if we can't access
+	  the database.
+
 2007-12-06	Andrew Ruthven
 	Be more paranoid about handling error conditions in the
 	  substitution code.
