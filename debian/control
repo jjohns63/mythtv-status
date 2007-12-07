@@ -3,7 +3,7 @@ Section: misc
 Priority: extra
 Maintainer: Andrew Ruthven <andrew@etc.gen.nz>
 Build-Depends: debhelper (>= 5), po-debconf
-Standards-Version: 3.7.2
+Standards-Version: 3.7.3
 Homepage: http://www.etc.gen.nz/projects/mythtv/mythtv-status.html
 Vcs-Git: http://git.etc.gen.nz/mythtv-status.git
 Vcs-Browser: http://git.etc.gen.nz/cgi-bin/gitweb.cgi?p=mythtv-status.git;a=summary

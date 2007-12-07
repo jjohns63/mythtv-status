@@ -31,7 +31,7 @@ my $xml_file = undef;
 my $verbose = 0;
 my $disk_space_warn = 95;  # Percent to warn at.
 
-my $VERSION = '0.5.1';
+my $VERSION = '0.5.3';
 
 GetOptions(
   'c|colour|color' => \$colour,
@@ -105,7 +105,7 @@ my %defaults = (
 );
 
 # The time of the next scheduled recording.
-my $next_time = undef;
+my $next_time = 'Never';
 # Are there any alerts that should be notified via email?
 my @alerts = ();
 
@@ -176,9 +176,9 @@ my @blocks = (
      if defined $next_time && $next_time eq 'now';
 
          my $date = ParseDate($vars->{'startTime'});
-   if (! defined $next_time || Date_Cmp($date, $next_time) < 0) {
-     $next_time = $date
-   };
+	 if ($next_time eq 'Never' || Date_Cmp($date, $next_time) < 0) {
+	   $next_time = $date
+	 };
        }
      }
   },
@@ -249,8 +249,8 @@ my @blocks = (
     'template' => '__next_time__',
     'rewrite' => {
       '&next_time' => sub {
-        return "Never"
-    unless defined $next_time;
+	return $next_time
+	  if $next_time eq 'Never' || $next_time eq 'now';
 
         my $str = Delta_Format(DateCalc('now', $next_time, undef, 1), 0, '%hh Hours, %mv Minutes');
         $str =~ s/\b1 (Hour|Minute)s/1 $1/;
@@ -420,7 +420,12 @@ sub load_perl_api {
   my $myth = undef;
 
   eval { require MythTV };
-  if (! $@) {
+  if ($@) {
+    print $@
+      if $verbose;
+  } else {
+    # Surpress warnings from DBI.  I tried unsetting $^W but that is ignored.
+    local($SIG{__WARN__}) = sub { if ($verbose) { print shift } };
     eval { $myth = new MythTV() };
   }
 
@@ -486,7 +491,7 @@ sub process_conflicts {
   my ($block) = @_;
   $myth ||= load_perl_api();
 
-  return "Unable to access MythTV Perl API."
+  return "Unable to access MythTV Perl API.  Try with --verbose to find out why."
     unless defined $myth;
 
   my @lines;
@@ -539,6 +544,11 @@ sub substitute_vars {
   my $skip = undef;
   my ($key, $value);
   while (($key, $value) = (each %{ $vars })) {
+    if (! defined $value) {
+      warn "Unable to find any value for $key while looking at $block->{'name'}\n";
+      next;
+    }
+
     $value = wrap('  ', '  ', $value)
       if $key eq 'NODE_TEXT';
 

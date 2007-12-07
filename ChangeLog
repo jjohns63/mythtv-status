@@ -1,17 +1,28 @@
+2007-12-07	Andrew Ruthven
+	Better suppress warnings from the MythTV Perl API if we can't access
+	  the database.
+
+2007-12-06	Andrew Ruthven
+	Be more paranoid about handling error conditions in the
+	  substitution code.
+	Handle the case where there is no next recording scheduled
+	  in a nicer fashion.
+	Release version 0.5.3.
+
 2007-12-02	Andrew Ruthven
 	Allow sending emails only if there is low disk space or recording
-	  conflicts.
+	  conflicts. (0.6)
 
 2007-11-28	Andrew Ruthven
 	Be more wary about processing what the backend has sent us.
-		This includes cleaning up some invalid UTF-8 characters.
+	This includes cleaning up some invalid UTF-8 characters.
 	Add support for reading XML from a file.
 	Be a bit more forgiving on the XML we're receiving.
 	Release version 0.5.2.
-	Show how much disk space is used - currently only total.
-	Rename "Time till next recording" to "Next Recording In".
+	Show how much disk space is used - currently only total. (0.6)
+	Rename "Time till next recording" to "Next Recording In". (0.6)
 	Put all the one liners together in the output and make them line
-	  up nicely.
+	  up nicely. (0.6)
 
 2007-11-23	Andrew Ruthven
 	Don't set the background when changing the colour.
