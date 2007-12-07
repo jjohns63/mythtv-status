@@ -1,0 +1,15 @@
+<!DOCTYPE Status>
+<Status version="0.21.20071202-1" protoVer="36" xmlVer="1" ISODate="2007-12-07T16:26:55" time="4:26 PM" date="12/7/2007" >
+ <Encoders count="0" />
+ <Scheduled count="0" />
+ <JobQueue count="0" />
+ <MachineInfo>
+  <Storage>
+   <Group dir="cyclops:/home/andrew/myth6" free="18818" id="1" total="50396" used="31578" />
+   <Group dir="cyclops:/scratch/myth2,cyclops:/tmp/myth1,cyclops:/tmp/myth3,cyclops:/tmp/myth4" free="10644" id="2" total="20746" used="10101" />
+   <Group dir="TotalDiskSpace" free="29463" id="total" total="71143" used="41679" />
+  </Storage>
+  <Load avg1="0.04" avg2="0.1" avg3="0.19" />
+  <Guide status="" next="1970-01-01T00:00:00" end="" start="" ></Guide>
+ </MachineInfo>
+</Status>
