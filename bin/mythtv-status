@@ -221,7 +221,7 @@ my @blocks = (
     'name' => 'Total Disk Space',
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage',
-    'protocol_version' => [ ">= 32" ],
+    'protocol_version' => [ ">= 32", "<= 36" ],
     'attrs' => [ qw/drive_total_total drive_total_used/ ],
     'commify' => [ qw/drive_total_total drive_total_used/ ],
     'template' => "Total space is __drive_total_total__ GB, with __drive_total_used__ GB used (__percent__)",
@@ -457,9 +457,13 @@ sub process_xml {
     if (defined $block->{"${vers}_version"}) {
       my $result = undef;
 
-      # At least one of the version checks must pass.
+      # All the version checks must pass.
       for my $check (@{ $block->{"${vers}_version"} }) {
-        $result ||= eval ( "$version{$vers} $check" );
+        my $res = eval ( "$version{$vers} $check" );
+
+        if (! defined $result || $res != 1) {
+	  $result = $res;
+	}
       }
 
       return
