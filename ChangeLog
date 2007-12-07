@@ -1,3 +1,6 @@
+2007-12-08	Andrew Ruthven
+	Allow using my new xmlVer attribute in the XML.
+
 2007-12-07	Andrew Ruthven
 	Better suppress warnings from the MythTV Perl API if we can't access
 	  the database.

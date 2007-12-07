@@ -196,7 +196,7 @@ my @blocks = (
     'name' => 'Total Disk Space',
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage',
-    'xml_version' => [ "<= 31" ],
+    'protocol_version' => [ "<= 31" ],
     'attrs' => [ qw/_total_total _total_used/ ],
     'commify' => [ qw/_total_total _total_used/ ],
     'template' => "Total space is ___total_total__ GB, with ___total_used__ GB used (__percent__)",
@@ -221,7 +221,7 @@ my @blocks = (
     'name' => 'Total Disk Space',
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage',
-    'xml_version' => [ ">= 32" ],
+    'protocol_version' => [ ">= 32" ],
     'attrs' => [ qw/drive_total_total drive_total_used/ ],
     'commify' => [ qw/drive_total_total drive_total_used/ ],
     'template' => "Total space is __drive_total_total__ GB, with __drive_total_used__ GB used (__percent__)",
@@ -277,7 +277,8 @@ our $today    = substr(ParseDate('today'), 0, 8);
 our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
 # A couple of global variables
-my ($xml, $xml_version, $myth);
+my ($xml, $myth);
+my %version;
 
 my $title =  "MythTV status for $host";
 my $output = "$title\n";
@@ -409,7 +410,8 @@ sub load_xml {
 
   # Pick out the XML version.
   my $items = $xml->documentElement->find('//Status');
-  $xml_version = @{ $items }[0]->getAttribute('protoVer');
+  $version{'xml'}      = @{ $items }[0]->getAttribute('xmlVer') || 0;
+  $version{'protocol'} = @{ $items }[0]->getAttribute('protoVer');
 
   return $xml;
 }
@@ -451,19 +453,21 @@ sub process_xml {
 
   # Only work on this block if we have received the appropriate version of
   # the XML.
-  if (defined $block->{'xml_version'}) {
-    my $result = undef;
+  for my $vers (qw/protocol xml/) {
+    if (defined $block->{"${vers}_version"}) {
+      my $result = undef;
 
-    # At least one of the version checks must pass.
-    for my $check (@{ $block->{'xml_version'} }) {
-      $result ||= eval ( "$xml_version $check" );
+      # At least one of the version checks must pass.
+      for my $check (@{ $block->{"${vers}_version"} }) {
+        $result ||= eval ( "$version{$vers} $check" );
+      }
+
+      return
+        unless defined $result && $result ne '';
+
+      warn "We have the correct version of the XML protocol\n"
+        if $verbose;
     }
-
-    return
-      unless defined $result && $result ne '';
-
-    warn "We have the correct version of the XML protocol\n"
-      if $verbose;
   }
 
   my $items = $xml->documentElement->find($block->{'xpath'});
