@@ -51,6 +51,7 @@ GetOptions(
   'schedule-conflicts!'   => \$display{'Schedule Conflicts'},
   'next-recording!'       => \$display{'Next Recording In'},
   'total-disk-space!'     => \$display{'Total Disk Space'},
+  'disk-space!'           => \$display{'Disk Space'},
 
   'file=s'                => \$xml_file,
 
@@ -244,6 +245,27 @@ my @blocks = (
     }
   },
 
+  # Diskspace, with storage groups and sensible XML layour.
+  {
+    'name' => 'Disk Space',
+    'type' => 'xpath',
+    'xpath' => '//Status/MachineInfo/Storage/Group',
+    'protocol_version' => [ ">= 36" ],
+    'xml_version' => [ "> 0" ],
+    'attrs' => [ qw/id total used/ ],
+    'commify' => [ qw/total used/ ],
+    'template' => "Total space for group __id__ is __total__ GB, with __used__ GB used (__percent__)",
+    'filter' =>  {
+      'id' => sub { return $_[0] eq 'total' }
+    },
+    'subs' => {
+      'percent' => sub {
+        calc_disk_space_percentage($_[0]->{'used'}, $_[0]->{'total'})
+      }
+    }
+  },
+
+  
   # How many hours till the next recording.
   {
     'name' => 'Next Recording In',
@@ -699,7 +721,7 @@ Handy for debugging things.
 
 The host to check, defaults to localhost.
 
-=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>
+=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>, B<--nodisk-space>
 
 Suppress displaying blocks of the output if they would normally be displayed.
 
@@ -754,6 +776,10 @@ The amount of disk space in total, and used by MythTV.
 
 If there are no recordings currently happening, then the amount of time until
 the next recording is displayed.
+
+=item Disk Space
+
+Details about each storage group that MythTV knows about.
 
 =back
 
