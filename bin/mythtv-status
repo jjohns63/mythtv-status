@@ -203,15 +203,7 @@ my @blocks = (
     'format' => 'one line',
     'subs' => {
       'percent' => sub {
-        my $vars = shift;
-        my $percent = sprintf("%.1f",
-    $vars->{'_total_used'} / $vars->{'_total_total'} * 100);
-  if ($percent >= $disk_space_warn) {
-    push @alerts, "DISK SPACE";
-    return "$warning$percent\%$normal";
-  } else {
-    return "$safe$percent\%$normal";
-  }
+        calc_disk_space_percentage($_[0]->{'_total_used'}, $_[0]->{'_total_total'})
       }
     }
   },
@@ -229,15 +221,7 @@ my @blocks = (
     'format' => 'one line',
     'subs' => {
       'percent' => sub {
-        my $vars = shift;
-        my $percent = sprintf("%.1f",
-    $vars->{'drive_total_used'} / $vars->{'drive_total_total'} * 100);
-  if ($percent >= $disk_space_warn) {
-    push @alerts, "DISK SPACE";
-    return "$warning$percent\%$normal";
-  } else {
-    return "$safe$percent\%$normal";
-  }
+        calc_disk_space_percentage($_[0]->{'drive_total_used'}, $_[0]->{'drive_total_total'})
       }
     }
   },
@@ -593,6 +577,27 @@ sub substitute_vars {
   }
 
   return defined $skip ? undef : $template;
+}
+
+# Work out the disk space percentage, possibly setting a flag that we should
+# raise an alert.
+sub calc_disk_space_percentage {
+  my ($used, $total) = @_;
+
+  if (! (defined $used && defined $total && $total > 0) ){
+    warn "Something is wrong calculating the disk space percentage.\n";
+    return 'unknown';
+  }
+
+  my $percent = sprintf("%.1f",
+    $used / $total * 100);
+
+  if ($percent >= $disk_space_warn) {
+    push @alerts, "DISK SPACE";
+    return "$warning$percent\%$normal";
+  } else {
+    return "$safe$percent\%$normal";
+  }
 }
 
 # Beautify numbers by sticking commas in.
