@@ -226,6 +226,24 @@ my @blocks = (
     }
   },
 
+  # Diskspace, with storage groups and sensible XML layour.
+  {
+    'name' => 'Total Disk Space',
+    'type' => 'xpath',
+    'xpath' => '//Status/MachineInfo/Storage/Group[@id="total"]',
+    'protocol_version' => [ ">= 36" ],
+    'xml_version' => [ "> 0" ],
+    'attrs' => [ qw/total used/ ],
+    'commify' => [ qw/total used/ ],
+    'template' => "Total space is __total__ GB, with __used__ GB used (__percent__)",
+    'format' => 'one line',
+    'subs' => {
+      'percent' => sub {
+        calc_disk_space_percentage($_[0]->{'used'}, $_[0]->{'total'})
+      }
+    }
+  },
+
   # How many hours till the next recording.
   {
     'name' => 'Next Recording In',
@@ -454,7 +472,7 @@ sub process_xml {
       return
         unless defined $result && $result ne '';
 
-      warn "We have the correct version of the XML protocol\n"
+      warn "We have the correct $vers version for $block->{'name'}\n"
         if $verbose;
     }
   }
