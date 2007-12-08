@@ -222,6 +222,7 @@ my @blocks = (
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage',
     'protocol_version' => [ ">= 32", "<= 36" ],
+    'xml_version' => [ "== 0" ],
     'attrs' => [ qw/drive_total_total drive_total_used/ ],
     'commify' => [ qw/drive_total_total drive_total_used/ ],
     'template' => "Total space is __drive_total_total__ GB, with __drive_total_used__ GB used (__percent__)",
