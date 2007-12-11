@@ -36,14 +36,14 @@ build/etch/$(deb):
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i $(package)_$(version)*.changes"
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes"
 	@mkdir -p build/etch
-	@mv ../$(deb) build/etch
+	@cp ../$(deb) build/etch
 
 build/sid/$(deb): 
 	@ssh build-sid-i386 "cd `pwd`; $(build)"
 	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/lintian -i $(package)_$(version)*.changes"
 	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes"
 	@mkdir -p build/sid
-	@mv ../$(deb) build/sid
+	@cp ../$(deb) build/sid
 
 publish: $(RELEASE_FILES)
 	for release in $(releases); do ars-add -r $$release -g main build/$$release/$(deb); done
