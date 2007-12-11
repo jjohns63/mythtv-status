@@ -227,7 +227,7 @@ my @blocks = (
     }
   },
 
-  # Diskspace, with storage groups and sensible XML layour.
+  # Diskspace, with storage groups and sensible XML layout.
   {
     'name' => 'Total Disk Space',
     'type' => 'xpath',
@@ -245,7 +245,7 @@ my @blocks = (
     }
   },
 
-  # Diskspace, with storage groups and sensible XML layour.
+  # Diskspace, with storage groups and sensible XML layout.
   {
     'name' => 'Disk Space',
     'type' => 'xpath',
