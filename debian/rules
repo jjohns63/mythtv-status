@@ -28,10 +28,6 @@ install: build-stamp
 
 # Build architecture-independent files here.
 binary-indep: install
-# We have nothing to do by default.
-
-# Build architecture-dependent files here.
-binary-arch: install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs ChangeLog
@@ -50,6 +46,11 @@ binary-arch: install
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
+
+
+# Build architecture-dependent files here.
+binary-arch: install
+# We have nothing to do by default.
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install configure
