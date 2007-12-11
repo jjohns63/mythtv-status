@@ -10,41 +10,45 @@ Sample output looks like:
 -- Begin --
 MythTV status for localhost
 ===========================
-Status: Mon Oct 15 2007, 8:41 AM
+Status...........: Wed Dec 12 2007, 12:00 PM
+Total Disk Space.: Total space is 102,350 GB, with 73,410 GB used (71.7%)
+Next Recording In: 5 Hours, 59 Minutes
 
 Encoders:
 cerberus (9) - Idle
 cerberus (12) - Idle
 
 Scheduled Recordings:
-2007-10-15 13:30:00 - Grey's Anatomy
-2007-10-15 18:00:00 - 3 News
-2007-10-15 20:30:00 - Mythbusters
-2007-10-15 22:00:00 - Flight Of The Conchords
-2007-10-16 13:30:00 - Grey's Anatomy
-2007-10-16 18:00:00 - 3 News
+2007-12-12 18:00:00 - 3 News
+2007-12-12 20:00:00 - Scrubs
+2007-12-13 18:00:00 - 3 News
+2007-12-13 20:30:00 - McLeod's Daughters
+2007-12-13 22:05:00 - 30 Rock
 -- End --
 
-And when recording:
+And when recording (and with a storage group running low on space):
 
 -- Begin --
 MythTV status for localhost
 ===========================
-Status: Mon Nov 5 2007, 6:30 PM
+Status...........: Wed Dec 12 2007, 6:30 PM
+Total Disk Space.: Total space is 102,350 GB, with 73,410 GB used (71.7%)
 
 Encoders:
 cerberus (9) - Recording
 cerberus (12) - Idle
 
 Recording Now:
-3 News (Ends: 2007-11-05 19:00:00)
+3 News (Ends: 2007-12-12 19:00:00)
 
 Scheduled Recordings:
-2007-11-05 20:30:00 - Heroes
-2007-11-05 22:00:00 - Flight Of The Conchords
-2007-11-06 00:00:00 - Alias
-2007-11-06 13:30:00 - Grey's Anatomy
-2007-11-06 18:00:00 - 3 News
+2007-12-12 20:00:00 - Scrubs
+2007-12-13 18:00:00 - 3 News
+2007-12-13 20:30:00 - McLeod's Daughters
+2007-12-13 22:05:00 - 30 Rock
+
+Disk Space:
+Total space for group 2 is 20,746 GB, with 20,101 GB used (96.9%)
 -- End --
 
 Why this tool?
