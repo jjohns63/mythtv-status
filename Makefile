@@ -54,5 +54,6 @@ publish: $(RELEASE_FILES)
 
 clean:
 	@rm -rf build
+	@rm -f ../$(package)*.changes ../$(package)*.dsc ../$(package)*.tar.gz ../$(package)*.deb
 
 .PHONY: release clean sponsor
