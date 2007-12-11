@@ -3,6 +3,7 @@ mythtv-status (0.6.0-1) unstable; urgency=low
   * New upstream release.
   * Remove empty usr/sbin from dirs, thanks lintian.
   * Move the packaging rules into binary-indep (section 4.9)
+  * mythtv-perl in debian-multimedia.org has been renamed to libmythtv-perl.
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Tue, 12 Dec 2007 06:46:56 +1300
 
