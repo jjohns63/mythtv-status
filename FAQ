@@ -19,3 +19,21 @@ mythtv-perl (apt-get install mythtv-perl).  Christian's packages are
 available at:
   http://www.debian-multimedia.org
 
+Q) I want to see disk space individually for each of my storage groups, how
+can I do this?
+A) If you're using storage groups then you're currently running from SVN,
+so you should be comfortable with what you need to do.  Namely, apply a
+couple of patches to MythTV and recompile.  The patches are known to apply
+against r15127.  If they don't, please let me (andrew@etc.gen.nz) know.
+
+Grab the patches from:
+  - http://svn.mythtv.org/trac/ticket/4278
+  - http://svn.mythtv.org/trac/ticket/4280 (the latest patch)
+
+Apply them, using something like the following from the root of your MythTV
+build tree:
+
+patch -p1 < 0001-Return-the-storage-group-data-using-a-sensible-XML-a.patch
+patch -p1 < 0003-Allow-defining-different-versions-of-the-XML-without.2.patch
+
+(The names might vary if I update the patches)
