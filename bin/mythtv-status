@@ -256,7 +256,12 @@ my @blocks = (
     'commify' => [ qw/total used/ ],
     'template' => "Total space for group __id__ is __total__ GB, with __used__ GB used (__percent__)",
     'filter' =>  {
-      'id' => sub { return $_[0] eq 'total' }
+      'id' => sub { return $_[0] eq 'total' },
+      'used' => sub {
+        return ! (
+	  (defined $display{'Disk Space'} && $display{'Disk Space'})
+	    || ($_[1]->{'used'} / $_[1]->{'total'}) * 100 > $disk_space_warn)
+      }
     },
     'subs' => {
       'percent' => sub {
@@ -591,7 +596,7 @@ sub substitute_vars {
 
     $skip = 1
       if defined $block->{'filter'}{$key} &&
-        &{ $block->{'filter'}{$key} }($value);
+        &{ $block->{'filter'}{$key} }($value, $vars);
 
     if (defined $block->{'rewrite'}{"/$key/"}) {
       my ($search, $replace);
@@ -779,7 +784,9 @@ the next recording is displayed.
 
 =item Disk Space
 
-Details about each storage group that MythTV knows about.
+Details about each storage group that MythTV knows about.  By default this
+only shows storage groups that are above the warning level.  Use
+B<--disk-space> to turn on display of all storage groups.
 
 =back
 
