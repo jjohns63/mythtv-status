@@ -30,6 +30,7 @@ my $help = undef;
 my $xml_file = undef;
 my $verbose = 0;
 my $disk_space_warn = 95;  # Percent to warn at.
+my $guide_days_warn = 2;   # How many days we require.
 
 my $VERSION = '0.6';
 
@@ -43,6 +44,7 @@ GetOptions(
   'email=s@'     => \@email,
   'email-only-on-conflict|email-only-on-alert' => \$email_only_on_alert,
   'disk-space-warn=i'      => \$disk_space_warn,
+  'guide-days-warn=i'      => \$guide_days_warn,
 
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
@@ -52,6 +54,7 @@ GetOptions(
   'next-recording!'       => \$display{'Next Recording In'},
   'total-disk-space!'     => \$display{'Total Disk Space'},
   'disk-space!'           => \$display{'Disk Space'},
+  'guide-data!'           => \$display{'Guide Data'},
 
   'file=s'                => \$xml_file,
 
@@ -298,6 +301,51 @@ my @blocks = (
     }
   },
 
+  # Check how much Guide data we have
+  {
+    'name'     => 'Guide Data',
+    'format'   => 'one line',
+    'type'     => 'xpath',
+    'xpath'    => '//Status/MachineInfo/Guide[@guideDays]',
+    'attrs'    => [qw/guideDays status guideThru/],
+    'template' => 'There is __guideDays__ days worth of data, through to __guideThru__',
+    'filter' => {
+      'guideDays' => sub {
+        if ($_[0] > $guide_days_warn) {
+	  return
+	    (defined $display{'Guide Data'} && ! $display{'Guide Data'}) || 1;
+        } else {
+          push @alerts, "GUIDE DATA";
+          return 0;
+        }
+      },
+    },
+    'rewrite'  => {
+      '&guideDays' => sub {
+        if ($_[0] <= $guide_days_warn) {
+          return "$warning$_[0]$normal";
+	} else {
+          return "$safe$_[0]$normal";
+        }
+      },
+      '/guideThru/' => { 'T\d+:\d+:\d+' => ' ' },
+      '&guideThru' => sub {
+        if ($_[1]->{'guideDays'} <= $guide_days_warn) {
+          return "$warning$_[0]$normal";
+	} else {
+          return "$safe$_[0]$normal";
+        }
+      },
+    },
+  },
+
+  {
+    'name'     => 'Guide Data',
+    'format'   => 'one line',
+    'type'     => 'xpath',
+    'xpath'    => '//Status/MachineInfo/Guide[@status=""]',
+    'template' => "${warning}No guide data!${normal}",
+  },
 );
 
 ###
@@ -603,8 +651,10 @@ sub substitute_vars {
       while (($search, $replace) = each %{ $block->{'rewrite'}{"/$key/"} } ) {
         $value =~ s/$search/$replace/g;
       }
-    } elsif (defined $block->{'rewrite'}{"&$key"}) {
-      $value = &{ $block->{'rewrite'}{"&$key"} }($value);
+    }
+
+    if (defined $block->{'rewrite'}{"&$key"}) {
+      $value = &{ $block->{'rewrite'}{"&$key"} }($value, $vars);
     }
 
     $value = commify($value)
@@ -722,11 +772,16 @@ Display help.
 Load XML from the file specified instead of querying a MythTV backend.
 Handy for debugging things.
 
+=item B<< --guide-data-warn <days> >>
+
+Warn if the number of days of guide data present is equal to or below
+this level.  Default is 2 days.
+
 =item B<-h HOST, --host=HOST>
 
 The host to check, defaults to localhost.
 
-=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>, B<--nodisk-space>
+=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>, B<--nodisk-space>, B<--noguide-data>
 
 Suppress displaying blocks of the output if they would normally be displayed.
 
@@ -755,6 +810,12 @@ The output of this script is broken up into several chunks they are:
 
 Some general info about the backend, currently just the timestamp of when
 this program was run.
+
+=item Guide Data
+
+The number of days of guide data is present.  By default it is only shown
+if the number of days is below the warning level.  To show it regardless
+of the warning level use --guide-data.
 
 =item Encoders
 

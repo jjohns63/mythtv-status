@@ -1,3 +1,9 @@
+2007-12-13	Andre Ruthven
+	Warn if there isn't enough guide data present.
+	
+2007-12-12	Andrew Ruthven
+	Release version 0.6.0
+
 2007-12-08	Andrew Ruthven
 	Allow using my new xmlVer attribute in the XML.
 	If using my XML patches against MythTV show the disk space details.
