@@ -1,5 +1,6 @@
 2007-12-13	Andre Ruthven
 	Warn if there isn't enough guide data present.
+	Show the channel name next to program details.
 	
 2007-12-12	Andrew Ruthven
 	Release version 0.6.0
