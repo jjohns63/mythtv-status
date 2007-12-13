@@ -91,7 +91,7 @@ if (defined $colour && scalar(@email) == 0) {
 # Allow setting some defaults for the output blocks.
 my %defaults = (
   'schedule' => {
-    'attrs' => [ qw/title startTime NODE_TEXT subTitle .\/Channel[@channelName]:channelName/ ],
+    'attrs' => [ qw/title startTime NODE_TEXT subTitle channelName:.\/Channel[@channelName]/ ],
     'template' => "__startTime__ - __title__"
       . (defined $episode ? " - __subTitle__" : '')
       . " (__channelName__)"
@@ -157,7 +157,7 @@ my @blocks = (
     'type'  => 'xpath',
     'xpath' => "//Status/Encoders/Encoder/Program",
     'hide'  => 'after',
-    'attrs' => [ qw/title endTime .\/Channel[@channelName]:channelName/ ],
+    'attrs' => [ qw/title endTime channelName:.\/Channel[@channelName]/ ],
     'template' => "__title__ (__channelName__) Ends: __endTime__",
     'rewrite' => {
       '/endTime/' => { '.*T' => '' },
@@ -564,8 +564,8 @@ sub process_xml {
     my %vars;
     for my $key (@{ $block->{'attrs'} }) {
       if ($key =~ /(.*?):(.*)/) {
-	my $subitem = $item->findnodes($1);
-        $vars{$2} = @{ $subitem }[0]->getAttribute($2)
+	my $subitem = $item->findnodes($2);
+        $vars{$1} = @{ $subitem }[0]->getAttribute($1)
           if defined @{ $subitem }[0];
       } else {
         $vars{$key} = $key eq 'NODE_TEXT' ? $item->string_value : $item->getAttribute($key);
