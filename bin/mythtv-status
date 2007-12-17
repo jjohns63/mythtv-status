@@ -42,7 +42,8 @@ GetOptions(
   'p|port=i'     => \$port,
   'v|version'    => \&print_version,
   'email=s@'     => \@email,
-  'email-only-on-conflict|email-only-on-alert' => \$email_only_on_alert,
+  'email-only-on-conflict|email-only-on-alert|email-only-on-alerts'
+		 => \$email_only_on_alert,
   'disk-space-warn=i'      => \$disk_space_warn,
   'guide-days-warn=i'      => \$guide_days_warn,
 
