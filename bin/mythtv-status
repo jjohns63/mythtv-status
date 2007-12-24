@@ -609,7 +609,8 @@ sub process_conflicts {
         'title'     => $show->{'title'},
         'startTime' => strftime("%FT%T", localtime($show->{'starttime'})),
         'NODE_TEXT' => $show->{'description'},
-        'subTitle'  => $show->{'subtitle'}
+        'subTitle'  => $show->{'subtitle'},
+	'channelName' => $show->{'channame'},
        );
 
       my $str = substitute_vars($block, \%vars);
