@@ -30,7 +30,7 @@ case "$1" in
     db_get $PACKAGE/email
     EMAIL="${RET:-none}"
 
-    EMAIL_ARGS="${EMAIL_ARGS:--email-only-on-conflict}"
+    EMAIL_ARGS="${EMAIL_ARGS:--email-only-on-alert}"
 
     cat <<_eof > $DEBIANCONFIG
 # $PACKAGE Debian configuration

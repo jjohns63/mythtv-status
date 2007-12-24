@@ -20,8 +20,8 @@ Default: none
 _Description: Send email status to:
  Status emails can be sent on a daily basis.
  .
- By default an email is only sent if there is a conflict.  You must have
- the MythTV Perl API installed for this to work.
+ By default an email is only sent if there are alerts.  You must have
+ the MythTV Perl API installed for conflict alerts to be generated.
  .
  To disable set the email address to "none".  To specify multiple email
  addresses, seperate them with a comma.
