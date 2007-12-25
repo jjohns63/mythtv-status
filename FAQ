@@ -9,6 +9,9 @@ That is why I decided to update the MOTD instead.  This way how long the
 script takes to run doesn't matter, you never have to run it
 interactively.
 
+I've had some reports that running mythtv-status from a .profile is okay
+on faster machines (I have a PIII 800...).
+
 Q) What provides the perl API?
 A) It comes from the MythTV svn repository:
   http://svn.mythtv.org/trac/browser/branches/release-0-20-fixes/mythtv/bindings/perl
