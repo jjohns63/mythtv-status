@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: Source: mythtv-status@packages.debian.org\n"
-"POT-Creation-Date: 2007-11-23 11:54+1300\n"
+"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
+"POT-Creation-Date: 2007-12-25 13:20+1300\n"
 "PO-Revision-Date: 2007-11-23 11:39+1300\n"
 "Last-Translator: Francois Marier <francois@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -72,9 +72,10 @@ msgstr "Un courriel de status peut être envoyé quotidiennement."
 #. Type: string
 #. Description
 #: ../templates:3001
+#, fuzzy
 msgid ""
-"By default an email is only sent if there is a conflict.  You must have the "
-"MythTV Perl API installed for this to work."
+"By default an email is only sent if there are alerts.  You must have the "
+"MythTV Perl API installed for conflict alerts to be generated."
 msgstr ""
 "Un message n'est envoyé que s'il y a un conflit dans l'horaire. Le module "
 "Perl MythTV doit etre installé pour utiliser cette fonction."
