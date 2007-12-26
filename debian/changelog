@@ -1,3 +1,13 @@
+mythtv-status (0.6.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Update debconf templates to reflect the fact that emails are sent out
+    for alerts now, not just conflicts (this feature was added in 0.6.0).
+    + Updated French translation from Franciois Marier.
+    + Updated Portuguese translation from Américo Monteiro.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Wed, 26 Dec 2007 22:36:45 +1300
+
 mythtv-status (0.6.1-1) unstable; urgency=low
 
   * New upstream release.

@@ -32,7 +32,7 @@ my $verbose = 0;
 my $disk_space_warn = 95;  # Percent to warn at.
 my $guide_days_warn = 2;   # How many days we require.
 
-my $VERSION = '0.6.1';
+my $VERSION = '0.6.2';
 
 GetOptions(
   'c|colour|color' => \$colour,
