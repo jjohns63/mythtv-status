@@ -5,10 +5,10 @@
 # Américo Monteiro <a_monteiro@netcabo.pt>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: mythtv-status 0.5.1-1\n"
+"Project-Id-Version: mythtv-status \n"
 "Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
 "POT-Creation-Date: 2007-12-25 13:20+1300\n"
-"PO-Revision-Date: 2007-11-24 16:16+0000\n"
+"PO-Revision-Date: 2007-12-25 13:41+0000\n"
 "Last-Translator: Américo Monteiro <a_monteiro@netcabo.pt>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,8 +51,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../templates:2001
-msgid ""
-"To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgid "To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
 msgstr ""
 "Para ajustar a frequência de actualização do MOTD, edite /etc/cron.d/mythtv-"
 "status."
@@ -72,13 +71,13 @@ msgstr "Emails de estado podem ser enviados diariamente."
 #. Type: string
 #. Description
 #: ../templates:3001
-#, fuzzy
 msgid ""
 "By default an email is only sent if there are alerts.  You must have the "
 "MythTV Perl API installed for conflict alerts to be generated."
 msgstr ""
-"Por pré-definição, um email é enviado apenas se existir um conflito. Você "
-"precisa ter a API MythTV Perl instalada para isto funcionar."
+"Por pré-definição, um email é enviado apenas se existir um alerta. Você "
+"precisa ter a API MythTV Perl instalada para os alertas de conflito serem "
+"gerados."
 
 #. Type: string
 #. Description
@@ -89,3 +88,4 @@ msgid ""
 msgstr ""
 "Para desactivar regule o endereço de email para \"none\". Para especificar "
 "endereços de email múltiplos, separe-os com uma vírgula."
+
