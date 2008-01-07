@@ -509,6 +509,9 @@ sub load_perl_api {
     # Surpress warnings from DBI.  I tried unsetting $^W but that is ignored.
     local($SIG{__WARN__}) = sub { if ($verbose) { print shift } };
     eval { $myth = new MythTV() };
+
+    print $@
+      if $@ && $verbose;
   }
 
   return $myth;
