@@ -33,14 +33,14 @@ $(tarball):
 
 build/etch/$(deb): 
 	@ssh build-etch-i386 "cd `pwd`; $(build)"
-	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i $(package)_$(version)*.changes" || true
+	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
 	@mkdir -p build/etch
 	@cp ../$(deb) build/etch
 
 build/sid/$(deb): 
 	@ssh build-sid-i386 "cd `pwd`; $(build)"
-	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/lintian -i $(package)_$(version)*.changes" || true
+	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
 	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
 	@mkdir -p build/sid
 	@cp ../$(deb) build/sid
