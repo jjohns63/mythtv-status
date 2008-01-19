@@ -1,0 +1,18 @@
+I'd like to thank the following people:
+
+ - Susanne Ruthven - my wife, without whom this programme wouldn't have
+   happened.
+ - Francois Marier - For getting the Debian packaging into shape and for
+   sponsoring it into Debian.
+ - Criggie - For suggesting I add colour to the output, and making me
+   add a --version option.
+ - Sam Vilain - For getting the colour output to work nicely!
+ - Claude Boucker - For letting me know the Fedora 7 packages required.
+ - Brad MerManouelian & Glen Dragon - For sending me samples of multi-storage
+   area XML so I could add the Diskspace block.
+ - Ryan Steffes - For suggesting the Auto Expire block.
+ - The Debian translators - Especially the Portuguese guys - you rock!
+ - All the MythTV developers for working on a great bit of software
+ 
+And everyone else who has sent me such great feedback, thank you!  And to
+everyone else that I've failed to mention here...
