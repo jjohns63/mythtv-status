@@ -1,3 +1,7 @@
+2007-01-20	Andrew Ruthven
+	Show the shows that will be deleted by the auto expirer, and their
+	order.
+
 2007-12-26	Andrew Ruthven
 	Release version 0.6.2
 	

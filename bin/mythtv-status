@@ -31,8 +31,12 @@ my $xml_file = undef;
 my $verbose = 0;
 my $disk_space_warn = 95;  # Percent to warn at.
 my $guide_days_warn = 2;   # How many days we require.
+my $pending_deletes_count = 10; # How many pending deletes to show.
 
 my $VERSION = '0.6.2';
+
+# Some display blocks are disabled by default:
+$display{'Pending Deletes'} = 0;
 
 GetOptions(
   'c|colour|color' => \$colour,
@@ -46,6 +50,7 @@ GetOptions(
 		 => \$email_only_on_alert,
   'disk-space-warn=i'      => \$disk_space_warn,
   'guide-days-warn=i'      => \$guide_days_warn,
+  'pending-deletes-count=i' => \$pending_deletes_count,
 
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
@@ -56,6 +61,7 @@ GetOptions(
   'total-disk-space!'     => \$display{'Total Disk Space'},
   'disk-space!'           => \$display{'Disk Space'},
   'guide-data!'           => \$display{'Guide Data'},
+  'pending-deletes!'      => \$display{'Pending Deletes'},
 
   'file=s'                => \$xml_file,
 
@@ -195,6 +201,20 @@ my @blocks = (
     'type' => 'sub',
     'defaults' => 'schedule',
     'sub' => \&process_conflicts
+  },
+
+  # Pending Deletes
+  {
+    'name' => 'Pending Deletes',
+    'type' => 'sub',
+    'defaults' => 'schedule',
+    'sub' => \&process_pending_deletes,
+    'filter' => {
+      'startTime' => sub {
+	$pending_deletes_count--;
+	return ($pending_deletes_count < 0);
+      },
+    },
   },
 
   # Diskspace, before storage groups
@@ -631,6 +651,48 @@ sub process_conflicts {
   return join("\n", @lines);
 }
 
+sub process_pending_deletes {
+  my ($block) = @_;
+  $myth ||= load_perl_api();
+
+  return "Unable to access MythTV Perl API.  Try with --verbose to find out why."
+    unless defined $myth;
+
+  my @lines;
+
+  # This isn't defined in the 0.20 version of the API.  It is in 0.21svn.
+  my %rows = $myth->backend_rows('QUERY_RECORDINGS Delete', 2);
+
+  # Returned in date order, desc.  So reverse it to make the oldest
+  # ones come first.
+  foreach my $row (reverse @{$rows{'rows'}}) {
+    my $show;
+    {
+      # MythTV::Program currently has a slightly broken line with a numeric
+      # comparision.
+      local($^W) = undef;
+      $show = new MythTV::Program(@$row);
+    }
+
+    # Who cares about LiveTV recordings?
+    next if $show->{'progflags'} eq 'LiveTV';
+
+    my %vars = (
+      'title'     => $show->{'parentid'},
+      'startTime' => strftime("%FT%T", localtime($show->{'starttime'})),
+      'NODE_TEXT' => $show->{'description'},
+      'subTitle'  => $show->{'subtitle'},
+      'channelName' => $show->{'callsign'},
+    );
+
+    my $str = substitute_vars($block, \%vars);
+    push @lines, $str
+      if defined $str;
+  }
+
+  return join("\n", @lines);
+}
+
 sub substitute_vars {
   my $block = shift;
   my $vars  = shift;
@@ -793,13 +855,21 @@ this level.  Default is 2 days.
 
 The host to check, defaults to localhost.
 
-=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>, B<--nodisk-space>, B<--noguide-data>
+=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>, B<--nodisk-space>, B<--noguide-data>, B<--nopending-deletes>
 
 Suppress displaying blocks of the output if they would normally be displayed.
 
 =item B<-p PORT, --port=PORT>
 
 The port to use when connecting to MythTV, defaults to 6544.
+
+=item B<--pending-deletes>
+
+Display the pending deletes (output is normally suppressed).
+
+=item B<--pending-deletes-count>
+
+How many pending delete shows to display, defaults to 10.
 
 =item B<--verbose>
 
@@ -845,6 +915,11 @@ Up to 10 programs which are scheduled to be recorded today and tomorrow.
 =item Schedule Conflicts
 
 Any upcoming schedule conflicts (not just limited to today or tomorrow).
+
+=item Pending Deletes
+
+The shows which will be deleted and the order they'll be deleted if the
+auto expirer kicks in.
 
 =item Total Disk Space
 
