@@ -31,12 +31,12 @@ my $xml_file = undef;
 my $verbose = 0;
 my $disk_space_warn = 95;  # Percent to warn at.
 my $guide_days_warn = 2;   # How many days we require.
-my $pending_deletes_count = 10; # How many pending deletes to show.
+my $auto_expire_count = 10; # How many auto expire shows to display.
 
 my $VERSION = '0.6.2';
 
 # Some display blocks are disabled by default:
-$display{'Pending Deletes'} = 0;
+$display{'Shows due to Auto Expire'} = 0;
 
 GetOptions(
   'c|colour|color' => \$colour,
@@ -50,7 +50,7 @@ GetOptions(
 		 => \$email_only_on_alert,
   'disk-space-warn=i'      => \$disk_space_warn,
   'guide-days-warn=i'      => \$guide_days_warn,
-  'pending-deletes-count=i' => \$pending_deletes_count,
+  'auto-expire-count=i'    => \$auto_expire_count,
 
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
@@ -61,7 +61,7 @@ GetOptions(
   'total-disk-space!'     => \$display{'Total Disk Space'},
   'disk-space!'           => \$display{'Disk Space'},
   'guide-data!'           => \$display{'Guide Data'},
-  'pending-deletes!'      => \$display{'Pending Deletes'},
+  'auto-expire!'          => \$display{'Shows due to Auto Expire'},
 
   'file=s'                => \$xml_file,
 
@@ -203,16 +203,16 @@ my @blocks = (
     'sub' => \&process_conflicts
   },
 
-  # Pending Deletes
+  # Auto Expire
   {
-    'name' => 'Pending Deletes',
+    'name' => 'Shows due to Auto Expire',
     'type' => 'sub',
     'defaults' => 'schedule',
-    'sub' => \&process_pending_deletes,
+    'sub' => \&process_auto_expire,
     'filter' => {
       'startTime' => sub {
-	$pending_deletes_count--;
-	return ($pending_deletes_count < 0);
+	$auto_expire_count--;
+	return ($auto_expire_count < 0);
       },
     },
   },
@@ -651,7 +651,7 @@ sub process_conflicts {
   return join("\n", @lines);
 }
 
-sub process_pending_deletes {
+sub process_auto_expire {
   my ($block) = @_;
   $myth ||= load_perl_api();
 
@@ -855,7 +855,7 @@ this level.  Default is 2 days.
 
 The host to check, defaults to localhost.
 
-=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>, B<--nodisk-space>, B<--noguide-data>, B<--nopending-deletes>
+=item B<--nostatus>, B<--noencoders>, B<--norecording-now>, B<--noscheduled-recordings>, B<--noschedule-conflicts>, B<--nonext-recording>, B<--nototal-disk-space>, B<--nodisk-space>, B<--noguide-data>, B<--noauto-expire>
 
 Suppress displaying blocks of the output if they would normally be displayed.
 
@@ -863,13 +863,13 @@ Suppress displaying blocks of the output if they would normally be displayed.
 
 The port to use when connecting to MythTV, defaults to 6544.
 
-=item B<--pending-deletes>
+=item B<--auto-expire>
 
-Display the pending deletes (output is normally suppressed).
+Display the shows due to auto expire (output is normally suppressed).
 
-=item B<--pending-deletes-count>
+=item B<--auto-expire-count>
 
-How many pending delete shows to display, defaults to 10.
+How many of the auto expire shows to display, defaults to 10.
 
 =item B<--verbose>
 
@@ -916,7 +916,7 @@ Up to 10 programs which are scheduled to be recorded today and tomorrow.
 
 Any upcoming schedule conflicts (not just limited to today or tomorrow).
 
-=item Pending Deletes
+=item Shows due to Auto Expire
 
 The shows which will be deleted and the order they'll be deleted if the
 auto expirer kicks in.
