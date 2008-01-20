@@ -225,7 +225,7 @@ my @blocks = (
     'protocol_version' => [ "<= 31" ],
     'attrs' => [ qw/_total_total _total_used/ ],
     'commify' => [ qw/_total_total _total_used/ ],
-    'template' => "Total space is ___total_total__ GB, with ___total_used__ GB used (__percent__)",
+    'template' => "Total space is ___total_total__ MB, with ___total_used__ MB used (__percent__)",
     'format' => 'one line',
     'subs' => {
       'percent' => sub {
