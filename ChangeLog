@@ -1,3 +1,7 @@
+2007-01-22	Andrew Ruthven
+	Change the version boundaries for the disk space blocks to reflect
+	current SVN.
+
 2007-01-20	Andrew Ruthven
 	Show the shows that will be deleted by the auto expirer, and their
 	order.
