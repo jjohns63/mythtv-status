@@ -11,6 +11,8 @@ I'd like to thank the following people:
  - Brad MerManouelian & Glen Dragon - For sending me samples of multi-storage
    area XML so I could add the Diskspace block.
  - Ryan Steffes - For suggesting the Auto Expire block.
+ - Marc - For bug reports and suggesting outputting the encoder details for
+   recordings.
  - The Debian translators - Especially the Portuguese guys - you rock!
  - All the MythTV developers for working on a great bit of software
  

@@ -22,6 +22,7 @@ my $host = "localhost";
 my $port = "6544";
 my $description = undef;
 my $episode = undef;
+my $encoder_details = undef;
 my $colour = undef;
 my %display;
 my @email;
@@ -42,6 +43,7 @@ GetOptions(
   'c|colour|color' => \$colour,
   'd|descripton' => \$description,
   'e|episode'    => \$episode,
+  'encoder-details' => \$encoder_details,
   'h|host=s'     => \$host,
   'p|port=i'     => \$port,
   'v|version'    => \&print_version,
@@ -98,8 +100,10 @@ if (defined $colour && scalar(@email) == 0) {
 # Allow setting some defaults for the output blocks.
 my %defaults = (
   'schedule' => {
-    'attrs' => [ qw/title startTime NODE_TEXT subTitle channelName:.\/Channel[@channelName]/ ],
-    'template' => "__startTime__ - __title__"
+    'attrs' => [ qw/title startTime NODE_TEXT subTitle channelName:.\/Channel[@channelName] chanNum:.\/Channel[@chanId] inputId:.\/Channel[@inputId]/ ],
+    'template' => "__startTime__"
+      . (defined $encoder_details ? " - Enc: __inputId__, Chan: __chanNum__" : '')
+      . " - __title__"
       . (defined $episode ? " - __subTitle__" : '')
       . " (__channelName__)"
       . (defined $description ? "\n__NODE_TEXT__" : ''),
@@ -818,6 +822,10 @@ Display the description for the scheduled recordings.
 The threshold (in percent) of used disk space that we should show
 the disk space in red (if using colour) or send an email if we're
 in email mode with email only on warnings.
+
+=item B<--encoder-details>
+
+Display the input ID and channel name against the recording details.
 
 =item B<-e, --episode>
 

@@ -2,6 +2,7 @@
 	Change the version boundaries for the disk space blocks to reflect
 	current SVN.
 	The backend returns the disk usage in MB, not GB.
+	Optionally show the input ID and channel number for recordings.
 
 2007-01-20	Andrew Ruthven
 	Show the shows that will be deleted by the auto expirer, and their
