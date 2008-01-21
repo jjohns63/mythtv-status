@@ -638,6 +638,8 @@ sub process_conflicts {
         'NODE_TEXT' => $show->{'description'},
         'subTitle'  => $show->{'subtitle'},
 	'channelName' => $show->{'channame'},
+	'inputId'   => $show->{'inputid'},
+	'chanNum'   => $show->{'channum'},
        );
 
       my $str = substitute_vars($block, \%vars);
@@ -687,6 +689,8 @@ sub process_auto_expire {
       'NODE_TEXT' => $show->{'description'},
       'subTitle'  => $show->{'subtitle'},
       'channelName' => $show->{'callsign'},
+      'inputId'   => $show->{'inputid'},
+      'chanNum'   => $show->{'chanid'},
     );
 
     my $str = substitute_vars($block, \%vars);
