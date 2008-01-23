@@ -34,7 +34,7 @@ my $disk_space_warn = 95;  # Percent to warn at.
 my $guide_days_warn = 2;   # How many days we require.
 my $auto_expire_count = 10; # How many auto expire shows to display.
 
-my $VERSION = '0.7.0';
+my $VERSION = '0.7.1';
 
 # Some display blocks are disabled by default:
 $display{'Shows due to Auto Expire'} = 0;
