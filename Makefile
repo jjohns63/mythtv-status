@@ -32,7 +32,7 @@ $(tarball):
 	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile|testing)"` | gzip > $(tarball)
 
 build/etch/$(deb): 
-	@ssh build-etch-i386 "cd `pwd`; $(build)"
+	@ssh build-etch-i386 "cd `pwd`; DH_COMPAT=5 $(build) -d"
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
 	@mkdir -p build/etch
