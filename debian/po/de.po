@@ -1,0 +1,89 @@
+# Translation of mythtv-status debconf templates to German
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2008.
+# This file is distributed under the same license as the mythtv-status package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mythtv-status 0.6.2-1\n"
+"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
+"POT-Creation-Date: 2007-12-25 13:20+1300\n"
+"PO-Revision-Date: 2008-01-27 23:14+0100\n"
+"Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
+"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid "MythTV backend to check:"
+msgstr "Zu prüfendes MythTV-Backend:"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid ""
+"The MythTV backend to check, you only need to change this if you want to "
+"check a different host."
+msgstr ""
+"Das zu prüfende MythTV-Backend. Sie müssen dies nur ändern, falls Sie einen "
+"anderen Rechner prüfen wollen."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "Update the system MOTD?"
+msgstr "Die MOTD des Systems aktualisieren?"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"Whether the Message of the Day should be updated on system boot and on a "
+"regular basis."
+msgstr ""
+"Entscheiden Sie, ob die Nachricht des Tages (»Message of the Day«) beim "
+"Systemstart und auf regelmäßiger Basis aktualisiert werden soll."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgstr ""
+"Bearbeiten Sie die Datei /etc/cron.d/mythtv-status, um einzustellen, wie "
+"oft die MOTD aktualisiert werden soll."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Send email status to:"
+msgstr "Verschicke E-Mail-Status an:"
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Status emails can be sent on a daily basis."
+msgstr "Es können tägliche Status-E-Mails versendet werden."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"By default an email is only sent if there are alerts.  You must have the "
+"MythTV Perl API installed for conflict alerts to be generated."
+msgstr ""
+"Standardmäßig wird nur bei Störungen eine E-Mail versandt. Damit bei "
+"Konflikten Warnungen erzeugt werden, müssen Sie das MythTV-Perl-API "
+"installiert haben."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"To disable set the email address to \"none\".  To specify multiple email "
+"addresses, seperate them with a comma."
+msgstr ""
+"Zum Deaktivieren setzen Sie die E-Mail-Adresse auf »none«. Mehrere E-Mail-"
+"Adressen werden durch Kommata getrennt."
