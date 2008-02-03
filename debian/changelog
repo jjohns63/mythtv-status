@@ -1,8 +1,9 @@
 mythtv-status (0.7.1-2) unstable; urgency=low
 
   * Bump debhelper compatibility to 6
+  * Add German translation (Closes: #463429)
 
- -- Francois Marier <francois@debian.org>  Fri, 01 Feb 2008 14:09:38 +1300
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Mon, 04 Feb 2008 10:51:49 +1300
 
 mythtv-status (0.7.1-1) unstable; urgency=low
 
