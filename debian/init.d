@@ -68,7 +68,7 @@ case "$1" in
     log_end_msg 0
     ;;
   stop)
-    log_daemon_msg "Stoping $DESC " "$NAME"
+    log_daemon_msg "Stopping $DESC " "$NAME"
     [ -f /var/run/motd.orig ] && cp /var/run/motd.orig /var/run/motd
     log_end_msg 0
     ;;
