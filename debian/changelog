@@ -1,9 +1,15 @@
+mythtv-status (0.7.1-3) unstable; urgency=low
+
+  * Fix a typo in the init.d output, Stoping should be Stopping.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Fri,  8 Feb 2008 15:36:56 +1300
+
 mythtv-status (0.7.1-2) unstable; urgency=low
 
   * Bump debhelper compatibility to 6
   * Add German translation (Closes: #463429)
 
- -- Andrew Ruthven <andrew@etc.gen.nz>  Mon, 04 Feb 2008 10:51:49 +1300
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Mon,  4 Feb 2008 10:51:49 +1300
 
 mythtv-status (0.7.1-1) unstable; urgency=low
 
