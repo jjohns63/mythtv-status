@@ -8,6 +8,7 @@ mythtv-status (0.7.1-2) unstable; urgency=low
 
   * Bump debhelper compatibility to 6
   * Add German translation (Closes: #463429)
+  * Not uploaded to Debian.
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Mon,  4 Feb 2008 10:51:49 +1300
 
