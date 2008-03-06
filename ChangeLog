@@ -1,13 +1,13 @@
-2007-01-24	Andrew Ruthven
+2008-01-24	Andrew Ruthven
 	Release version 0.7.1
 
-2007-01-22	Andrew Ruthven
+2008-01-22	Andrew Ruthven
 	Change the version boundaries for the disk space blocks to reflect
 	current SVN.
 	The backend returns the disk usage in MB, not GB.
 	Optionally show the input ID and channel number for recordings.
 
-2007-01-20	Andrew Ruthven
+2008-01-20	Andrew Ruthven
 	Show the shows that will be deleted by the auto expirer, and their
 	order.
 	Release version 0.7.0
