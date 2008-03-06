@@ -34,7 +34,7 @@ my $disk_space_warn = 95;  # Percent to warn at.
 my $guide_days_warn = 2;   # How many days we require.
 my $auto_expire_count = 10; # How many auto expire shows to display.
 
-my $VERSION = '0.7.1';
+my $VERSION = '0.7.2';
 
 # Some display blocks are disabled by default:
 $display{'Shows due to Auto Expire'} = 0;
@@ -243,7 +243,7 @@ my @blocks = (
     'name' => 'Total Disk Space',
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage',
-    'protocol_version' => [ ">= 32", "<= 37" ],
+    'protocol_version' => [ ">= 32", "<= 39" ],
     'xml_version' => [ "== 0" ],
     'attrs' => [ qw/drive_total_total drive_total_used/ ],
     'commify' => [ qw/drive_total_total drive_total_used/ ],
@@ -261,7 +261,7 @@ my @blocks = (
     'name' => 'Total Disk Space',
     'type' => 'xpath',
     'xpath' => '//Status/MachineInfo/Storage/Group[@id="total"]',
-    'protocol_version' => [ ">= 38" ],
+    'protocol_version' => [ ">= 40" ],
     'xml_version' => [ "> 0" ],
     'attrs' => [ qw/total used/ ],
     'commify' => [ qw/total used/ ],
