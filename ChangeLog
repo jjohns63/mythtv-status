@@ -1,3 +1,8 @@
+2008-03-11	Andrew Ruthven
+	Be less stressed about the XML protocol, let XPath matching do
+	the validation for us.
+	Release version 0.7.3
+
 2008-03-07	Andrew Ruthven
 	The MythTV protocol on release-0-21-fixes has been increased to 39.
 	Release version 0.7.2
