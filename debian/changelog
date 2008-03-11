@@ -1,3 +1,9 @@
+mythtv-status (0.7.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Tue, 11 Mar 2008 14:19:49 +1300
+
 mythtv-status (0.7.2-1) unstable; urgency=low
 
   * New upstream release.
