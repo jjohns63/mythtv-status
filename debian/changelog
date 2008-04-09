@@ -1,3 +1,11 @@
+mythtv-status (0.7.3-2) unstable; urgency=low
+
+  * The cron.daily file should honour the HOST setting in
+    /etc/default/mythtv-status (Closes: #475106)
+  * Remove two bogus space charaters in the output from the init.d script.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Wed, 09 Apr 2008 14:29:30 +1200
+
 mythtv-status (0.7.3-1) unstable; urgency=low
 
   * New upstream release.
