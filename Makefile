@@ -6,8 +6,9 @@ sponsor_keyid=19D03486
 
 build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting
 version=$(shell git-tag -l | grep -v ^debian | tail -1)
+deb_version=$(shell git-tag -l | grep ^debian | tail -1 | sed 's/debian-//')
 
-deb=$(package)_$(version)-*_all.deb
+deb=$(package)_$(deb_version)_all.deb
 orig_tarball=../$(package)_$(version).orig.tar.gz
 tarball=build/tarball/$(package)-$(version).tar.gz
 tarball_dir=../$(package)_tarballs
