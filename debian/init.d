@@ -56,7 +56,7 @@ set -e
 
 case "$1" in
   start|reload|refresh|restart|force-reload)
-    log_daemon_msg "Updating $DESC " "$NAME"
+    log_daemon_msg "Updating $DESC" "$NAME"
     [ ! -f /var/run/motd.orig ] && cp /var/run/motd /var/run/motd.orig
 
     cp /var/run/motd.orig /var/run/motd.new
@@ -68,7 +68,7 @@ case "$1" in
     log_end_msg 0
     ;;
   stop)
-    log_daemon_msg "Stopping $DESC " "$NAME"
+    log_daemon_msg "Stopping $DESC" "$NAME"
     [ -f /var/run/motd.orig ] && cp /var/run/motd.orig /var/run/motd
     log_end_msg 0
     ;;
