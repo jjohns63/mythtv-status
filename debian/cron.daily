@@ -7,4 +7,4 @@ then
   exit
 fi
 
-/usr/bin/mythtv-status --email $EMAIL $EMAIL_ARGS
+/usr/bin/mythtv-status --host $HOST --email $EMAIL $EMAIL_ARGS
