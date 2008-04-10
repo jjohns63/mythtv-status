@@ -33,8 +33,9 @@ my $verbose = 0;
 my $disk_space_warn = 95;  # Percent to warn at.
 my $guide_days_warn = 2;   # How many days we require.
 my $auto_expire_count = 10; # How many auto expire shows to display.
+my $recording_in_warn = 60 * 60; # When is the next recording considered critical? (seconds)
 
-my $VERSION = '0.7.3';
+my $VERSION = '0.7.4';
 
 # Some display blocks are disabled by default:
 $display{'Shows due to Auto Expire'} = 0;
@@ -53,6 +54,7 @@ GetOptions(
   'disk-space-warn=i'      => \$disk_space_warn,
   'guide-days-warn=i'      => \$guide_days_warn,
   'auto-expire-count=i'    => \$auto_expire_count,
+  'recording-in-warn=i'    => \$recording_in_warn,
 
   'status!'               => \$display{'Status'},
   'encoders!'             => \$display{'Encoders'},
@@ -309,12 +311,19 @@ my @blocks = (
 	return $next_time
 	  if $next_time eq 'Never' || $next_time eq 'now';
 
-        my $str = Delta_Format(DateCalc('now', $next_time, undef, 1), 0, '%hh Hours, %mv Minutes');
+        my $delta   = DateCalc('now', $next_time, undef, 1);
+        my $str     = Delta_Format($delta, 0, '%hh Hours, %mv Minutes');
+        my $seconds = Delta_Format($delta, 0, '%sh');
+
         $str =~ s/\b1 (Hour|Minute)s/1 $1/;
-        $str =~ s/^0 Hours, (.*)$/$warning$1$normal/;
+	$str =~ s/^0 Hours, //;
         $str =~ s/ 0 Minutes//;
 
-  return $str;
+	if ($seconds <= $recording_in_warn) {
+          $str = "$warning$str$normal";
+	}
+
+        return $str;
       }
     },
     'filter' =>  {
@@ -880,6 +889,11 @@ Display the shows due to auto expire (output is normally suppressed).
 =item B<--auto-expire-count>
 
 How many of the auto expire shows to display, defaults to 10.
+
+=ietm B<--recording-in-warn>
+
+If the "Next Recording In" time is less than this amount, display it
+in red.  This in seconds, and defaults to 3600 (1 hour).
 
 =item B<--verbose>
 
