@@ -35,6 +35,8 @@ my $guide_days_warn = 2;   # How many days we require.
 my $auto_expire_count = 10; # How many auto expire shows to display.
 my $recording_in_warn = 60 * 60; # When is the next recording considered critical? (seconds)
 
+my $return_code_only = 0;
+
 my $VERSION = '0.7.4';
 
 # Some display blocks are disabled by default:
@@ -67,6 +69,8 @@ GetOptions(
   'guide-data!'           => \$display{'Guide Data'},
   'auto-expire!'          => \$display{'Shows due to Auto Expire'},
 
+  'return-code-only'      => \$return_code_only,
+
   'file=s'                => \$xml_file,
 
   'verbose' => \$verbose,
@@ -98,6 +102,9 @@ if (defined $colour && scalar(@email) == 0) {
   $warning = "\033[1;31m";
   $normal  = "\033[0m";
 }
+
+# Is a warning present?
+my $warn_present = 0;
 
 # Allow setting some defaults for the output blocks.
 my %defaults = (
@@ -156,11 +163,12 @@ my @blocks = (
     'template' => "__hostname__ (__id__) - __state____connected__",
     'rewrite' => {
       '/connected/' => { '1' => '', '0' => ' (Disconnected)' },
-      '/state/' =>{ '^0$' => "${safe}Idle${normal}",
-                  '^1$' => "${warning}Watching LiveTV${normal}",
-                  '^2$' => "${warning}Watching Pre-recorded${normal}",
-      '^3$' => "${warning}Watching Recording${normal}",
-      '^4$' => "${warning}Recording${normal}" },
+      '/state/' => {
+	 '^0$' => "${safe}Idle${normal}",
+         '^1$' => "${warning}Watching LiveTV${normal}",
+         '^2$' => "${warning}Watching Pre-recorded${normal}",
+         '^3$' => "${warning}Watching Recording${normal}",
+         '^4$' => "${warning}Recording${normal}" },
     }
   },
 
@@ -176,7 +184,7 @@ my @blocks = (
       '/endTime/' => { '.*T' => '' },
      },
      'subs' => {
-       'find_next' => sub { $next_time = 'now' }
+       'find_next' => sub { $warn_present ||= 1; $next_time = 'now' }
      }
   },
 
@@ -189,9 +197,9 @@ my @blocks = (
     'hide'  => 'after',
     'subs' => {
       'find_next' => sub {
-   my $vars = shift;
+         my $vars = shift;
          return
-     if defined $next_time && $next_time eq 'now';
+           if defined $next_time && $next_time eq 'now';
 
          my $date = ParseDate($vars->{'startTime'});
 	 if ($next_time eq 'Never' || Date_Cmp($date, $next_time) < 0) {
@@ -320,6 +328,7 @@ my @blocks = (
         $str =~ s/ 0 Minutes//;
 
 	if ($seconds <= $recording_in_warn) {
+	  $warn_present ||= 1;
           $str = "$warning$str$normal";
 	}
 
@@ -348,6 +357,7 @@ my @blocks = (
 	  return
 	    (defined $display{'Guide Data'} && ! $display{'Guide Data'}) || 1;
         } else {
+	  $warn_present ||= 1;
           push @alerts, "GUIDE DATA";
           return 0;
         }
@@ -356,6 +366,7 @@ my @blocks = (
     'rewrite'  => {
       '&guideDays' => sub {
         if ($_[0] <= $guide_days_warn) {
+	  $warn_present ||= 1;
           return "$warning$_[0]$normal";
 	} else {
           return "$safe$_[0]$normal";
@@ -364,6 +375,7 @@ my @blocks = (
       '/guideThru/' => { 'T\d+:\d+:\d+' => ' ' },
       '&guideThru' => sub {
         if ($_[1]->{'guideDays'} <= $guide_days_warn) {
+	  $warn_present ||= 1;
           return "$warning$_[0]$normal";
 	} else {
           return "$safe$_[0]$normal";
@@ -387,16 +399,31 @@ my @blocks = (
 our $today    = substr(ParseDate('today'), 0, 8);
 our $tomorrow = substr(ParseDate('tomorrow'), 0, 8);
 
+# If we're in return code only mode then we disable all blocks
+# except for those explicitly enabled.
+if ($return_code_only) {
+  warn "In return-code-only mode, disabling all blocks by default.\n"
+    if $verbose;
+
+  for my $block (@blocks) {
+    $display{ $block->{'name'} } ||= 0;
+  }
+}
+
 # A couple of global variables
 my ($xml, $myth);
 my %version;
 
+my $exit_value = 0;
 my $title =  "MythTV status for $host";
 my $output = "$title\n";
 $output .= '=' x length($title) . "\n";
 
 for my $block (@blocks) {
   $block->{'format'} ||= 'multi line';
+
+  warn "Considering: $block->{'name'}\n"
+    if $verbose;
 
   my $hide = undef;
   if (defined $display{ $block->{'name'} }
@@ -408,6 +435,9 @@ for my $block (@blocks) {
     }
   }
 
+  warn "  Going to process: $block->{'name'}\n"
+    if $verbose;
+
   # We might need to set some defaults.
   if (defined $block->{'defaults'}) {
     for my $field (keys %{ $defaults{ $block->{'defaults'} } }) {
@@ -416,6 +446,7 @@ for my $block (@blocks) {
   }
 
   my $result = undef;
+  $warn_present = 0;
   if ($block->{'type'} eq 'xpath') {
     $xml ||= load_xml();
 
@@ -428,6 +459,8 @@ for my $block (@blocks) {
   }
 
   if (defined $result && $result ne '' && ! defined $hide) {
+    $exit_value ||= $warn_present;
+
     if ($block->{'format'} eq 'one line') {
       push @oneliners, [ $block->{'name'}, $result ];
     } else {
@@ -459,7 +492,9 @@ if (scalar(@oneliners) > 0) {
 }
 
 # Either print the status out, or email it.
-if (scalar(@email) == 0) {
+if ($return_code_only) {
+  exit $exit_value;
+} elsif (scalar(@email) == 0) {
   print "\n$output";
 } else {
   if ((! $email_only_on_alert) ||
@@ -481,7 +516,7 @@ if (scalar(@email) == 0) {
   }
 }
 
-exit 0;
+exit $exit_value;
 
 # Fetch the XML status from the backend.
 sub load_xml {
@@ -524,6 +559,9 @@ sub load_xml {
   $version{'xml'}      = @{ $items }[0]->getAttribute('xmlVer') || 0;
   $version{'protocol'} = @{ $items }[0]->getAttribute('protoVer');
 
+  warn "Loaded XML from $host\n"
+    if $verbose;
+
   return $xml;
 }
 
@@ -541,8 +579,14 @@ sub load_perl_api {
     local($SIG{__WARN__}) = sub { if ($verbose) { print shift } };
     eval { $myth = new MythTV() };
 
-    print $@
-      if $@ && $verbose;
+    if ($@) {
+      if ($verbose) {
+	warn "Failed to load Perl API\n";
+        print $@;
+      }
+    } elsif ($verbose) {
+      warn "Loaded Perl API\n";
+    }
   }
 
   return $myth;
@@ -777,6 +821,7 @@ sub calc_disk_space_percentage {
     $used / $total * 100);
 
   if ($percent >= $disk_space_warn) {
+    $exit_value ||= 1;
     push @alerts, "DISK SPACE";
     return "$warning$percent\%$normal";
   } else {
@@ -890,7 +935,7 @@ Display the shows due to auto expire (output is normally suppressed).
 
 How many of the auto expire shows to display, defaults to 10.
 
-=ietm B<--recording-in-warn>
+=item B<--recording-in-warn>
 
 If the "Next Recording In" time is less than this amount, display it
 in red.  This in seconds, and defaults to 3600 (1 hour).
@@ -959,6 +1004,22 @@ the next recording is displayed.
 Details about each storage group that MythTV knows about.  By default this
 only shows storage groups that are above the warning level.  Use
 B<--disk-space> to turn on display of all storage groups.
+
+=back
+
+=head1 RETURN CODES
+
+mythtv-status provides some return codes.
+
+=over
+
+=item 0
+
+Standard return code
+
+=item 1
+
+A warning is generated
 
 =back
 
