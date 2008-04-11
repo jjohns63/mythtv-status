@@ -31,3 +31,10 @@ Public License can be found in `/usr/share/common-licenses/GPL-2'.
 
 The Debian packaging is (C) 2007, Andrew Ruthven <andrew@etc.gen.nz> and
 is licensed under the GPL, see above.
+
+Files: *
+Copyright: (C) 2008  .nz Registry Services
+License: GPL-3
+Files debian/*
+Copright: (C) 2008  Andrew Ruthven <puck@catalyst.net.nz>
+License: GPL-2+
