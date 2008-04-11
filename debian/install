@@ -1,1 +1,3 @@
 bin/mythtv-status usr/bin
+bin/mythtv_recording_now usr/bin
+bin/mythtv_recording_soon usr/bin
