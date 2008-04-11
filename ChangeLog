@@ -1,3 +1,10 @@
+2008-04-11	Andrew Ruthven
+	Provide helper scripts that'll return true if the MythTV backend
+	is:
+	 * recording a show now, 
+	 * will be recording one within the next hour (or is currently
+	   recording)
+
 2008-03-11	Andrew Ruthven
 	Be less stressed about the XML protocol, let XPath matching do
 	the validation for us.
