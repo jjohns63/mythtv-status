@@ -38,7 +38,7 @@ binary-indep: install
 # Make sure we start after mythtv-backend
 	dh_installinit -- defaults 51
 	dh_installcron
-	dh_installman debian/mythtv-status.1
+	dh_installman debian/mythtv-status.1 man/*
 	dh_compress
 	dh_fixperms
 	dh_perl

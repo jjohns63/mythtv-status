@@ -1,0 +1,51 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH MYTHTV-RECORDING-SOON 1 "2008-04-19"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+mythtv_recording_soon \- test whether a MythTV backend will be recording soon
+.SH SYNOPSIS
+.B mythtv_recording_soon
+[
+.I time in seconds
+]
+.SH DESCRIPTION
+.B mythtv_recording_soon
+checks to see if a MythTV backend is currently recording, or will be recording
+soon.  It checks the host which is configured in 
+.I /etc/default/mythtv-status
+with the HOST setting.
+.PP
+.I time in seconds
+is how long "soon" is considered to be.  It defaults to 600 (10 minutes).
+.SH OPTIONS
+None
+.SH "EXIT STATUS"
+.TP
+.B 0
+MythTV backend is recording now, or will be recording soon
+.TP
+.B 1
+MythTV backend is not recording now and won't be recording soon
+.SH FILES
+.B /etc/default/mythtv-status
+Config file
+.SH SEE ALSO
+.BR mythtv-status (1),
+.BR mythtv_recording_now (1).
+.SH AUTHOR
+mythtv_recording_soon and this manpage were written by Andrew Ruthven
+<andrew@etc.gen.nz>.
