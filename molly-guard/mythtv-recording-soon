@@ -3,7 +3,7 @@
 ME=molly-guard
 
 if [ ! -f /usr/bin/mythtv_recording_soon ]; then
-  echo "I: I can't find /usr/bin/mythtv_recording_soon, skipping check"
+  echo "I: I can't find /usr/bin/mythtv_recording_soon, skipping check" >&2
   exit 0;
 fi
 
@@ -11,14 +11,14 @@ HOSTNAME="$(hostname --short)"
 
 sigh()
 {
-  echo "Good thing I asked; I won't $CMD $HOSTNAME ..."
+  echo "Good thing I asked; I won't $MOLLYGUARD_CMD $HOSTNAME ..." >&2
   exit 1
 }
 
 
 if /usr/bin/mythtv_recording_soon; then
   trap 'echo;sigh' 1 2 3 9 10 12 15
-  echo -n "MythTV is either recording now, or will be soon. Type YES to $CMD: "
+  echo -n "MythTV is either recording now, or will be soon. Type YES to $MOLLYGUARD_CMD: "
   read CONFIRM || :
 
   [ $(echo "x$CONFIRM" | tr 'A-Z' 'a-z') = "xyes" ] || sigh
