@@ -15,8 +15,15 @@ then
   . /etc/default/mythtv-status
 fi
 
+if [ "x$1" -ne "x" ]
+then
+  ARGS="--recording-in-warn $1"
+else
+  ARGS="--recording-in-warn 600"
+fi
+
 /usr/bin/mythtv-status -h ${HOST:=localhost} --return-code-only \
-  --recording-now --next-recording
+  --recording-now --next-recording $ARGS
 
 if [ $? -eq 1 ]
 then
