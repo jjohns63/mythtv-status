@@ -15,7 +15,7 @@ then
   . /etc/default/mythtv-status
 fi
 
-if [ "x$1" -ne "x" ]
+if [ "x$1" != "x" ]
 then
   ARGS="--recording-in-warn $1"
 else
