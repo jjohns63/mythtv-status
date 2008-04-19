@@ -1,3 +1,4 @@
 bin/mythtv-status usr/bin
 bin/mythtv_recording_now usr/bin
 bin/mythtv_recording_soon usr/bin
+molly-guard/mythtv-recording-soon usr/share/molly-guard/checks.d/40-mythtv-recording-now

@@ -1,3 +1,6 @@
+2008-04-19	Andrew Ruthven
+	Add a molly-guard check
+
 2008-04-11	Andrew Ruthven
 	Provide helper scripts that'll return true if the MythTV backend
 	is:
