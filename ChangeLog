@@ -1,3 +1,6 @@
+2008-05-23	Andrew Ruthven
+	Add a timeout for the HTTP request to the backend.
+
 2008-04-19	Andrew Ruthven
 	Add a molly-guard check
 

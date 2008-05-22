@@ -531,7 +531,15 @@ sub load_xml {
     close IN;
   } else {
     my $url = "http://$host:$port/xml";
-    $status = get($url);
+    eval {
+      local $SIG{ALRM} = sub { die "alarm\n" };
+      alarm(15);
+      $status = get($url);
+      alarm(0);
+    };
+
+    die "Sorry, failed to fetch $url: Connection to MythTV timed out.\n"
+      if $@;
 
     die "Sorry, failed to fetch $url.\n"
       unless defined $status;
