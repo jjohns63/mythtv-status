@@ -1,0 +1,298 @@
+<!DOCTYPE Status>
+<Status version="0.21.20071119-1" protoVer="36" time="4:36 PM"  
+date="Tue Nov 27 2007" >
+  <Encoders count="5" >
+   <Encoder local="0" connected="1" id="1" state="0" hostname="Myth-Livingroom" />
+   <Encoder local="0" connected="1" id="2" state="0" hostname="Myth-Livingroom" />
+   <Encoder local="1" connected="1" id="3" state="0" hostname="slave" />
+   <Encoder local="0" connected="1" id="4" state="0" hostname="Myth-Livingroom" />
+   <Encoder local="0" connected="1" id="5" state="0" hostname="Myth-Livingroom" />
+  </Encoders>
+  <Scheduled count="10" >
+   <Program programFlags="0" title="Modern Marvels"  
+programId="EP001031150620" catType="series" category="Documentary"  
+seriesId="EP00103115" endTime="2007-11-27T18:00:00"  
+airdate="2007-11-27" lastModified="2007-11-27T16:12:52" subTitle="The  
+Pig" stars="0" repeat="0" fileSize="0" startTime="2007-11-27T17:00:00"  
+hostname="Myth-Livingroom" >Some say pigs are as smart as 3-year-old  
+humans; turning pigs into bacon, ham, ribs and sausage; boar semen  
+collection; the use of pig organs in medicine.<Channel chanFilters=""  
+channelName="The History Channel" chanNum="269" sourceId="1"  
+commFree="0" inputId="5" chanId="1269" callSign="HISTORY" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="1" recEndTs="2007-11-27T18:00:00" recStatus="-1"  
+recordId="1858" recProfile="Default" recType="4" playGroup="Default"  
+recPriority="-4" recStartTs="2007-11-27T17:00:00" />
+   </Program>
+   <Program programFlags="0" title="ABC 7 News at 5PM"  
+programId="SH003304040000" catType="series" category="News"  
+seriesId="EP00330404" endTime="2007-11-27T17:30:00"  
+airdate="1999-08-31" lastModified="2007-11-27T16:12:52" subTitle=""  
+stars="0" repeat="1" fileSize="0" startTime="2007-11-27T17:00:00"  
+hostname="Myth-Livingroom" ><Channel chanFilters="" channelName="KGO- 
+DT " chanNum="7.1" sourceId="4" commFree="0" inputId="8" chanId="4071"  
+callSign="KGO-DT " />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="4" recEndTs="2007-11-27T17:30:00" recStatus="-1"  
+recordId="562" recProfile="Default" recType="3" playGroup="Default"  
+recPriority="15" recStartTs="2007-11-27T17:00:00" />
+   </Program>
+   <Program programFlags="0" title="NBC Nightly News"  
+programId="SH000030610000" catType="series" category="News"  
+seriesId="EP00003061" endTime="2007-11-27T18:00:00"  
+airdate="1970-08-03" lastModified="2007-11-27T16:12:52" subTitle=""  
+stars="0" repeat="1" fileSize="0" startTime="2007-11-27T17:30:00"  
+hostname="Myth-Livingroom" >The latest world and national  
+news.<Channel chanFilters="" channelName="KNTV-HD" chanNum="11.1"  
+sourceId="2" commFree="0" inputId="2" chanId="2111" callSign="KNTV- 
+HD" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="2" recEndTs="2007-11-27T18:00:00" recStatus="-1"  
+recordId="568" recProfile="Default" recType="2" playGroup="Default"  
+recPriority="11" recStartTs="2007-11-27T17:30:00" />
+   </Program>
+   <Program programFlags="0" title="Family Guy"  
+programId="EP002960010032" catType="series" category="Animated"  
+seriesId="EP00296001" endTime="2007-11-27T18:00:00"  
+airdate="2001-07-11" lastModified="2007-11-27T16:12:52" subTitle="The  
+Thin White Line" stars="0" repeat="1" fileSize="0"  
+startTime="2007-11-27T17:30:00" hostname="slave" >Brian's keen sense  
+of smell gets him a job with the police department.<Channel  
+chanFilters="" channelName="Turner Broadcasting System" chanNum="247"  
+sourceId="1" commFree="0" inputId="3" chanId="1247" callSign="TBS" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="3" recEndTs="2007-11-27T18:00:00" recStatus="-1"  
+recordId="1014" recProfile="Default" recType="4" playGroup="Default"  
+recPriority="-20" recStartTs="2007-11-27T17:30:00" />
+   </Program>
+   <Program programFlags="0" title="CBS Evening News With Katie  
+Couric" programId="SH008618890000" catType="series" category="News"  
+seriesId="EP00861889" endTime="2007-11-27T18:00:00"  
+airdate="2006-09-05" lastModified="2007-11-27T16:12:52" subTitle=""  
+stars="0" repeat="1" fileSize="0" startTime="2007-11-27T17:30:00"  
+hostname="Myth-Livingroom" >The latest world and national  
+news.<Channel chanFilters="" channelName="KPIX-HD" chanNum="5.1"  
+sourceId="4" commFree="0" inputId="8" chanId="4051" callSign="KPIX- 
+HD" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="4" recEndTs="2007-11-27T18:00:00" recStatus="-1"  
+recordId="1843" recProfile="Default" recType="3" playGroup="Default"  
+recPriority="6" recStartTs="2007-11-27T17:30:00" />
+   </Program>
+   <Program programFlags="0" title="NBC11 News: The Bay Area at 6"  
+programId="SH005368940000" catType="series" category="News"  
+seriesId="EP00536894" endTime="2007-11-27T19:00:00"  
+airdate="2002-09-23" lastModified="2007-11-27T16:12:52" subTitle=""  
+stars="0" repeat="1" fileSize="0" startTime="2007-11-27T18:00:00"  
+hostname="Myth-Livingroom" ><Channel chanFilters="" channelName="KNTV- 
+HD" chanNum="11.1" sourceId="2" commFree="0" inputId="9" chanId="2111"  
+callSign="KNTV-HD" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="5" recEndTs="2007-11-27T19:00:00" recStatus="-1"  
+recordId="1846" recProfile="Default" recType="3" playGroup="Default"  
+recPriority="6" recStartTs="2007-11-27T18:00:00" />
+   </Program>
+   <Program programFlags="0" title="CBS 5 Eyewitness News at 6PM"  
+programId="SH007563220000" catType="series" category="News"  
+seriesId="EP00756322" endTime="2007-11-27T19:00:00"  
+airdate="2005-06-27" lastModified="2007-11-27T16:12:52" subTitle=""  
+stars="0" repeat="1" fileSize="0" startTime="2007-11-27T18:00:00"  
+hostname="Myth-Livingroom" ><Channel chanFilters="" channelName="KPIX- 
+HD" chanNum="5.1" sourceId="2" commFree="0" inputId="2" chanId="2051"  
+callSign="KPIX-HD" />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="2" recEndTs="2007-11-27T19:00:00" recStatus="-1"  
+recordId="1844" recProfile="Default" recType="3" playGroup="Default"  
+recPriority="7" recStartTs="2007-11-27T18:00:00" />
+   </Program>
+   <Program programFlags="0" title="ABC 7 News at 6PM"  
+programId="SH003304060000" catType="series" category="News"  
+seriesId="EP00330406" endTime="2007-11-27T19:00:00"  
+airdate="1999-08-31" lastModified="2007-11-27T16:12:52" subTitle=""  
+stars="0" repeat="1" fileSize="0" startTime="2007-11-27T18:00:00"  
+hostname="Myth-Livingroom" ><Channel chanFilters="" channelName="KGO- 
+DT " chanNum="7.1" sourceId="4" commFree="0" inputId="8" chanId="4071"  
+callSign="KGO-DT " />
+    <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="4" recEndTs="2007-11-27T19:00:00" recStatus="-1"  
+recordId="1845" recProfile="Default" recType="3" playGroup="Default"  
+recPriority="10" recStartTs="2007-11-27T18:00:00" />
+   </Program>
+   <Program programFlags="0" title="South Park"  
+programId="EP002298270083" catType="series" category="Sitcom"  
+seriesId="EP00229827" endTime="2007-11-27T19:00:00"  
+airdate="2001-11-28" lastModified="2007-11-27T16:12:52" subTitle="Here  
+Comes the Neighborhood" stars="0" repeat="1" fileSize="0"  
+startTime="2007-11-27T18:30:00" hostname="Myth-Livingroom" >Wealthy  
+people invade the humble town of South Park.<Channel chanFilters=""  
+channelName="Comedy Central" chanNum="249" sourceId="1" commFree="0"  
+inputId="5" chanId="1249" callSign="COMEDY" />
+    <Recording dupInType="15" dupMethod="6" recGroup="TV-14"  
+encoderId="1" recEndTs="2007-11-27T19:00:00" recStatus="-1"  
+recordId="67" recProfile="Default" recType="4" playGroup="Default"  
+recPriority="-9" recStartTs="2007-11-27T18:30:00" />
+   </Program>
+   <Program programFlags="0" title="The Hustler"  
+programId="MV000086880000" catType="movie" category="Drama"  
+seriesId="" endTime="2007-11-27T21:45:00"  
+lastModified="2007-11-27T16:12:52" subTitle="" stars="0.875"  
+repeat="0" fileSize="0" startTime="2007-11-27T19:15:00"  
+hostname="slave" >A gambler (George C. Scott) stakes pool shark  
+&quot;Fast Eddie&quot; Felson (Paul Newman) in a smoke-filled marathon  
+against Minnesota Fats (Jackie Gleason).<Channel chanFilters=""  
+channelName="Turner Classic Movies" chanNum="256" sourceId="1"  
+commFree="0" inputId="3" chanId="1256" callSign="TCM" />
+    <Recording dupInType="15" dupMethod="6" recGroup="TVWish"  
+encoderId="3" recEndTs="2007-11-27T21:45:00" recStatus="-1"  
+recordId="1653" recProfile="Default" recType="6" playGroup="Default"  
+recPriority="-2" recStartTs="2007-11-27T19:15:00" />
+   </Program>
+  </Scheduled>
+  <JobQueue count="7" >
+   <Job schedTime="2007-11-03T23:31:19" status="1" flags="0" cmds="0"  
+type="256" chanId="1537" args="" id="15105"  
+insertTime="2007-11-03T23:31:19" statusTime="2007-11-03T23:31:19"  
+startTime="2007-11-03T23:00:00" hostname="slave"  
+startTs="20071103230000" ><Program programFlags="2068" title="Penn  
+&amp; Teller: Bulls...!" programId="EP005478180052" catType=""  
+category="" seriesId="EP00547818" endTime="2007-11-03T23:30:00"  
+airdate="2005-07-04" lastModified="2007-11-04T13:08:58"  
+subTitle="Signs From Heaven" stars="0" repeat="1" fileSize="943996442"  
+startTime="2007-11-03T23:00:00" hostname="slave" >Bogus miracles and  
+duping gullible believers.<Channel chanFilters=""  
+channelName="Showtime" chanNum="537" sourceId="0" commFree="1"  
+inputId="0" chanId="1537" callSign="SHOW" />
+     <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="0" recEndTs="2007-11-03T23:31:00" recStatus="-3"  
+recordId="423" recProfile="Default" recType="0" playGroup="Default"  
+recPriority="0" recStartTs="2007-11-03T23:00:00" />
+    </Program>
+   </Job>
+   <Job schedTime="2007-11-27T13:00:03" status="272" flags="2"  
+cmds="0" type="2" chanId="1245" args="" id="15915"  
+insertTime="2007-11-27T13:00:03" statusTime="2007-11-27T14:00:12"  
+startTime="2007-11-27T13:00:00" hostname="Myth-Livingroom"  
+startTs="20071127130000" >4 commercial break(s)<Program  
+programFlags="5" title="Charmed" programId="EP002741720020" catType=""  
+category="" seriesId="EP00274172" endTime="2007-11-27T14:00:00"  
+airdate="1999-05-12" lastModified="2007-11-27T14:50:15" subTitle="The  
+Power of Two" stars="0" repeat="1" fileSize="2089176171"  
+startTime="2007-11-27T13:00:00" hostname="Myth-Livingroom" >On a visit  
+to Alcatraz, Phoebe sees the ghost of a serial killer escape from the  
+island to exact revenge on those responsible for his trip to the gas  
+chamber.<Channel chanFilters="" channelName="Turner Network TV"  
+chanNum="245" sourceId="0" commFree="0" inputId="0" chanId="1245"  
+callSign="TNT" />
+     <Recording dupInType="15" dupMethod="6" recGroup="Deleted"  
+encoderId="0" recEndTs="2007-11-27T14:00:00" recStatus="-3"  
+recordId="1640" recProfile="Default" recType="0" playGroup="Default"  
+recPriority="0" recStartTs="2007-11-27T13:00:00" />
+    </Program>
+   </Job>
+   <Job schedTime="2007-11-27T14:00:02" status="272" flags="0"  
+cmds="0" type="1" chanId="1245" args="RENAME_TO_NUV" id="15916"  
+insertTime="2007-11-27T14:00:02" statusTime="2007-11-27T14:50:15"  
+startTime="2007-11-27T13:00:00" hostname="Myth-Livingroom"  
+startTs="20071127130000" >Autodetect: 3.2 GB => 1.9 GB<Program  
+programFlags="5" title="Charmed" programId="EP002741720020" catType=""  
+category="" seriesId="EP00274172" endTime="2007-11-27T14:00:00"  
+airdate="1999-05-12" lastModified="2007-11-27T14:50:15" subTitle="The  
+Power of Two" stars="0" repeat="1" fileSize="2089176171"  
+startTime="2007-11-27T13:00:00" hostname="Myth-Livingroom" >On a visit  
+to Alcatraz, Phoebe sees the ghost of a serial killer escape from the  
+island to exact revenge on those responsible for his trip to the gas  
+chamber.<Channel chanFilters="" channelName="Turner Network TV"  
+chanNum="245" sourceId="0" commFree="0" inputId="0" chanId="1245"  
+callSign="TNT" />
+     <Recording dupInType="15" dupMethod="6" recGroup="Deleted"  
+encoderId="0" recEndTs="2007-11-27T14:00:00" recStatus="-3"  
+recordId="1640" recProfile="Default" recType="0" playGroup="Default"  
+recPriority="0" recStartTs="2007-11-27T13:00:00" />
+    </Program>
+   </Job>
+   <Job schedTime="2007-11-27T14:00:04" status="272" flags="2"  
+cmds="0" type="2" chanId="1245" args="" id="15917"  
+insertTime="2007-11-27T14:00:04" statusTime="2007-11-27T15:00:41"  
+startTime="2007-11-27T14:00:00" hostname="Myth-Livingroom"  
+startTs="20071127140000" >5 commercial break(s)<Program  
+programFlags="5" title="Charmed" programId="EP002741720021" catType=""  
+category="" seriesId="EP00274172" endTime="2007-11-27T15:00:00"  
+airdate="1999-05-19" lastModified="2007-11-27T16:02:10" subTitle="Love  
+Hurts" stars="0" repeat="1" fileSize="2095315892"  
+startTime="2007-11-27T14:00:00" hostname="Myth-Livingroom" >Piper  
+switches powers with Leo (Brian Krause) to try to save his life, but  
+her spell changes her sisters' powers too.<Channel chanFilters=""  
+channelName="Turner Network TV" chanNum="245" sourceId="0"  
+commFree="0" inputId="0" chanId="1245" callSign="TNT" />
+     <Recording dupInType="15" dupMethod="6" recGroup="Deleted"  
+encoderId="0" recEndTs="2007-11-27T15:00:00" recStatus="-3"  
+recordId="1640" recProfile="Default" recType="0" playGroup="Default"  
+recPriority="0" recStartTs="2007-11-27T14:00:00" />
+    </Program>
+   </Job>
+   <Job schedTime="2007-11-27T15:00:02" status="272" flags="0"  
+cmds="0" type="1" chanId="1245" args="RENAME_TO_NUV" id="15918"  
+insertTime="2007-11-27T15:00:02" statusTime="2007-11-27T16:02:10"  
+startTime="2007-11-27T14:00:00" hostname="Myth-Livingroom"  
+startTs="20071127140000" >Autodetect: 3.2 GB => 2.0 GB<Program  
+programFlags="5" title="Charmed" programId="EP002741720021" catType=""  
+category="" seriesId="EP00274172" endTime="2007-11-27T15:00:00"  
+airdate="1999-05-19" lastModified="2007-11-27T16:02:10" subTitle="Love  
+Hurts" stars="0" repeat="1" fileSize="2095315892"  
+startTime="2007-11-27T14:00:00" hostname="Myth-Livingroom" >Piper  
+switches powers with Leo (Brian Krause) to try to save his life, but  
+her spell changes her sisters' powers too.<Channel chanFilters=""  
+channelName="Turner Network TV" chanNum="245" sourceId="0"  
+commFree="0" inputId="0" chanId="1245" callSign="TNT" />
+     <Recording dupInType="15" dupMethod="6" recGroup="Deleted"  
+encoderId="0" recEndTs="2007-11-27T15:00:00" recStatus="-3"  
+recordId="1640" recProfile="Default" recType="0" playGroup="Default"  
+recPriority="0" recStartTs="2007-11-27T14:00:00" />
+    </Program>
+   </Job>
+   <Job schedTime="2007-11-27T15:00:04" status="272" flags="2"  
+cmds="0" type="2" chanId="1309" args="" id="15919"  
+insertTime="2007-11-27T15:00:04" statusTime="2007-11-27T16:11:25"  
+startTime="2007-11-27T15:00:00" hostname="Myth-Livingroom"  
+startTs="20071127150000" >3 commercial break(s)<Program  
+programFlags="5" title="Lingo" programId="SH000026250000" catType=""  
+category="" seriesId="EP00002625" endTime="2007-11-27T15:30:00"  
+lastModified="2007-11-27T16:11:55" subTitle="" stars="0" repeat="0"  
+fileSize="1790025728" startTime="2007-11-27T15:00:00" hostname="Myth- 
+Livingroom" >Teams try to guess five-letter words.<Channel  
+chanFilters="" channelName="GSN" chanNum="309" sourceId="0"  
+commFree="0" inputId="0" chanId="1309" callSign="GSN" />
+     <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="0" recEndTs="2007-11-27T15:31:00" recStatus="-3"  
+recordId="107" recProfile="Default" recType="0" playGroup="Default"  
+recPriority="-10" recStartTs="2007-11-27T15:00:00" />
+    </Program>
+   </Job>
+   <Job schedTime="2007-11-27T15:31:00" status="4" flags="0" cmds="0"  
+type="1" chanId="1309" args="" id="15920"  
+insertTime="2007-11-27T15:31:00" statusTime="2007-11-27T16:36:40"  
+startTime="2007-11-27T15:00:00" hostname="Myth-Livingroom"  
+startTs="20071127150000" >71% Completed @ 26.6586 fps.<Program  
+programFlags="5" title="Lingo" programId="SH000026250000" catType=""  
+category="" seriesId="EP00002625" endTime="2007-11-27T15:30:00"  
+lastModified="2007-11-27T16:11:55" subTitle="" stars="0" repeat="0"  
+fileSize="1790025728" startTime="2007-11-27T15:00:00" hostname="Myth- 
+Livingroom" >Teams try to guess five-letter words.<Channel  
+chanFilters="" channelName="GSN" chanNum="309" sourceId="0"  
+commFree="0" inputId="0" chanId="1309" callSign="GSN" />
+     <Recording dupInType="15" dupMethod="6" recGroup="Default"  
+encoderId="0" recEndTs="2007-11-27T15:31:00" recStatus="-3"  
+recordId="107" recProfile="Default" recType="0" playGroup="Default"  
+recPriority="-10" recStartTs="2007-11-27T15:00:00" />
+    </Program>
+   </Job>
+  </JobQueue>
+  <MachineInfo>
+  <Storage drive_1_used="3625" drive_1_dirs="mythtv2:/mythtv-br/tv" 
+  fsids="1" drive_1_total="37137" drive_1_free="33511"/>
+  <Load avg1="0.53" avg2="0.28" avg3="0.33"/>
+  <Guide guideDays="14" status="Successful." end="2008-05-27 03:27" 
+  guideThru="2008-06-10T03:00:00" start="2008-05-27 03:27">Your 
+  subscription expires on 06/19/08 22:36:41</Guide>
+  </MachineInfo>
+</Status>

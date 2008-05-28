@@ -1,3 +1,8 @@
+2008-05-28	Andrew Ruthven
+	It turns out that secondary backends don't return total diskspace,
+	handle that in a nicer manner.  Thank you Steve Gunther for letting
+	me know.
+
 2008-05-23	Andrew Ruthven
 	Add a timeout for the HTTP request to the backend.
 

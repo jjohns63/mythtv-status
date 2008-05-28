@@ -37,7 +37,7 @@ my $recording_in_warn = 60 * 60; # When is the next recording considered critica
 
 my $return_code_only = 0;
 
-my $VERSION = '0.7.4';
+my $VERSION = '0.7.5';
 
 # Some display blocks are disabled by default:
 $display{'Shows due to Auto Expire'} = 0;
@@ -241,6 +241,7 @@ my @blocks = (
     'commify' => [ qw/_total_total _total_used/ ],
     'template' => "Total space is ___total_total__ MB, with ___total_used__ MB used (__percent__)",
     'format' => 'one line',
+    'optional' => 1,
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'_total_used'}, $_[0]->{'_total_total'})
@@ -259,6 +260,7 @@ my @blocks = (
     'commify' => [ qw/drive_total_total drive_total_used/ ],
     'template' => "Total space is __drive_total_total__ MB, with __drive_total_used__ MB used (__percent__)",
     'format' => 'one line',
+    'optional' => 1,
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'drive_total_used'}, $_[0]->{'drive_total_total'})
@@ -276,6 +278,7 @@ my @blocks = (
     'commify' => [ qw/total used/ ],
     'template' => "Total space is __total__ MB, with __used__ MB used (__percent__)",
     'format' => 'one line',
+    'optional' => 1,
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'used'}, $_[0]->{'total'})
@@ -421,6 +424,7 @@ $output .= '=' x length($title) . "\n";
 
 for my $block (@blocks) {
   $block->{'format'} ||= 'multi line';
+  $block->{'optional'} ||= 0;
 
   warn "Considering: $block->{'name'}\n"
     if $verbose;
@@ -772,8 +776,14 @@ sub substitute_vars {
   my ($key, $value);
   while (($key, $value) = (each %{ $vars })) {
     if (! defined $value) {
-      warn "Unable to find any value for $key while looking at $block->{'name'}\n";
-      next;
+      if ($block->{'optional'}) {
+        warn "Unable to find any value for $key while at $block->{'name'}, marked as optional, skipping block.\n"
+	  if $verbose;
+	return undef;
+      } else {
+        warn "Unable to find any value for $key while looking at $block->{'name'}\n";
+        next;
+      }
     }
 
     $value = wrap('  ', '  ', $value)
