@@ -223,12 +223,7 @@ my @blocks = (
     'type' => 'sub',
     'defaults' => 'schedule',
     'sub' => \&process_auto_expire,
-    'filter' => {
-      'startTime' => sub {
-	$auto_expire_count--;
-	return ($auto_expire_count < 0);
-      },
-    },
+    'filter' =>  {},   # Over ride the default filter from 'schedule'.
   },
 
   # Diskspace, before storage groups
@@ -747,7 +742,7 @@ sub process_auto_expire {
     next if $show->{'progflags'} eq 'LiveTV';
 
     my %vars = (
-      'title'     => $show->{'parentid'},
+      'title'     => $show->{'parentid'} || 'Unknown',
       'startTime' => strftime("%FT%T", localtime($show->{'starttime'})),
       'NODE_TEXT' => $show->{'description'},
       'subTitle'  => $show->{'subtitle'},
@@ -759,6 +754,9 @@ sub process_auto_expire {
     my $str = substitute_vars($block, \%vars);
     push @lines, $str
       if defined $str;
+
+    # Don't do more work than is required.
+    last if --$auto_expire_count <= 0;
   }
 
   return join("\n", @lines);
