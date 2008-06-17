@@ -30,7 +30,7 @@ case "$1" in
     db_get $PACKAGE/email
     EMAIL="${RET:-none}"
 
-    EMAIL_ARGS="${EMAIL_ARGS:--email-only-on-alert}"
+    EMAIL_ARGS="${EMAIL_ARGS:---email-only-on-alert}"
 
     cat <<_eof > $DEBIANCONFIG
 # $PACKAGE Debian configuration
@@ -53,6 +53,7 @@ HOST=$HOST
 
 # ARGS:
 #  Any extra arguments to pass to mythtv-status (i.e., -e and/or -d).
+#  This is used by /etc/init.d/mythtv-status script.
 ARGS=$ARGS
 
 # EMAIL:
@@ -63,6 +64,7 @@ EMAIL=$EMAIL
 
 # EMAIL_ARGS:
 #  Command line arguments that are used when sending the daily email.
+#  This is used by /etc/cron.daily/mythtv-status script.
 EMAIL_ARGS=$EMAIL_ARGS
 _eof
 
