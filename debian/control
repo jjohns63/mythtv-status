@@ -10,7 +10,7 @@ Vcs-Browser: http://git.etc.gen.nz/cgi-bin/gitweb.cgi?p=mythtv-status.git;a=summ
 
 Package: mythtv-status
 Architecture: all
-Depends: ${misc:Depends}, ${perl:Depends}, libwww-perl, libxml-libxml-perl, libdate-manip-perl, libmime-perl
+Depends: ${misc:Depends}, ${perl:Depends}, libwww-perl, libxml-libxml-perl, libdate-manip-perl, libmime-tools-perl
 Suggests: libmythtv-perl, molly-guard (>= 0.4)
 Description: Show the status of a MythTV backend
  Shows the current status of a local or remote MythTV backend and up to

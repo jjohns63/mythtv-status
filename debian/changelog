@@ -2,6 +2,7 @@ mythtv-status (0.8.0-1) unstable; urgency=low
 
   * New upstream release.
   * Update Standards-Version to 3.8.0.
+  * Change dependency on libmime-perl to libmime-tools-perl.
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Wed, 18 Jun 2008 12:46:48 +1200
 
