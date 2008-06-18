@@ -532,7 +532,7 @@ sub load_xml {
     my $url = "http://$host:$port/xml";
     eval {
       local $SIG{ALRM} = sub { die "alarm\n" };
-      alarm(15);
+      alarm(30);
       $status = get($url);
       alarm(0);
     };
