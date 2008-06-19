@@ -9,7 +9,7 @@ Upstream Author:
 
 Copyright: 
 
-    Copyright (C) 2007 Andrew Ruthven
+    Copyright (C) 2007-2008 Andrew Ruthven
 
 License:
 
@@ -33,8 +33,8 @@ The Debian packaging is (C) 2007, Andrew Ruthven <andrew@etc.gen.nz> and
 is licensed under the GPL, see above.
 
 Files: *
-Copyright: (C) 2007  Andrew Ruthven <andrew@etc.gen.nz>
+Copyright: (C) 2007-2008  Andrew Ruthven <andrew@etc.gen.nz>
 License: GPL-2
 Files debian/*
-Copright: (C) 2007  Andrew Ruthven <andrew@etc.gen.nz>
+Copright: (C) 2007-2008  Andrew Ruthven <andrew@etc.gen.nz>
 License: GPL-2+
