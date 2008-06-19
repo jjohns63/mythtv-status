@@ -1,3 +1,9 @@
+mythtv-status (0.8.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Thu, 19 Jun 2008 12:26:27 +1200
+
 mythtv-status (0.8.0-2) unstable; urgency=low
 
   * Stop run-parts in the cron.daily script from complaining if mythtv-status
