@@ -6,7 +6,7 @@ sponsor_keyid=19D03486
 
 build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting
 version=$(shell git-tag -l | grep -v ^debian | tail -1)
-deb_version=$(shell git-tag -l | grep ^debian | tail -1 | sed 's/debian-//')
+deb_version=$(shell git-tag -l | grep ^debian-[[:digit:]] | tail -1 | sed 's/debian-//')
 
 deb=$(package)_$(deb_version)_all.deb
 orig_tarball=../$(package)_$(version).orig.tar.gz
@@ -33,6 +33,7 @@ $(tarball):
 	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile|testing)"` | gzip > $(tarball)
 
 build/etch/$(deb): 
+	@echo Building Etch
 	@ssh build-etch-i386 "cd `pwd`; DH_COMPAT=5 $(build) -d"
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
@@ -40,6 +41,7 @@ build/etch/$(deb):
 	@cp ../$(deb) build/etch
 
 build/sid/$(deb): 
+	@echo Building Sid
 	@ssh build-sid-i386 "cd `pwd`; $(build)"
 	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
 	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
