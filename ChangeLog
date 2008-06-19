@@ -1,3 +1,7 @@
+2008-06-19	Andrew Ruthven
+	Just extend the copyright time ranges to include 2008.
+	Release version 0.8.1.
+
 2008-06-18	Andrew Ruthven
 	Modify the auto expire logic to reduce the amount of needless work
 	that is done.  Thank youy Tom Metro for point this out.
