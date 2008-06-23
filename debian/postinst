@@ -54,7 +54,7 @@ HOST=$HOST
 # ARGS:
 #  Any extra arguments to pass to mythtv-status (i.e., -e and/or -d).
 #  This is used by /etc/init.d/mythtv-status script.
-ARGS=$ARGS
+ARGS="$ARGS"
 
 # EMAIL:
 #  A comma separated list of email address to send status emails to.
@@ -65,7 +65,7 @@ EMAIL=$EMAIL
 # EMAIL_ARGS:
 #  Command line arguments that are used when sending the daily email.
 #  This is used by /etc/cron.daily/mythtv-status script.
-EMAIL_ARGS=$EMAIL_ARGS
+EMAIL_ARGS="$EMAIL_ARGS"
 _eof
 
     db_stop
