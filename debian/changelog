@@ -1,3 +1,10 @@
+mythtv-status (0.8.1-2) unstable; urgency=low
+
+  * Make sure that variables in /etc/default/mythtv-status that might
+    have spaces in them are handled correctly in the postinst.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Mon, 23 Jun 2008 14:27:29 +1200
+
 mythtv-status (0.8.1-1) unstable; urgency=low
 
   * New upstream release.
