@@ -13,6 +13,9 @@ case "$1" in
   configure|reconfigure)
     DEBIANCONFIG=/etc/default/$PACKAGE
 
+    # Default to --email-only-on-alert but allow it be unset in the config file.
+    EMAIL_ARGS="---email-only-on-alert"
+
     # load current settings, most of which will be overwritten.
     [ -f $DEBIANCONFIG ] && . $DEBIANCONFIG
 
@@ -30,31 +33,38 @@ case "$1" in
     db_get $PACKAGE/email
     EMAIL="${RET:-none}"
 
-    EMAIL_ARGS="${EMAIL_ARGS:---email-only-on-alert}"
-
     cat <<_eof > $DEBIANCONFIG
 # $PACKAGE Debian configuration
 #
 # You can run 'dpkg-reconfigure $PACKAGE' to modify the values in this
 # file, if you want. You can also change the values here and changes will
-# be preserved.
+# be preserved.  But other changes will not be preserved.
 #
 # Do note that only the values are preserved; the rest of the file is
 # rewritten.
 #
 
+# HOST:
+#  What host should we check the status on?
+HOST=$HOST
+
+########################################################################
+# The following settings are used by /etc/init.d/mythtv-status script  #
+# to update the MOTD.                                                  #
+########################################################################
+
 # RUN:
 #  Should we actually run and update the MOTD?
 RUN=$RUN
 
-# HOST:
-#  What host should be check the status on?
-HOST=$HOST
-
 # ARGS:
 #  Any extra arguments to pass to mythtv-status (i.e., -e and/or -d).
-#  This is used by /etc/init.d/mythtv-status script.
 ARGS="$ARGS"
+
+########################################################################
+# The following settings are used by the /etc/cron.daily/mythtv-status #
+# script when generating the daily status email report.                #
+########################################################################
 
 # EMAIL:
 #  A comma separated list of email address to send status emails to.
@@ -64,7 +74,6 @@ EMAIL=$EMAIL
 
 # EMAIL_ARGS:
 #  Command line arguments that are used when sending the daily email.
-#  This is used by /etc/cron.daily/mythtv-status script.
 EMAIL_ARGS="$EMAIL_ARGS"
 _eof
 

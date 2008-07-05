@@ -9,5 +9,5 @@ fi
 
 /usr/bin/mythtv-status --host $HOST --email $EMAIL $EMAIL_ARGS
 
-# Keep run-parts happy by always return a return code of 0.
+# Keep run-parts happy by always returning with a return code of 0.
 exit 0

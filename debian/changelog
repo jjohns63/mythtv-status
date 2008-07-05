@@ -1,3 +1,13 @@
+mythtv-status (0.8.1-3) unstable; urgency=low
+
+  * A number of small changes to the /etc/default/mythtv-status file
+    to make it clearer which script uses which settings.
+  * Thank you to Tom Metro for the above suggestion.
+  * Fix the handling of EMAIL_ARGS in the postinst to honour it being
+    unset.  Thank you to Tom for reporting the issue.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Sat,  5 Jul 2008 21:15:00 +1200
+
 mythtv-status (0.8.1-2) unstable; urgency=low
 
   * Make sure that variables in /etc/default/mythtv-status that might
