@@ -24,10 +24,10 @@ available at:
 
 Q) I want to see disk space individually for each of my storage groups, how
 can I do this?
-A) If you're using storage groups then you're currently running from SVN,
-so you should be comfortable with what you need to do.  Namely, apply a
-couple of patches to MythTV and recompile.  The patches are known to apply
-against r15127.  If they don't, please let me (andrew@etc.gen.nz) know.
+A) If you're using storage groups then you're currently running 0.21 or newer,
+You will need to, apply a couple of patches to MythTV and recompile.  The
+patches are known to apply against r15127.  If they don't, please let me
+(andrew@etc.gen.nz) know.
 
 Grab the patches from:
   - http://svn.mythtv.org/trac/ticket/4278
