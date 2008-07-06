@@ -1,10 +1,14 @@
+2008-07-06	Andrew Ruthven
+	Fix a couple of minor typos in the arguement passing, and the help
+	screen.  Thank you Mike Holden for reporting these.
+
 2008-06-19	Andrew Ruthven
 	Just extend the copyright time ranges to include 2008.
 	Release version 0.8.1.
 
 2008-06-18	Andrew Ruthven
 	Modify the auto expire logic to reduce the amount of needless work
-	that is done.  Thank youy Tom Metro for point this out.
+	that is done.  Thank you Tom Metro for point this out.
 	Release version 0.8.0.
 
 2008-05-28	Andrew Ruthven

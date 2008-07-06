@@ -44,7 +44,7 @@ $display{'Shows due to Auto Expire'} = 0;
 
 GetOptions(
   'c|colour|color' => \$colour,
-  'd|descripton' => \$description,
+  'd|description' => \$description,
   'e|episode'    => \$episode,
   'encoder-details' => \$encoder_details,
   'h|host=s'     => \$host,
@@ -926,7 +926,7 @@ Display help.
 Load XML from the file specified instead of querying a MythTV backend.
 Handy for debugging things.
 
-=item B<< --guide-data-warn <days> >>
+=item B<< --guide-days-warn <days> >>
 
 Warn if the number of days of guide data present is equal to or below
 this level.  Default is 2 days.
