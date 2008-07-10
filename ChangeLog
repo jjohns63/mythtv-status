@@ -1,3 +1,7 @@
+2008-08-11	Andrew Ruthven
+	Relicense under the GPL v3.
+	Release version 0.9.
+
 2008-07-06	Andrew Ruthven
 	Fix a couple of minor typos in the arguement passing, and the help
 	screen.  Thank you Mike Holden for reporting these.
