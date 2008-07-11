@@ -15,7 +15,7 @@ License:
 
     This package is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; version 2.
+    the Free Software Foundation; version 3.
  
     This package is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -27,14 +27,14 @@ License:
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
 On Debian systems, the complete text of the GNU General
-Public License can be found in `/usr/share/common-licenses/GPL-2'.
+Public License can be found in `/usr/share/common-licenses/GPL-3'.
 
 The Debian packaging is (C) 2007, Andrew Ruthven <andrew@etc.gen.nz> and
 is licensed under the GPL, see above.
 
 Files: *
 Copyright: (C) 2007-2008  Andrew Ruthven <andrew@etc.gen.nz>
-License: GPL-2
+License: GPL-3
 Files debian/*
 Copright: (C) 2007-2008  Andrew Ruthven <andrew@etc.gen.nz>
 License: GPL-2+
