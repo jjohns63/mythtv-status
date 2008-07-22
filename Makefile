@@ -5,7 +5,7 @@ releases=etch sid
 sponsor_keyid=19D03486
 
 build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting
-version=$(shell git-tag -l | grep -v ^debian | tail -1)
+version=$(shell git-tag -l | grep '^[0-9]' | tail -1)
 deb_version=$(shell git-tag -l | grep ^debian-[[:digit:]] | tail -1 | sed 's/debian-//')
 
 deb=$(package)_$(deb_version)_all.deb
