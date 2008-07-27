@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 package=mythtv-status
-releases=etch sid
+releases=sid
 sponsor_keyid=19D03486
 
 build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting
