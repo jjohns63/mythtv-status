@@ -555,7 +555,14 @@ sub load_xml {
 
   clean_xml(\$status);
 
+  # Try and hide any error messages thar XML::LibXML insists on printing out.
+  open my $olderr, ">&STDERR";
+  open(STDERR, "> /dev/null") || die "Can't redirect stderr to /dev/null: $!";
+
   my $xml = eval { $parser->parse_string( $status ) };
+
+  close (STDERR);
+  open (STDERR, ">&$olderr");
 
   if ($@) {
     die "Failed to parse XML: $@\n";
