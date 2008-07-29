@@ -37,7 +37,7 @@ my $recording_in_warn = 60 * 60; # When is the next recording considered critica
 
 my $return_code_only = 0;
 
-my $VERSION = '0.9.0';
+my $VERSION = '0.9.1';
 
 # Some display blocks are disabled by default:
 $display{'Shows due to Auto Expire'} = 0;
