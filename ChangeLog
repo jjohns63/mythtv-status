@@ -1,4 +1,7 @@
-2008-08-11	Andrew Ruthven
+2008-07-30	Andrew Ruthven
+	Suppress the errors from XML::LibXML.
+
+2008-07-11	Andrew Ruthven
 	Relicense under the GPL v3.
 	Release version 0.9.
 
