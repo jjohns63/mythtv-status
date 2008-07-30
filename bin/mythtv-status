@@ -52,7 +52,7 @@ GetOptions(
   'v|version'    => \&print_version,
   'email=s@'     => \@email,
   'email-only-on-conflict|email-only-on-alert|email-only-on-alerts'
-		 => \$email_only_on_alert,
+    => \$email_only_on_alert,
   'disk-space-warn=i'      => \$disk_space_warn,
   'guide-days-warn=i'      => \$guide_days_warn,
   'auto-expire-count=i'    => \$auto_expire_count,
@@ -75,7 +75,7 @@ GetOptions(
 
   'verbose' => \$verbose,
   'help|?' => \$help,
-) || pod2usage("\nUse --help for help.\n");
+  ) || pod2usage("\nUse --help for help.\n");
 
 pod2usage(verbose => 1)
   if defined $help;
@@ -117,25 +117,28 @@ my %defaults = (
       . " (__channelName__)"
       . (defined $description ? "\n__NODE_TEXT__" : ''),
     'filter' =>  {
-       # Only show recordings for today and tomorrow.
-       'startTime' => sub {
-         my $date = substr(ParseDate($_[0]), 0, 8);
-         return ! (($date cmp $today) == 0
+
+      # Only show recordings for today and tomorrow.
+      'startTime' => sub {
+        my $date = substr(ParseDate($_[0]), 0, 8);
+        return ! (($date cmp $today) == 0
           || ($date cmp $tomorrow) == 0) }
-     },
-     'rewrite' => {
-       '/startTime/' => { 'T' => ' ' },
-     }
-   }
-);
+      },
+    'rewrite' => {
+      '/startTime/' => { 'T' => ' ' },
+      }
+    }
+  );
 
 # The time of the next scheduled recording.
 my $next_time = 'Never';
+
 # Are there any alerts that should be notified via email?
 my @alerts = ();
 
 # The blocks of output which we might generate.
 my @blocks = (
+
   # All the one liners together
   {
     'name' => 'One Liners',
@@ -164,12 +167,12 @@ my @blocks = (
     'rewrite' => {
       '/connected/' => { '1' => '', '0' => ' (Disconnected)' },
       '/state/' => {
-	 '^0$' => "${safe}Idle${normal}",
-         '^1$' => "${warning}Watching LiveTV${normal}",
-         '^2$' => "${warning}Watching Pre-recorded${normal}",
-         '^3$' => "${warning}Watching Recording${normal}",
-         '^4$' => "${warning}Recording${normal}" },
-    }
+        '^0$' => "${safe}Idle${normal}",
+        '^1$' => "${warning}Watching LiveTV${normal}",
+        '^2$' => "${warning}Watching Pre-recorded${normal}",
+        '^3$' => "${warning}Watching Recording${normal}",
+        '^4$' => "${warning}Recording${normal}" },
+      }
   },
 
   # What programs (if any) are being recorded right now?
@@ -182,10 +185,10 @@ my @blocks = (
     'template' => "__title__ (__channelName__) Ends: __endTime__",
     'rewrite' => {
       '/endTime/' => { '.*T' => '' },
-     },
-     'subs' => {
-       'find_next' => sub { $warn_present ||= 1; $next_time = 'now' }
-     }
+      },
+    'subs' => {
+      'find_next' => sub { $warn_present ||= 1; $next_time = 'now' }
+      }
   },
 
   # The upcoming recordings.
@@ -197,16 +200,16 @@ my @blocks = (
     'hide'  => 'after',
     'subs' => {
       'find_next' => sub {
-         my $vars = shift;
-         return
-           if defined $next_time && $next_time eq 'now';
+        my $vars = shift;
+        return
+          if defined $next_time && $next_time eq 'now';
 
-         my $date = ParseDate($vars->{'startTime'});
-	 if ($next_time eq 'Never' || Date_Cmp($date, $next_time) < 0) {
-	   $next_time = $date
-	 };
-       }
-     }
+        my $date = ParseDate($vars->{'startTime'});
+        if ($next_time eq 'Never' || Date_Cmp($date, $next_time) < 0) {
+          $next_time = $date
+        };
+        }
+      }
   },
 
   # Conflicts
@@ -240,8 +243,8 @@ my @blocks = (
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'_total_used'}, $_[0]->{'_total_total'})
+        }
       }
-    }
   },
 
   # Diskspace, with storage groups
@@ -259,8 +262,8 @@ my @blocks = (
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'drive_total_used'}, $_[0]->{'drive_total_total'})
+        }
       }
-    }
   },
 
   # Diskspace, with storage groups and sensible XML layout.
@@ -277,8 +280,8 @@ my @blocks = (
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'used'}, $_[0]->{'total'})
+        }
       }
-    }
   },
 
   # Diskspace, with storage groups and sensible XML layout.
@@ -294,18 +297,17 @@ my @blocks = (
       'id' => sub { return $_[0] eq 'total' },
       'used' => sub {
         return ! (
-	  (defined $display{'Disk Space'} && $display{'Disk Space'})
-	    || ($_[1]->{'used'} / $_[1]->{'total'}) * 100 > $disk_space_warn)
-      }
-    },
+          (defined $display{'Disk Space'} && $display{'Disk Space'})
+          || ($_[1]->{'used'} / $_[1]->{'total'}) * 100 > $disk_space_warn)
+        }
+      },
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'used'}, $_[0]->{'total'})
+        }
       }
-    }
   },
 
-  
   # How many hours till the next recording.
   {
     'name' => 'Next Recording In',
@@ -314,31 +316,31 @@ my @blocks = (
     'template' => '__next_time__',
     'rewrite' => {
       '&next_time' => sub {
-	return $next_time
-	  if $next_time eq 'Never' || $next_time eq 'now';
+        return $next_time
+          if $next_time eq 'Never' || $next_time eq 'now';
 
         my $delta   = DateCalc('now', $next_time, undef, 1);
         my $str     = Delta_Format($delta, 0, '%hh Hours, %mv Minutes');
         my $seconds = Delta_Format($delta, 0, '%sh');
 
         $str =~ s/\b1 (Hour|Minute)s/1 $1/;
-	$str =~ s/^0 Hours, //;
+        $str =~ s/^0 Hours, //;
         $str =~ s/ 0 Minutes//;
 
-	if ($seconds <= $recording_in_warn) {
-	  $warn_present ||= 1;
+        if ($seconds <= $recording_in_warn) {
+          $warn_present ||= 1;
           $str = "$warning$str$normal";
-	}
+        }
 
         return $str;
-      }
-    },
+        }
+      },
     'filter' =>  {
       'next_time' => sub { return $_[0] eq 'now' }
-    },
+      },
     'sub' => sub {
       return substitute_vars($_[0], { 'next_time' => $next_time });
-    }
+      }
   },
 
   # Check how much Guide data we have
@@ -352,34 +354,34 @@ my @blocks = (
     'filter' => {
       'guideDays' => sub {
         if ($_[0] > $guide_days_warn) {
-	  return
-	    (defined $display{'Guide Data'} && ! $display{'Guide Data'}) || 1;
+          return
+            (defined $display{'Guide Data'} && ! $display{'Guide Data'}) || 1;
         } else {
-	  $warn_present ||= 1;
+          $warn_present ||= 1;
           push @alerts, "GUIDE DATA";
           return 0;
         }
+        },
       },
-    },
     'rewrite'  => {
       '&guideDays' => sub {
         if ($_[0] <= $guide_days_warn) {
-	  $warn_present ||= 1;
+          $warn_present ||= 1;
           return "$warning$_[0]$normal";
-	} else {
+        } else {
           return "$safe$_[0]$normal";
         }
-      },
+        },
       '/guideThru/' => { 'T\d+:\d+:\d+' => ' ' },
       '&guideThru' => sub {
         if ($_[1]->{'guideDays'} <= $guide_days_warn) {
-	  $warn_present ||= 1;
+          $warn_present ||= 1;
           return "$warning$_[0]$normal";
-	} else {
+        } else {
           return "$safe$_[0]$normal";
         }
+        },
       },
-    },
   },
 
   {
@@ -389,7 +391,7 @@ my @blocks = (
     'xpath'    => '//Status/MachineInfo/Guide[@status=""]',
     'template' => "${warning}No guide data!${normal}",
   },
-);
+  );
 
 ###
 ### Set some useful variables
@@ -471,19 +473,20 @@ for my $block (@blocks) {
 
 # Deal with the one liners.
 if (scalar(@oneliners) > 0) {
+
   # Find the longest header
   my $length = 0;
   for $line (@oneliners) {
-     if (length($line->[0]) > $length) {
-       $length = length($line->[0]);
-     }
+    if (length($line->[0]) > $length) {
+      $length = length($line->[0]);
+    }
   }
 
   # Put the one liners together, with leading dots to the colon.
   my $oneliners = "";
   for $line (@oneliners) {
-     $oneliners .= "$line->[0]"
-       . ('.' x ($length - length($line->[0]))) . ": $line->[1]\n";
+    $oneliners .= "$line->[0]"
+      . ('.' x ($length - length($line->[0]))) . ": $line->[1]\n";
   }
 
   # What a hacky way of putting the one liners where I want them...
@@ -497,7 +500,7 @@ if ($return_code_only) {
   print "\n$output";
 } else {
   if ((! $email_only_on_alert) ||
-      ($email_only_on_alert && scalar(@alerts) > 0)) {
+    ($email_only_on_alert && scalar(@alerts) > 0)) {
     my $suffix = undef;
     if (@alerts == 1) {
       $suffix = $alerts[0];
@@ -509,7 +512,7 @@ if ($return_code_only) {
       To      => \@email,
       Subject => $title . (defined $suffix ? " - $suffix" : ''),
       Data    => $output
-    );
+      );
 
     $mail->send('sendmail');
   }
@@ -535,7 +538,7 @@ sub load_xml {
       alarm(30);
       $status = get($url);
       alarm(0);
-    };
+      };
 
     die "Sorry, failed to fetch $url: Connection to MythTV timed out.\n"
       if $@;
@@ -579,7 +582,6 @@ sub load_xml {
   return $xml;
 }
 
-
 # Prep the Perl MythTV API if available.
 sub load_perl_api {
   my $myth = undef;
@@ -589,13 +591,14 @@ sub load_perl_api {
     print $@
       if $verbose;
   } else {
+
     # Surpress warnings from DBI.  I tried unsetting $^W but that is ignored.
     local($SIG{__WARN__}) = sub { if ($verbose) { print shift } };
     eval { $myth = new MythTV() };
 
     if ($@) {
       if ($verbose) {
-	warn "Failed to load Perl API\n";
+        warn "Failed to load Perl API\n";
         print $@;
       }
     } elsif ($verbose) {
@@ -634,8 +637,8 @@ sub process_xml {
         my $res = eval ( "$version{$vers} $check" );
 
         if (! defined $result || $res != 1) {
-	  $result = $res;
-	}
+          $result = $res;
+        }
       }
 
       return
@@ -657,7 +660,7 @@ sub process_xml {
     my %vars;
     for my $key (@{ $block->{'attrs'} }) {
       if ($key =~ /(.*?):(.*)/) {
-	my $subitem = $item->findnodes($2);
+        my $subitem = $item->findnodes($2);
         $vars{$1} = @{ $subitem }[0]->getAttribute($1)
           if defined @{ $subitem }[0];
       } else {
@@ -690,6 +693,7 @@ sub process_conflicts {
   foreach my $row (@{$rows{'rows'}}) {
     my $show;
     {
+
       # MythTV::Program currently has a slightly broken line with a numeric
       # comparision.
       local($^W) = undef;
@@ -702,10 +706,10 @@ sub process_conflicts {
         'startTime' => strftime("%FT%T", localtime($show->{'starttime'})),
         'NODE_TEXT' => $show->{'description'},
         'subTitle'  => $show->{'subtitle'},
-	'channelName' => $show->{'channame'},
-	'inputId'   => $show->{'inputid'},
-	'chanNum'   => $show->{'channum'},
-       );
+        'channelName' => $show->{'channame'},
+        'inputId'   => $show->{'inputid'},
+        'chanNum'   => $show->{'channum'},
+        );
 
       my $str = substitute_vars($block, \%vars);
       push @lines, $str
@@ -739,6 +743,7 @@ sub process_auto_expire {
   foreach my $row (reverse @{$rows{'rows'}}) {
     my $show;
     {
+
       # MythTV::Program currently has a slightly broken line with a numeric
       # comparision.
       local($^W) = undef;
@@ -756,7 +761,7 @@ sub process_auto_expire {
       'channelName' => $show->{'callsign'},
       'inputId'   => $show->{'inputid'},
       'chanNum'   => $show->{'chanid'},
-    );
+      );
 
     my $str = substitute_vars($block, \%vars);
     push @lines, $str
@@ -783,8 +788,8 @@ sub substitute_vars {
     if (! defined $value) {
       if ($block->{'optional'}) {
         warn "Unable to find any value for $key while at $block->{'name'}, marked as optional, skipping block.\n"
-	  if $verbose;
-	return undef;
+          if $verbose;
+        return undef;
       } else {
         warn "Unable to find any value for $key while looking at $block->{'name'}\n";
         next;
