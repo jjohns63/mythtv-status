@@ -35,6 +35,23 @@ my $guide_days_warn = 2;   # How many days we require.
 my $auto_expire_count = 10; # How many auto expire shows to display.
 my $recording_in_warn = 60 * 60; # When is the next recording considered critical? (seconds)
 
+# What units we have available for converting diskspaces.
+my @size_thresholds = (
+  {
+    'unit' => 'TB',
+    'threshold' => 50 * 1024 * 1024, # Someone might have more than 50TB!
+    'conversion' => 1024 * 1024,
+  },
+  {
+    'unit' => 'GB',
+    'threshold' => 50 * 1024,        # 50GB seems like a good threshold.
+    'conversion' => 1024,
+  },
+  {
+    'unit' => 'MB',
+  },
+  );
+
 my $return_code_only = 0;
 
 my $VERSION = '0.9.1';
@@ -237,13 +254,14 @@ my @blocks = (
     'protocol_version' => [ "<= 31" ],
     'attrs' => [ qw/_total_total _total_used/ ],
     'commify' => [ qw/_total_total _total_used/ ],
-    'template' => "Total space is ___total_total__ MB, with ___total_used__ MB used (__percent__)",
+    'human_readable_sizes' => [ qw/_total_total _total_used/ ],
+    'template' => "Total space is ___total_total__ ___total_total_unit__, with ___total_used__ ___total_used_unit__ used (__percent__)",
     'format' => 'one line',
     'optional' => 1,
     'subs' => {
       'percent' => sub {
         calc_disk_space_percentage($_[0]->{'_total_used'}, $_[0]->{'_total_total'})
-        }
+        },
       }
   },
 
@@ -256,7 +274,8 @@ my @blocks = (
     'xml_version' => [ "== 0" ],
     'attrs' => [ qw/drive_total_total drive_total_used/ ],
     'commify' => [ qw/drive_total_total drive_total_used/ ],
-    'template' => "Total space is __drive_total_total__ MB, with __drive_total_used__ MB used (__percent__)",
+    'human_readable_sizes' => [ qw/drive_total_total drive_total_used/ ],
+    'template' => "Total space is __drive_total_total__ __drive_total_total_unit__, with __drive_total_used__ __drive_total_used_unit__ used (__percent__)",
     'format' => 'one line',
     'optional' => 1,
     'subs' => {
@@ -274,7 +293,8 @@ my @blocks = (
     'protocol_version' => [ ">= 39" ],
     'attrs' => [ qw/total used/ ],
     'commify' => [ qw/total used/ ],
-    'template' => "Total space is __total__ MB, with __used__ MB used (__percent__)",
+    'human_readable_sizes' => [ qw/total used/ ],
+    'template' => "Total space is __total__ __total_unit__, with __used__ __used_unit__ used (__percent__)",
     'format' => 'one line',
     'optional' => 1,
     'subs' => {
@@ -292,7 +312,8 @@ my @blocks = (
     'protocol_version' => [ ">= 39" ],
     'attrs' => [ qw/id total used/ ],
     'commify' => [ qw/total used/ ],
-    'template' => "Total space for group __id__ is __total__ MB, with __used__ MB used (__percent__)",
+    'human_readable_sizes' => [ qw/total used/ ],
+    'template' => "Total space for group __id__ is __total__ __total_unit__, with __used__ __used_unit__ used (__percent__)",
     'filter' =>  {
       'id' => sub { return $_[0] eq 'total' },
       'used' => sub {
@@ -784,6 +805,25 @@ sub substitute_vars {
   my $template = $block->{'template'};
   my $skip = undef;
   my ($key, $value);
+
+  # Convert disk spaces into more suitable units.
+  if (defined $block->{'human_readable_sizes'}) {
+    for my $key (@{ $block->{'human_readable_sizes'}}) {
+      for my $unit (@size_thresholds) {
+        if (defined $unit->{'threshold'}) {
+          if ($vars->{$key} > $unit->{'threshold'}) {
+            $vars->{$key} = sprintf("%.1f", $vars->{$key} / $unit->{'conversion'});
+            $vars->{"${key}_unit"} = $unit->{'unit'};
+
+            last;
+          }
+        } else {
+          $vars->{"${key}_unit"} = $unit->{'unit'};
+        }
+      }
+    }
+  }
+
   while (($key, $value) = (each %{ $vars })) {
     if (! defined $value) {
       if ($block->{'optional'}) {
@@ -805,7 +845,7 @@ sub substitute_vars {
 
     $skip = 1
       if defined $block->{'filter'}{$key} &&
-        &{ $block->{'filter'}{$key} }($value, $vars);
+      &{ $block->{'filter'}{$key} }($value, $vars);
 
     if (defined $block->{'rewrite'}{"/$key/"}) {
       my ($search, $replace);

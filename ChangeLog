@@ -1,3 +1,7 @@
+2008-08-01	Andrew Ruthven
+	Automatically convert the disk space units to more human readable
+	forms if it is many GBs.
+
 2008-07-30	Andrew Ruthven
 	Suppress the errors from XML::LibXML.
 
