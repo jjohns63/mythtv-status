@@ -1,9 +1,10 @@
 mythtv-status (0.9.0-2) unstable; urgency=low
 
   * The init.d script shouldn't check the return code anymore, as the
-    return code may be 1 if there any warnings present.
+    return code may be 1 if there are any warnings present.  This
+    has been stopping the MOTD from being updated.
 
- -- Andrew Ruthven <andrew@etc.gen.nz>  Mon, 15 Sep 2008 11:16:53 +1200
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Mon, 26 Sep 2008 09:16:53 +1200
 
 mythtv-status (0.9.0-1) unstable; urgency=low
 
