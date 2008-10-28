@@ -57,6 +57,9 @@ set -e
 case "$1" in
   start|reload|refresh|restart|force-reload)
     log_daemon_msg "Updating $DESC" "$NAME"
+
+    # Just incase someone has removed their motd file.
+    [ ! -f /var/run/motd ] && touch /var/run/motd
     [ ! -f /var/run/motd.orig ] && cp /var/run/motd /var/run/motd.orig
 
     cp /var/run/motd.orig /var/run/motd.new
