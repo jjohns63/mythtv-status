@@ -3,6 +3,8 @@ mythtv-status (0.9.0-3) unstable; urgency=medium
   * If someone has removed /var/run/motd then tries to install (or
     reinstall) this package, then it fails.  We should make sure that
     doesn't happen by making sure that /var/run/motd exists.
+  * Provide some sanity checking before updating the MOTD file in
+    the init.d script to make sure that mythtv-status didn't die.
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Tue, 28 Oct 2008 15:12:02 +1300
 

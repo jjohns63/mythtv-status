@@ -65,7 +65,9 @@ case "$1" in
     cp /var/run/motd.orig /var/run/motd.new
 
     $DAEMON $ARGS -h $HOST >> /var/run/motd.new
-    mv /var/run/motd.new /var/run/motd
+    if [ $? -eq 0 -o $? -eq 1 ]; then
+      mv /var/run/motd.new /var/run/motd
+    fi
     log_end_msg 0
     ;;
   stop)
