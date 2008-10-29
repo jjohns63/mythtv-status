@@ -64,11 +64,16 @@ case "$1" in
 
     cp /var/run/motd.orig /var/run/motd.new
 
-    $DAEMON $ARGS -h $HOST >> /var/run/motd.new
-    if [ $? -eq 0 -o $? -eq 1 ]; then
+    set +e
+    $DAEMON $ARGS -h $HOST >> /var/run/motd.new 2> /dev/null
+    ret=$?
+    set -e
+    if [ $ret -eq 0 -o $ret -eq 1 ]; then
       mv /var/run/motd.new /var/run/motd
+      log_end_msg 0
+    else
+      log_failure_msg 
     fi
-    log_end_msg 0
     ;;
   stop)
     log_daemon_msg "Stopping $DESC" "$NAME"
