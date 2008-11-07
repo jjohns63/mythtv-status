@@ -59,15 +59,13 @@ case "$1" in
     log_daemon_msg "Updating $DESC" "$NAME"
 
     # Just incase someone has removed their motd file.
-    [ ! -f /var/run/motd ] && touch /var/run/motd
-    [ ! -f /var/run/motd.orig ] && cp /var/run/motd /var/run/motd.orig
+    [ -f /var/run/motd ] || touch /var/run/motd
+    [ -f /var/run/motd.orig ] || cp /var/run/motd /var/run/motd.orig
 
     cp /var/run/motd.orig /var/run/motd.new
 
-    set +e
-    $DAEMON $ARGS -h $HOST >> /var/run/motd.new 2> /dev/null
-    ret=$?
-    set -e
+    ret=0
+    $DAEMON $ARGS -h $HOST >> /var/run/motd.new 2> /dev/null || ret=$?
     if [ $ret -eq 0 -o $ret -eq 1 ]; then
       mv /var/run/motd.new /var/run/motd
       log_end_msg 0
