@@ -4,6 +4,12 @@ mythtv-status (0.9.1-1) unstable; urgency=low
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Thu, 30 Oct 2008 14:13:50 +1300
 
+mythtv-status (0.9.0-5) unstable; urgency=medium
+
+  * Update init.d with feedback from Adeodato Simó. 
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Sat, 08 Nov 2008 10:49:01 +1300
+
 mythtv-status (0.9.0-4) unstable; urgency=medium
 
   * It turns out that release 0.9.1 of mythtv-status snuck into
