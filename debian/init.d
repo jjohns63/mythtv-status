@@ -76,11 +76,31 @@ case "$1" in
   stop)
     log_daemon_msg "Stopping $DESC" "$NAME"
     [ -f /var/run/motd.orig ] && cp /var/run/motd.orig /var/run/motd
+    rm /var/run/motd.orig
     log_end_msg 0
+    ;;
+  status)
+    if [ ! -f /var/run/motd.orig ]; then 
+      log_failure_msg "$NAME is not running"
+      exit 1
+    fi
+    if [ ! -f /var/run/motd ]; then 
+      log_failure_msg "$NAME is not running (no motd file!)"
+      exit 1
+    fi
+    if [ $(date -d "15 minutes ago" +"%s") -gt $(stat -c "%Y" /var/run/motd) ]
+    then
+      log_failure_msg "$NAME is not running (motd file is stale)"
+      exit 1
+    fi
+
+    # If all tests have passed, then we must be running.
+    log_success_msg "$NAME is running"
+    exit 0
     ;;
   *)
     N=/etc/init.d/$NAME
-    echo "Usage: $N {start|stop|reload|refresh}" >&2
+    echo "Usage: $N {start|stop|reload|refresh|status}" >&2
     exit 1
     ;;
 esac
