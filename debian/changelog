@@ -4,6 +4,13 @@ mythtv-status (0.9.1-1) unstable; urgency=low
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Thu, 30 Oct 2008 14:13:50 +1300
 
+mythtv-status (0.9.0-6) unstable; urgency=low
+
+  * Swedish debconf translation from Martin Bagge (Closes: #506599).
+  * Add a status to the init.d file.
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Sun, 23 Nov 2008 13:29:52 +1300
+
 mythtv-status (0.9.0-5) unstable; urgency=medium
 
   * Update init.d with feedback from Adeodato Simó. 
