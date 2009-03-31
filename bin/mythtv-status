@@ -192,10 +192,11 @@ my @blocks = (
     'name'  => 'Encoders',
     'type'  => 'xpath',
     'xpath' => "//Status/Encoders/Encoder",
+    'protocol_version' => [ "<= 43" ],
     'attrs' => [ qw/hostname id state connected/ ],
     'template' => "__hostname__ (__id__) - __state____connected__",
     'rewrite' => {
-      '/connected/' => { '1' => '', '0' => ' (Disconnected)' },
+      '/connected/' => { '1' => '', '0' => "${warning}(Disconnected)${normal}" },
       '/state/' => {
         '^0$' => "${safe}Idle${normal}",
         '^1$' => "${warning}Watching LiveTV${normal}",
@@ -203,6 +204,28 @@ my @blocks = (
         '^3$' => "${warning}Watching Recording${normal}",
         '^4$' => "${warning}Recording${normal}" },
       }
+  },
+
+  # Info about the encoders.
+  {
+    'name'  => 'Encoders',
+    'type'  => 'xpath',
+    'xpath' => "//Status/Encoders/Encoder",
+    'protocol_version' => [ ">= 44" ],
+    'attrs' => [ qw/hostname id state connected/ ],
+    'template' => "__hostname__ (__id__) - __state____connected__",
+    'rewrite' => {
+      '/connected/' => { '1' => '', '0' => "${warning}(Disconnected)${normal}" },
+      '/state/' => {
+         '^-1$' => "${warning}Error${normal}",
+         '^0$' => "${safe}Idle${normal}",
+         '^1$' => "${warning}Watching LiveTV${normal}",
+         '^2$' => "${warning}Watching Pre-recorded${normal}",
+         '^3$' => "${warning}Watching DVD${normal}",
+         '^4$' => "${warning}Watching Video${normal}",
+         '^5$' => "${warning}Watching Recording${normal}",
+         '^6$' => "${warning}Recording${normal}" },
+    }
   },
 
   # What programs (if any) are being recorded right now?
