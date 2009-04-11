@@ -1,3 +1,12 @@
+2009-04-11	Andrew Ruthven
+	Show the encoder details for "Recording Now".
+
+2009-03-31	Andrew Ruthven
+	Add support for the newer encoder statuses.
+
+2009-02-20	Andrew Ruthven
+	Allow using a YAML file for setting most of the command line flags.
+
 2008-08-01	Andrew Ruthven
 	Automatically convert the disk space units to more human readable
 	forms if it is many GBs.
