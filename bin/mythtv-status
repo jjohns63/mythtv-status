@@ -8,7 +8,7 @@
 
 # Display the current status of a MythTV system.
 
-use LWP::Simple;
+use LWP::UserAgent;
 use XML::LibXML;
 use Date::Manip;
 use Getopt::Long;
@@ -472,7 +472,7 @@ if ($return_code_only) {
 }
 
 # A couple of global variables
-my ($xml, $myth);
+my ($xml, $charset, $myth);
 my %version;
 
 my $exit_value = 0;
@@ -510,7 +510,8 @@ for my $block (@blocks) {
   my $result = undef;
   $warn_present = 0;
   if ($block->{'type'} eq 'xpath') {
-    $xml ||= load_xml();
+    ($xml, $charset) = load_xml()
+      unless defined $xml;
 
     $result = process_xml($block, $xml);
 
@@ -572,6 +573,7 @@ if ($return_code_only) {
     my $mail = MIME::Entity->build(
       To      => $c->{'email'},
       Subject => $title . (defined $suffix ? " - $suffix" : ''),
+      Charset => $charset,
       Data    => $output
       );
 
@@ -583,7 +585,8 @@ exit $exit_value;
 
 # Fetch the XML status from the backend.
 sub load_xml {
-  my $status = "";
+  my $status = '';
+  my $charset = '';
 
   if (defined $c->{'xml_file'}) {
     open (IN, "< $c->{'xml_file'}")
@@ -594,18 +597,26 @@ sub load_xml {
     close IN;
   } else {
     my $url = "http://$c->{'host'}:$c->{'port'}/xml";
+    my $ua = LWP::UserAgent->new;
+    $ua->timeout(30);
+    $ua->env_proxy;
+    my $response;
     eval {
       local $SIG{ALRM} = sub { die "alarm\n" };
       alarm(30);
-      $status = get($url);
+      $response = $ua->get($url);
       alarm(0);
       };
 
     die "Sorry, failed to fetch $url: Connection to MythTV timed out.\n"
       if $@;
 
-    die "Sorry, failed to fetch $url.\n"
-      unless defined $status;
+    die "Sorry, failed to fetch $url:\n" . $response->status_line . "\n"
+      unless $response->is_success;
+
+    $status = $response->decoded_content;
+    my $content_type = $response->header('Content-Type');
+    ($charset)  = ($content_type =~ /charset="(\S+?)"/);
   }
 
   # Parse the XML
@@ -640,7 +651,7 @@ sub load_xml {
   warn "Loaded XML from " . ($c->{'xml_file'} || $c->{'host'}) . "\n"
     if $verbose;
 
-  return $xml;
+  return ($xml, $charset);
 }
 
 # Prep the Perl MythTV API if available.

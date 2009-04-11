@@ -1,5 +1,6 @@
 2009-04-11	Andrew Ruthven
 	Show the encoder details for "Recording Now".
+	Pass on that charset that MythTV gave us in any emails we send.
 
 2009-03-31	Andrew Ruthven
 	Add support for the newer encoder statuses.
