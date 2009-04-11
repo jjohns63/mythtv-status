@@ -234,8 +234,12 @@ my @blocks = (
     'type'  => 'xpath',
     'xpath' => "//Status/Encoders/Encoder/Program",
     'hide'  => 'after',
-    'attrs' => [ qw/title endTime channelName:.\/Channel[@channelName]/ ],
-    'template' => "__title__ (__channelName__) Ends: __endTime__",
+    'attrs' => [ qw/title endTime channelName:.\/Channel[@channelName]
+    		    inputId:.\/Channel[@inputId]
+		    chanNum:.\/Channel[@chanNum]/ ],
+    'template' => "__title__ (__channelName__"
+      . ($c->{'encoder_details'} ? ", Enc: __inputId__, Chan: __chanNum__" : '')
+      . ") Ends: __endTime__",
     'rewrite' => {
       '/endTime/' => { '.*T' => '' },
       },
