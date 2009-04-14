@@ -574,6 +574,7 @@ if ($return_code_only) {
       To      => $c->{'email'},
       Subject => $title . (defined $suffix ? " - $suffix" : ''),
       Charset => $charset,
+      Encoding=> "quoted-printable",
       Data    => $output
       );
 
