@@ -1,3 +1,6 @@
+2009-05-22	Andrew Ruthven
+	Only move /var/run/motd.new if it exists.
+
 2009-04-11	Andrew Ruthven
 	Show the encoder details for "Recording Now".
 	Pass on that charset that MythTV gave us in any emails we send and
