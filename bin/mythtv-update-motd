@@ -12,5 +12,5 @@ fi
 cp /var/run/motd.orig /var/run/motd.new
 if mythtv-status $ARGS -h $HOST >> /var/run/motd.new
 then
-  mv /var/run/motd.new /var/run/motd
+  [ -f /var/run/motd.new ] && mv /var/run/motd.new /var/run/motd
 fi
