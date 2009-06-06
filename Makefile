@@ -1,10 +1,10 @@
 #!/usr/bin/make -f
 
 package=mythtv-status
-releases=sid
+releases=lenny sid
 sponsor_keyid=19D03486
 
-build=dpkg-buildpackage -sn -uc -us -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting
+build=dpkg-buildpackage -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting -tc -k0C62B791
 version=$(shell git-tag -l | grep '^[0-9]' | tail -1)
 deb_version=$(shell git-tag -l | grep ^debian-[[:digit:]] | tail -1 | sed 's/debian-//')
 
@@ -34,19 +34,39 @@ $(tarball):
 
 build/etch/$(deb): 
 	@echo Building Etch
-	@ssh build-etch-i386 "cd `pwd`; DH_COMPAT=5 $(build) -d"
+	@ssh -t build-etch-i386 "cd `pwd`; DH_COMPAT=5 $(build) -d"
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
 	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
 	@mkdir -p build/etch
-	@cp ../$(deb) build/etch
+	@cp ../$(deb)  \
+		../$(package)_$(deb_version)_i386.changes \
+		../$(package)_$(deb_version).dsc \
+		../$(package)_$(deb_version).tar.gz \
+		build/etch
+
+build/lenny/$(deb): 
+	@echo Building Lenny
+	@ssh -t build-lenny-i386 "cd `pwd`; $(build)"
+	@ssh build-lenny-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
+	@ssh build-lenny-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
+	@mkdir -p build/lenny
+	@cp ../$(deb)  \
+		../$(package)_$(deb_version)_i386.changes \
+		../$(package)_$(deb_version).dsc \
+		../$(package)_$(deb_version).tar.gz \
+		build/lenny
 
 build/sid/$(deb): 
 	@echo Building Sid
-	@ssh build-sid-i386 "cd `pwd`; $(build)"
+	@ssh -t build-sid-i386 "cd `pwd`; $(build)"
 	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
 	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
 	@mkdir -p build/sid
-	@cp ../$(deb) build/sid
+	@cp ../$(deb)  \
+		../$(package)_$(deb_version)_i386.changes \
+		../$(package)_$(deb_version).dsc \
+		../$(package)_$(deb_version).tar.gz \
+		build/sid
 
 publish: $(RELEASE_FILES)
 	for release in $(releases); do ars-add -r $$release -g main build/$$release/$(deb); done
