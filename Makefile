@@ -1,7 +1,8 @@
 #!/usr/bin/make -f
 
 package=mythtv-status
-releases=lenny sid
+releases=sid
+release=sid
 sponsor_keyid=19D03486
 
 build=dpkg-buildpackage -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting -tc -k0C62B791
@@ -32,41 +33,17 @@ $(tarball):
 	@mkdir -p $(@D)
 	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile|testing)"` | gzip > $(tarball)
 
-build/etch/$(deb): 
-	@echo Building Etch
-	@ssh -t build-etch-i386 "cd `pwd`; DH_COMPAT=5 $(build) -d"
-	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
-	@ssh build-etch-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
-	@mkdir -p build/etch
+build/$(release)/$(deb): 
+	@echo Building $(release)
+	@ssh -t build-$(release)-i386 "cd `pwd`; $(build)"
+	@ssh build-$(release)-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
+	@ssh build-$(release)-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
+	@mkdir -p build/$(release)
 	@cp ../$(deb)  \
 		../$(package)_$(deb_version)_i386.changes \
 		../$(package)_$(deb_version).dsc \
 		../$(package)_$(deb_version).tar.gz \
-		build/etch
-
-build/lenny/$(deb): 
-	@echo Building Lenny
-	@ssh -t build-lenny-i386 "cd `pwd`; $(build)"
-	@ssh build-lenny-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
-	@ssh build-lenny-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
-	@mkdir -p build/lenny
-	@cp ../$(deb)  \
-		../$(package)_$(deb_version)_i386.changes \
-		../$(package)_$(deb_version).dsc \
-		../$(package)_$(deb_version).tar.gz \
-		build/lenny
-
-build/sid/$(deb): 
-	@echo Building Sid
-	@ssh -t build-sid-i386 "cd `pwd`; $(build)"
-	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/lintian -i -I $(package)_$(version)*.changes" || true
-	@ssh build-sid-i386 "cd `pwd`/..; /usr/bin/linda -i $(package)_$(version)*.changes" || true
-	@mkdir -p build/sid
-	@cp ../$(deb)  \
-		../$(package)_$(deb_version)_i386.changes \
-		../$(package)_$(deb_version).dsc \
-		../$(package)_$(deb_version).tar.gz \
-		build/sid
+		build/$(release)
 
 publish: $(RELEASE_FILES)
 	for release in $(releases); do ars-add -r $$release -g main build/$$release/$(deb); done
