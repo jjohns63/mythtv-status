@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mythtv-status package.
+# Martin Sin <martin.sin@zshk.cz>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mythtv-status 0.9.0-5\n"
+"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
+"POT-Creation-Date: 2007-12-25 13:20+1300\n"
+"PO-Revision-Date: 2009-07-06 04:15+0200\n"
+"Last-Translator: Martin Sin <martin.sin@zshk.cz>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid "MythTV backend to check:"
+msgstr "Backend MythTV ke kontrole:"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid ""
+"The MythTV backend to check, you only need to change this if you want to "
+"check a different host."
+msgstr ""
+"Backend MythTV ke kontrole, mění se pouze pokud chcete zkontrolovat jiný "
+"počítač."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "Update the system MOTD?"
+msgstr "Aktualizovat systémovou MOTD?"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"Whether the Message of the Day should be updated on system boot and on a "
+"regular basis."
+msgstr ""
+"Zda se má pravidelně aktualizovat MOTD (Message of the Day = zpráva dne) při "
+"startu systému."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgstr ""
+"Pro nastavení jak často se má MOTD aktualizovat upravte "
+"/etc/cron.d/mythtv-status."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Send email status to:"
+msgstr "Poslat stavový email na:"
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Status emails can be sent on a daily basis."
+msgstr "Email se stavem je možno posílat pravidelně každý den."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"By default an email is only sent if there are alerts.  You must have the "
+"MythTV Perl API installed for conflict alerts to be generated."
+msgstr ""
+"Ve výchozím nastavení je email posílán pouze v případě nějakého problému. "
+"Pro generování upozornění o konfliktech je potřeba nainstalovat také API "
+"MythTV Perl."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"To disable set the email address to \"none\".  To specify multiple email "
+"addresses, seperate them with a comma."
+msgstr ""
+"Pro vypnutí zasílání zpráv nastavte emailovou adresu na „none“. Více adres "
+"oddělte pomocí čárky."
