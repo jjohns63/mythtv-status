@@ -1,4 +1,12 @@
-mythtv-status (0.9.2-1) unstable; urgency=low
+mythtv-status (0.9.2-2) lenny; urgency=low
+
+  * Add in a missing dependency on libconfig-auto-perl.
+  * Basque debconf translation from Piarres Beobide (Closes: #539906).
+  * Czech debconf translation from Martin Å Ã (Closes: #535914).
+
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Fri, 04 Sep 2009 10:15:04 +1200
+
+mythtv-status (0.9.2-1) lenny; urgency=low
 
   * New upstream release.
 
