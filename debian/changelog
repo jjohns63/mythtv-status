@@ -7,8 +7,9 @@ mythtv-status (0.9.2-2) unstable; urgency=low
   * Correct the init.d dependencies from Petter Reinholdtsen (Closes: #547558).
   * Bump to Standards-Version 3.8.2.
   * Disable the watch file for now.
+  * Update Debian copyright file.
 
- -- Andrew Ruthven <andrew@etc.gen.nz>  Fri, 04 Sep 2009 10:15:04 +1200
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Sat, 03 Oct 2009 20:15:04 +1300
 
 mythtv-status (0.9.2-1) unstable; urgency=low
 

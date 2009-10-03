@@ -9,7 +9,7 @@ Upstream Author:
 
 Copyright: 
 
-    Copyright (C) 2007-2008 Andrew Ruthven
+    Copyright (C) 2007-2009 Andrew Ruthven
 
 License:
 
@@ -29,12 +29,12 @@ License:
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL-3'.
 
-The Debian packaging is (C) 2007, Andrew Ruthven <andrew@etc.gen.nz> and
-is licensed under the GPL, see above.
+The Debian packaging is Copyright (C) 2007-2009, Andrew Ruthven
+<andrew@etc.gen.nz> and is licensed under the GPL, see above.
 
 Files: *
-Copyright: (C) 2007-2008  Andrew Ruthven <andrew@etc.gen.nz>
+Copyright: (C) 2007-2009  Andrew Ruthven <andrew@etc.gen.nz>
 License: GPL-3
 Files debian/*
-Copright: (C) 2007-2008  Andrew Ruthven <andrew@etc.gen.nz>
+Copright: (C) 2007-2009  Andrew Ruthven <andrew@etc.gen.nz>
 License: GPL-2+
