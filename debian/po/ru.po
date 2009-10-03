@@ -1,0 +1,87 @@
+# translation of mythtv-status_0.9.0-5_ru.po to Russian
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Yuri Kozlov <yuray@komyakino.ru>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: mythtv-status 0.9.0-5\n"
+"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
+"POT-Creation-Date: 2007-12-25 13:20+1300\n"
+"PO-Revision-Date: 2009-08-29 11:32+0400\n"
+"Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
+"Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid "MythTV backend to check:"
+msgstr "Проверяемая серверная часть MythTV:"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid ""
+"The MythTV backend to check, you only need to change this if you want to "
+"check a different host."
+msgstr ""
+"Здесь указывается проверяемая серверная часть (backend) MythTV; требует "
+"изменения только в случае, если вы хотите проверять другой компьютер."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "Update the system MOTD?"
+msgstr "Обновлять системный MOTD?"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"Whether the Message of the Day should be updated on system boot and on a "
+"regular basis."
+msgstr "Здесь можно указать, нужно ли обновлять Сообщение Для регулярно и при загрузке системы."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgstr "Для настройки частоты обновления MOTD, отредактируйте /etc/cron.d/mythtv-status."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Send email status to:"
+msgstr "Отправка данных о состоянии на эл. почту:"
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Status emails can be sent on a daily basis."
+msgstr "Состояние можно отправлять ежедневно по электронной почте."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"By default an email is only sent if there are alerts.  You must have the "
+"MythTV Perl API installed for conflict alerts to be generated."
+msgstr ""
+"По умолчанию письма отправляются только при возникновении проблем. "
+"Для предупреждений о конфликтах вам требуется установить MythTV Perl API."
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"To disable set the email address to \"none\".  To specify multiple email "
+"addresses, seperate them with a comma."
+msgstr ""
+"Для выключения вместо адреса укажите \"none\". Несколько адресов "
+"эл. почты можно задавать через запятую."
+
