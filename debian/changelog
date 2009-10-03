@@ -6,6 +6,7 @@ mythtv-status (0.9.2-2) unstable; urgency=low
   * Russian debconf translation from Yuri Kozlov (Closes: #546347).
   * Correct the init.d dependencies from Petter Reinholdtsen (Closes: #547558).
   * Bump to Standards-Version 3.8.2.
+  * Disable the watch file for now.
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Fri, 04 Sep 2009 10:15:04 +1200
 
