@@ -1,0 +1,4 @@
+mythtv-status: unused-debconf-template mythtv-status/host
+mythtv-status: unused-debconf-template mythtv-status/enable
+mythtv-status: unused-debconf-template mythtv-status/email
+

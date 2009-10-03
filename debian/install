@@ -2,3 +2,4 @@ bin/mythtv-status usr/bin
 bin/mythtv_recording_now usr/bin
 bin/mythtv_recording_soon usr/bin
 molly-guard/40-mythtv-recording-soon etc/molly-guard/run.d
+debian/lintian/overrides/mythtv-status usr/share/lintian/overrides
