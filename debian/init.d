@@ -19,10 +19,10 @@
 #
 ### BEGIN INIT INFO
 # Provides:          mythtv-status
-# Required-Start:    $mythtv-backend
-# Required-Stop:     
-# Should-Start:      $named
-# Should-Stop:       
+# Required-Start:    $remote_fs
+# Required-Stop:     $remote_fs
+# Should-Start:      $named mythtv-backend
+# Should-Stop:       $named mythtv-backend
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Update the MOTD with the MythTV status
