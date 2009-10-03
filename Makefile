@@ -6,8 +6,8 @@ release=sid
 sponsor_keyid=19D03486
 
 build=dpkg-buildpackage -rfakeroot -i'(.git|build|.gitignore|testing)*' -I.git -Ibuild -I.gitignore -Itesting -tc -k0C62B791
-version=$(shell git-tag -l | grep '^[0-9]' | tail -1)
-deb_version=$(shell git-tag -l | grep ^debian-$(release)-[[:digit:]] | tail -1 | sed 's/debian-$(release)-//' | sed 's/@/~/')
+version=$(shell git tag -l | grep '^[0-9]' | tail -1)
+deb_version=$(shell git tag -l | grep ^debian-$(release)-[[:digit:]] | tail -1 | sed 's/debian-$(release)-//' | sed 's/@/~/')
 
 deb=$(package)_$(deb_version)_all.deb
 orig_tarball=../$(package)_$(version).orig.tar.gz
@@ -31,7 +31,7 @@ sponsor: $(orig_tarball)
 
 $(tarball):
 	@mkdir -p $(@D)
-	@git-archive --format=tar --prefix=$(package)-$(version)/ $(version) `git-ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile|testing)"` | gzip > $(tarball)
+	@git archive --format=tar --prefix=$(package)-$(version)/ $(version) `git ls-tree --name-only $(version) | egrep -v "(.gitignore|debian|Makefile|testing)"` | gzip > $(tarball)
 
 build/$(release)/$(deb): 
 	@echo Building $(release)
