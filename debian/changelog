@@ -5,7 +5,7 @@ mythtv-status (0.9.2-2) unstable; urgency=low
   * Czech debconf translation from Martin Šín (Closes: #535914).
   * Russian debconf translation from Yuri Kozlov (Closes: #546347).
   * Correct the init.d dependencies from Petter Reinholdtsen (Closes: #547558).
-  * Bump to Standards-Version 3.8.2.
+  * Bump to Standards-Version 3.8.3.
   * Disable the watch file for now.
   * Update Debian copyright file.
 
