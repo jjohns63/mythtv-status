@@ -187,7 +187,7 @@ my @blocks = (
     'format' => 'one line'
   },
 
-  # Info about the encoders.
+  # Info about the encoders before TV OSD Declutter (Changeset 20037).
   {
     'name'  => 'Encoders',
     'type'  => 'xpath',
@@ -206,7 +206,7 @@ my @blocks = (
       }
   },
 
-  # Info about the encoders.
+  # Info about the encoders after TV OSD Declutter (Changeset 20037).
   {
     'name'  => 'Encoders',
     'type'  => 'xpath',
