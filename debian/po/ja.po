@@ -1,0 +1,87 @@
+# Copyright (C) 2009 Andrew Ruthven <andrew@etc.gen.nz>
+# This file is distributed under the same license as mythtv-status package.
+# Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mythtv-status 0.9.2-2\n"
+"Report-Msgid-Bugs-To: andrew@etc.gen.nz\n"
+"POT-Creation-Date: 2007-12-25 13:20+1300\n"
+"PO-Revision-Date: 2009-11-07 14:26+0900\n"
+"Last-Translator: Hideki Yamane (Debian-JP) <henrich@debian.or.jp>\n"
+"Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid "MythTV backend to check:"
+msgstr "MythTV のバックエンドの確認:"
+
+#. Type: string
+#. Description
+#: ../templates:1001
+msgid ""
+"The MythTV backend to check, you only need to change this if you want to "
+"check a different host."
+msgstr ""
+"MythTV のバックエンドの確認です。別のホストを確認したい場合のみ、これを"
+"変更する必要があります。"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "Update the system MOTD?"
+msgstr "system の MOTD を更新しますか?"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"Whether the Message of the Day should be updated on system boot and on a "
+"regular basis."
+msgstr ""
+"システム起動時および定期的に、今日のお知らせ (Message of the Day) を更新するかどうかです。"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid ""
+"To adjust how often the MOTD is updated, edit /etc/cron.d/mythtv-status."
+msgstr ""
+"どのぐらいの頻度で MOTD を更新するかについては、/etc/cron.d/mythtv-status "
+"を編集してください。"
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Send email status to:"
+msgstr "ステータスを以下にメールする:"
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid "Status emails can be sent on a daily basis."
+msgstr "ステータスのメールは毎日送ることができます。"
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"By default an email is only sent if there are alerts.  You must have the "
+"MythTV Perl API installed for conflict alerts to be generated."
+msgstr ""
+"デフォルトではメールは警告がある場合にのみ送られます。番組の衝突警告を生成"
+"するには、MythTV Perl API がインストール済みであることが必要です。"
+
+#. Type: string
+#. Description
+#: ../templates:3001
+msgid ""
+"To disable set the email address to \"none\".  To specify multiple email "
+"addresses, seperate them with a comma."
+msgstr ""
+"メールアドレスを無効にするには「none」を設定してください。複数のメールアドレス"
+"を指定するにはコンマで区切ってください。"
