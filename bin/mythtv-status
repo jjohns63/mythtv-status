@@ -67,7 +67,7 @@ my @size_thresholds = (
 
 my $return_code_only = 0;
 
-my $VERSION = '0.9.2';
+my $VERSION = '0.9.3';
 
 # Some display blocks are disabled by default:
 $c->{'display'}{'Shows due to Auto Expire'} = 0;
@@ -300,7 +300,7 @@ my @blocks = (
     'optional' => 1,
     'subs' => {
       'percent' => sub {
-        calc_disk_space_percentage($_[0]->{'_total_used'}, $_[0]->{'_total_total'})
+        calc_disk_space_percentage("$_[0]->{'_total_used'} $_[0]->{'_total_used_unit'}", "$_[0]->{'_total_total'} $_[0]->{'_total_total_unit'}")
         },
       }
   },
@@ -320,7 +320,7 @@ my @blocks = (
     'optional' => 1,
     'subs' => {
       'percent' => sub {
-        calc_disk_space_percentage($_[0]->{'drive_total_used'}, $_[0]->{'drive_total_total'})
+        calc_disk_space_percentage("$_[0]->{'drive_total_used'} $_[0]->{'drive_total_used_unit'}", "$_[0]->{'drive_total_total'} $_[0]->{'drive_total_total_unit'}")
         }
       }
   },
@@ -339,7 +339,7 @@ my @blocks = (
     'optional' => 1,
     'subs' => {
       'percent' => sub {
-        calc_disk_space_percentage($_[0]->{'used'}, $_[0]->{'total'})
+        calc_disk_space_percentage("$_[0]->{'used'} $_[0]->{'used_unit'}", "$_[0]->{'total'} $_[0]->{'total_unit'}")
         }
       }
   },
@@ -364,7 +364,7 @@ my @blocks = (
       },
     'subs' => {
       'percent' => sub {
-        calc_disk_space_percentage($_[0]->{'used'}, $_[0]->{'total'})
+        calc_disk_space_percentage("$_[0]->{'used'} $_[0]->{'used_unit'}", "$_[0]->{'total'} $_[0]->{'total_unit'}")
         }
       }
   },
@@ -638,7 +638,7 @@ sub load_xml {
   my $xml = eval { $parser->parse_string( $status ) };
 
   close (STDERR);
-  open (STDERR, ">&$olderr");
+  open (STDERR, ">&", $olderr);
 
   if ($@) {
     die "Failed to parse XML: $@\n";
@@ -673,6 +673,7 @@ sub load_perl_api {
       if ($verbose) {
         warn "Failed to load Perl API\n";
         print $@;
+	return undef;
       }
     } elsif ($verbose) {
       warn "Loaded Perl API\n";
@@ -932,13 +933,13 @@ sub substitute_vars {
 sub calc_disk_space_percentage {
   my ($used, $total) = @_;
 
-  if (! (defined $used && defined $total && $total > 0) ){
+  if (! (defined $used && defined $total) ){
     warn "Something is wrong calculating the disk space percentage.\n";
     return 'unknown';
   }
 
   my $percent = sprintf("%.1f",
-    $used / $total * 100);
+    normalise_disk_space($used) / normalise_disk_space($total) * 100);
 
   if ($percent >= $c->{'disk_space_warn'}) {
     $exit_value ||= 1;
@@ -947,6 +948,33 @@ sub calc_disk_space_percentage {
   } else {
     return "$safe$percent\%$normal";
   }
+}
+
+# Make sure that the disk space is in a common unit.
+# Currently that is MB.
+sub normalise_disk_space {
+  if ($_[0] =~ /^([.0-9]+) (\w+)$/) {
+    my $space = $1;
+    my $unit = $2;
+
+    if ($unit eq 'B') {
+      return $space / (1024 * 1024);
+    } elsif ($unit eq 'KB') {
+      return $space / 1024;
+    } elsif ($unit eq 'MB') {
+      return $space;
+    } elsif ($unit eq 'GB') {
+      return $space * 1024;
+    } elsif ($unit eq 'TB') {
+      return $space * 1024 * 1024;
+    }
+
+    warn "Unknown unit for disk space: $unit.  Please let the author of mythtv-status know.\n";
+    return $space;
+  }
+
+  warn "Unrecognised format for disk space: $_[0].  Please let the author of mythtv-status know.\n";
+  return $_[0];
 }
 
 # Beautify numbers by sticking commas in.
