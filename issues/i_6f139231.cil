@@ -1,0 +1,25 @@
+Summary: Incorrect percentage shown
+Status: New
+CreatedBy: ChrisKemp
+AssignedTo: andrew
+Inserted: 2010-04-29T00:47:18
+Updated: 2010-04-29T00:48:16
+
+When mythtv-status runs I get this in my /etc/motd
+Isnt 28905.3% incorrect?
+
+
+MythTV status for localhost
+===========================
+Status..........: Wed Apr 28 2010, 21:47
+Total Disk Space: Total space is 142.5 GB, with 41,190 MB used (28905.3%)
+
+Encoders:
+chimera (1) - Idle
+chimera (2) - Idle
+
+Scheduled Recordings:
+2010-04-29 18:00:00 - The Simpsons (Channel 4)
+
+Disk Space:
+Total space for group 1 is 142.5 GB, with 41,190 MB used (28905.3%) 
