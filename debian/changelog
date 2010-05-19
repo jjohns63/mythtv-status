@@ -1,6 +1,8 @@
 mythtv-status (0.9.3-1) unstable; urgency=low
 
   * New upstream release.
+  * Source version 3.0 (quilt).
+  * Bump Standards-Version to 3.8.4.
 
  -- Andrew Ruthven <andrew@etc.gen.nz>  Wed, 19 May 2010 11:40:36 +1200
 
