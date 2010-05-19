@@ -16,7 +16,7 @@ tarball_dir=../$(package)_tarballs
 
 DEBS=$(foreach release, $(releases), build/$(release)/$(deb))
 
-RELEASE_FILES=build/tarball/mythtv-status-${version}.tar.gz $(DEBS)
+RELEASE_FILES=$(orig_tarball) build/tarball/mythtv-status-${version}.tar.gz $(DEBS)
 
 all: release
 
