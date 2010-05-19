@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Andrew Ruthven <andrew@etc.gen.nz>
 DM-Upload-Allowed: yes
 Build-Depends: debhelper (>= 6), po-debconf
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://www.etc.gen.nz/projects/mythtv/mythtv-status.html
 Vcs-Git: http://git.etc.gen.nz/mythtv-status.git
 Vcs-Browser: http://git.etc.gen.nz/cgi-bin/gitweb.cgi?p=mythtv-status.git;a=summary
