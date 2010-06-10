@@ -42,7 +42,8 @@ build/$(release)/$(deb):
 	@cp ../$(deb)  \
 		../$(package)_$(deb_version)_i386.changes \
 		../$(package)_$(deb_version).dsc \
-		../$(package)_$(deb_version).tar.gz \
+		../$(package).orig.tar.gz \
+		../$(package)_$(deb_version).debian.tar.gz \
 		build/$(release)
 
 publish: $(RELEASE_FILES)
