@@ -67,7 +67,7 @@ my @size_thresholds = (
 
 my $return_code_only = 0;
 
-my $VERSION = '0.9.3';
+my $VERSION = '0.9.4';
 
 # Some display blocks are disabled by default:
 $c->{'display'}{'Shows due to Auto Expire'} = 0;
@@ -863,7 +863,7 @@ sub substitute_vars {
   if (defined $block->{'human_readable_sizes'}) {
     for my $key (@{ $block->{'human_readable_sizes'}}) {
       for my $unit (@size_thresholds) {
-        if (defined $unit->{'threshold'}) {
+        if (defined $vars->{$key} && defined $unit->{'threshold'}) {
           if ($vars->{$key} > $unit->{'threshold'}) {
             $vars->{$key} = sprintf("%.1f", $vars->{$key} / $unit->{'conversion'});
             $vars->{"${key}_unit"} = $unit->{'unit'};
