@@ -36,6 +36,7 @@ $c->{'port'} ||= "6544";
 $c->{'description'} ||= 0;
 $c->{'episode'} ||= 0;
 $c->{'encoder_details'} ||= 0;
+$c->{'encoder_skip_idle'} ||= 1;
 $c->{'colour'} ||= 0;
 #my %display;
 # my @email;
@@ -87,6 +88,7 @@ GetOptions(
   'guide-days-warn=i'     => \$c->{'guide_days_warn'},
   'auto-expire-count=i'   => \$c->{'auto_expire_count'},
   'recording-in-warn=i'   => \$c->{'recording_in_warn'},
+  'encoder-skip-idle!'     => \$c->{'encoder_skip_idle'},
 
   'status!'               => \$c->{'display'}{'Status'},
   'encoders!'             => \$c->{'display'}{'Encoders'},
@@ -203,7 +205,10 @@ my @blocks = (
         '^2$' => "${warning}Watching Pre-recorded${normal}",
         '^3$' => "${warning}Watching Recording${normal}",
         '^4$' => "${warning}Recording${normal}" },
-      }
+    },
+    'filter' => {
+      'state' => sub { return $c->{'encoder_skip_idle'} && $_[0] == 0 },
+    },
   },
 
   # Info about the encoders after TV OSD Declutter (Changeset 20037).
@@ -225,7 +230,10 @@ my @blocks = (
          '^4$' => "${warning}Watching Video${normal}",
          '^5$' => "${warning}Watching Recording${normal}",
          '^6$' => "${warning}Recording${normal}" },
-    }
+    },
+    'filter' => {
+      'state' => sub { return $c->{'encoder_skip_idle'} && $_[0] == 0 },
+    },
   },
 
   # What programs (if any) are being recorded right now?
