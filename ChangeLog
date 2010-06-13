@@ -1,6 +1,13 @@
 2010-06-13	Andrew Ruthven
 	Allow skipping idle encoders when showing the encoder status and
 	make that the default.  Thanks to Ron Kellam for the suggestion.
+
+	It seems that Date::Manip::DateCalc in some versions require that
+	you parse in a ref for the error ref, passing in undef causes it
+	to not perform the date calculation.  Parse in a ref, even if we
+	don't actually check it.  Thanks to Ron Kellam for doing some
+	leg work on tracking this issue down.
+
 2010-04-29	Andrew Ruthven
 	Handle the case where the disk space units returned from the server
 	are different.  i.e., total is in GB and used is in MB.
