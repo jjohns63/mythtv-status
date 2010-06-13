@@ -388,7 +388,8 @@ my @blocks = (
         return $next_time
           if $next_time eq 'Never' || $next_time eq 'now';
 
-        my $delta   = DateCalc('now', $next_time, undef, 1);
+        my $err;
+        my $delta   = DateCalc('now', $next_time, \$err, 1);
         my $str     = Delta_Format($delta, 0, '%hh Hours, %mv Minutes');
         my $seconds = Delta_Format($delta, 0, '%sh');
 
