@@ -1,8 +1,9 @@
 mythtv-status (0.9.4-1) unstable; urgency=low
 
   * New upstream release.
+  * Bump Standards-Version to 3.9.1.
 
- -- Andrew Ruthven <andrew@etc.gen.nz>  Mon, 09 Aug 2010 10:13:10 +1200
+ -- Andrew Ruthven <andrew@etc.gen.nz>  Mon, 09 Aug 2010 10:18:22 +1200
 
 mythtv-status (0.9.3-1) unstable; urgency=low
 
