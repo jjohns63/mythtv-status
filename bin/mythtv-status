@@ -50,10 +50,11 @@ $c->{'auto_expire_count'} ||= 10; # How many auto expire shows to display.
 $c->{'recording_in_warn'} ||= 60 * 60; # When is the next recording considered critical? (seconds)
 
 # What units we have available for converting diskspaces.
+# The threshold is at what level we switch to using that unit.
 my @size_thresholds = (
   {
     'unit' => 'TB',
-    'threshold' => 50 * 1024 * 1024, # Someone might have more than 50TB!
+    'threshold' => 2 * 1024 * 1024,
     'conversion' => 1024 * 1024,
   },
   {
@@ -68,7 +69,7 @@ my @size_thresholds = (
 
 my $return_code_only = 0;
 
-my $VERSION = '0.9.4';
+my $VERSION = '0.9.5';
 
 # Some display blocks are disabled by default:
 $c->{'display'}{'Shows due to Auto Expire'} = 0;
@@ -230,6 +231,34 @@ my @blocks = (
          '^4$' => "${warning}Watching Video${normal}",
          '^5$' => "${warning}Watching Recording${normal}",
          '^6$' => "${warning}Recording${normal}" },
+    },
+    'filter' => {
+      'state' => sub { return $c->{'encoder_skip_idle'} && $_[0] == 0 },
+    },
+  },
+
+  # Info about the encoders after adding Blu-ray (Changeset 25058).
+  #  The protocol version is from svn commit 25362 but is the closest commit
+  #  for mythtv/libs/libmythdb/mythversion.h.
+  {
+    'name'  => 'Encoders',
+    'type'  => 'xpath',
+    'xpath' => "//Status/Encoders/Encoder",
+    'protocol_version' => [ ">= 58" ],
+    'attrs' => [ qw/hostname id state connected/ ],
+    'template' => "__hostname__ (__id__) - __state____connected__",
+    'rewrite' => {
+      '/connected/' => { '1' => '', '0' => "${warning}(Disconnected)${normal}" },
+      '/state/' => {
+         '^-1$' => "${warning}Error${normal}",
+         '^0$' => "${safe}Idle${normal}",
+         '^1$' => "${warning}Watching LiveTV${normal}",
+         '^2$' => "${warning}Watching Pre-recorded${normal}",
+         '^3$' => "${warning}Watching DVD${normal}",
+         '^4$' => "${warning}Watching Blu-ray${normal}",
+         '^5$' => "${warning}Watching Video${normal}",
+         '^6$' => "${warning}Watching Recording${normal}",
+         '^7$' => "${warning}Recording${normal}" },
     },
     'filter' => {
       'state' => sub { return $c->{'encoder_skip_idle'} && $_[0] == 0 },

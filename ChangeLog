@@ -1,3 +1,8 @@
+2010-09-16	Andrew Ruthven
+	Add support for extra recording state.
+
+	Be ready to switch to TB's earlier.
+
 2010-06-13	Andrew Ruthven
 	Allow skipping idle encoders when showing the encoder status and
 	make that the default.  Thanks to Ron Kellam for the suggestion.
