@@ -217,7 +217,7 @@ my @blocks = (
     'name'  => 'Encoders',
     'type'  => 'xpath',
     'xpath' => "//Status/Encoders/Encoder",
-    'protocol_version' => [ ">= 44" ],
+    'protocol_version' => [ ">= 44", "< 58" ],
     'attrs' => [ qw/hostname id state connected/ ],
     'template' => "__hostname__ (__id__) - __state____connected__",
     'rewrite' => {
