@@ -1,9 +1,9 @@
 Summary: Incorrect percentage shown
-Status: New
+Status: Finished
 CreatedBy: ChrisKemp
 AssignedTo: andrew
 Inserted: 2010-04-29T00:47:18
-Updated: 2010-04-29T00:48:16
+Updated: 2010-09-16T09:07:20
 
 When mythtv-status runs I get this in my /etc/motd
 Isnt 28905.3% incorrect?
