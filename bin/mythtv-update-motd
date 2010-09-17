@@ -10,7 +10,8 @@ fi
 [ ! -f /var/run/motd.orig ] && cp /var/run/motd /var/run/motd.orig
 
 cp /var/run/motd.orig /var/run/motd.new
-if mythtv-status $ARGS -h $HOST >> /var/run/motd.new
-then
+ret=0
+mythtv-status $ARGS -h $HOST >> /var/run/motd.new 2> /dev/null || ret=$?
+if [ $ret -eq 0 -o $ret -eq 1 ]; then
   [ -f /var/run/motd.new ] && mv /var/run/motd.new /var/run/motd
 fi
