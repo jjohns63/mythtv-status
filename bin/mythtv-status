@@ -34,10 +34,10 @@ if ($@ && $@ !~ /^No config file found/) {
 $c->{'host'} ||= "localhost";
 $c->{'port'} ||= "6544";
 $c->{'description'} ||= 0;
-$c->{'episode'} ||= 0;
+$c->{'episode'} ||= 1;
 $c->{'encoder_details'} ||= 0;
 $c->{'encoder_skip_idle'} ||= 1;
-$c->{'colour'} ||= 0;
+$c->{'colour'} ||= 1;
 #my %display;
 # my @email;
 $c->{'email_only_on_alert'} ||= 0;
